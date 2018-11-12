@@ -1,6 +1,0 @@
-2018/11/13 03:40:45 main.go:106: aid=23 crawler failed, json: cannot unmarshal string into Go struct field Video.View of type int
-2018/11/13 03:40:45 main.go:106: aid=23 crawler failed, json: cannot unmarshal string into Go struct field Video.View of type int
-2018/11/13 03:40:45 main.go:106: aid=23 crawler failed, json: cannot unmarshal string into Go struct field Video.View of type int
-2018/11/13 03:57:07 main.go:109: aid=250 crawler failed, json: cannot unmarshal string into Go struct field Video.View of type int
-2018/11/13 03:57:07 main.go:109: aid=250 crawler failed, json: cannot unmarshal string into Go struct field Video.View of type int
-2018/11/13 03:57:07 main.go:109: aid=250 crawler failed, json: cannot unmarshal string into Go struct field Video.View of type int
