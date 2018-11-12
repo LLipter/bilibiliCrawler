@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"github.com/LLipter/bilibili-report/util"
 )
 
 type Video struct {
@@ -67,14 +68,14 @@ func sendRequest(addr string) (Info, error) {
 }
 
 
+
 func main() {
 	info,err := sendRequest("https://api.bilibili.com/archive_stat/stat?aid=2")
 	if err != nil {
 		fmt.Println(err)
 	}
 
-	buf,err := json.MarshalIndent(info,"","    ")
-	fmt.Println(string(buf))
+	util.PrintJson(info)
 	fmt.Println(info)
 
 }
