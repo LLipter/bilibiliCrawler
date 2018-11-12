@@ -16,18 +16,17 @@ import (
 	"github.com/LLipter/bilibili-report/util"
 )
 
-var(
-	retryTimes 			= 3
-	maxGoroutinueNum	= 200
-	wg					sync.WaitGroup
-	logFile				*os.File
+var (
+	retryTimes       = 3
+	maxGoroutinueNum = 200
+	wg               sync.WaitGroup
+	logFile          *os.File
 )
-
 
 func sendRequest(addr string, useProxy bool) (util.Info, error) {
 	var resp *http.Response
 	var err error
-	if useProxy{
+	if useProxy {
 		// TODO: add proxies pool
 		urlproxy, err := url.Parse("http://183.245.99.52:80")
 		if err != nil {
@@ -42,7 +41,7 @@ func sendRequest(addr string, useProxy bool) (util.Info, error) {
 		if err != nil {
 			return util.Info{}, err
 		}
-	}else{
+	} else {
 		resp, err = http.Get(addr)
 		if err != nil {
 			return util.Info{}, err
@@ -64,10 +63,10 @@ func sendRequest(addr string, useProxy bool) (util.Info, error) {
 	return info, nil
 }
 
-func init(){
+func init() {
 	log.SetFlags(log.Lshortfile | log.LstdFlags)
 	var err error
-	logFile, err = os.OpenFile("log.txt", os.O_APPEND | os.O_WRONLY | os.O_CREATE, 0644)
+	logFile, err = os.OpenFile("log.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0644)
 	if err != nil {
 		log.Fatal(fmt.Sprintf("cannot open log file, %v", err))
 	}
@@ -76,8 +75,8 @@ func init(){
 	fmt.Println("init successfully. ")
 }
 
-func crawler(aid int) error{
-	info, err := sendRequest("https://api.bilibili.com/archive_stat/stat?aid=" + strconv.Itoa(aid), false)
+func crawler(aid int) error {
+	info, err := sendRequest("https://api.bilibili.com/archive_stat/stat?aid="+strconv.Itoa(aid), false)
 	if err != nil {
 		return err
 	}
@@ -92,20 +91,20 @@ func crawler(aid int) error{
 	}
 
 	err = util.InsertVideo(video)
-	if err != nil{
+	if err != nil {
 		return err
 	}
 
 	return nil
 }
 
-func crawlerRoutine(aid int){
+func crawlerRoutine(aid int) {
 	defer wg.Done()
-	for t:=0;t<retryTimes;t++{
+	for t := 0; t < retryTimes; t++ {
 		err := crawler(aid)
-		if err == nil{
+		if err == nil {
 			return
-		}else{
+		} else {
 			log.Printf("aid=%d crawler failed, %v\n", aid, err)
 		}
 	}
@@ -114,12 +113,12 @@ func crawlerRoutine(aid int){
 	video.Status = 2
 	video.Aid = aid
 	err := util.InsertVideo(video)
-	if err != nil{
+	if err != nil {
 		log.Printf("aid=%d insertion failed, %v\n", aid, err)
 	}
 }
 
-func cleanup(){
+func cleanup() {
 	if logFile != nil {
 		logFile.Close()
 	}
@@ -128,8 +127,8 @@ func cleanup(){
 
 func main() {
 
-	for i:=301;i<=1000;i++{
-		for runtime.NumGoroutine() > maxGoroutinueNum{
+	for i := 301; i <= 1000; i++ {
+		for runtime.NumGoroutine() > maxGoroutinueNum {
 			time.Sleep(time.Second)
 		}
 		wg.Add(1)

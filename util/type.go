@@ -1,6 +1,5 @@
 package util
 
-
 type Video struct {
 	Aid        int
 	Status     int

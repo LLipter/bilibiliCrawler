@@ -16,7 +16,6 @@ func PrintJson(data interface{}) {
 	fmt.Println(string(buf))
 }
 
-
 func LoadDBConf(path string) (string, error) {
 	buf, err := ioutil.ReadFile(path)
 	if err != nil {

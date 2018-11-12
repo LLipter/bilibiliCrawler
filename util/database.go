@@ -10,14 +10,14 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
-var(
-	connPool		*sql.DB // database connection pool
-	maxOpenConn		= 100
-	maxIdleConn 	= 30
+var (
+	connPool        *sql.DB // database connection pool
+	maxOpenConn     = 100
+	maxIdleConn     = 30
 	maxConnLifeTime = time.Minute * 10
 )
 
-func init(){
+func init() {
 	// change to your database configuration file path, see dbconfig-sample.json
 	connStr, err := LoadDBConf("dbconfig.json")
 	if err != nil {
@@ -40,14 +40,13 @@ func init(){
 	connPool.SetConnMaxLifetime(maxConnLifeTime)
 }
 
-func CloseDatabase(){
-	if connPool != nil{
+func CloseDatabase() {
+	if connPool != nil {
 		connPool.Close()
 	}
 }
 
-
-func InsertVideo(video Video) error{
+func InsertVideo(video Video) error {
 	stmt, err := connPool.Prepare("INSERT INTO video VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);")
 	if err != nil {
 		log.Fatal(err)
