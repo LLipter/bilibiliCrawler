@@ -1,8 +1,11 @@
 package util
 
 import (
+	"bytes"
 	"encoding/json"
+	"errors"
 	"fmt"
+	"io/ioutil"
 )
 
 func PrintJson(data interface{}){
@@ -11,4 +14,34 @@ func PrintJson(data interface{}){
 		fmt.Println(err)
 	}
 	fmt.Println(string(buf))
+}
+
+type DBConf struct {
+	User	string
+	Passwd	string
+	Host	string
+	Dbname	string
+}
+
+func LoadDBConf(path string) (string, error) {
+	buf, err := ioutil.ReadFile(path)
+	if err != nil{
+		return "",err
+	}
+
+	var dbname DBConf;
+	err = json.Unmarshal(buf, &dbname)
+	if err != nil{
+		return "", errors.New("invalid database configuration file")
+	}
+
+	var strBuf bytes.Buffer
+	strBuf.WriteString(dbname.User)
+	strBuf.WriteString(":")
+	strBuf.WriteString(dbname.Passwd)
+	strBuf.WriteString("@tcp(")
+	strBuf.WriteString(dbname.Host)
+	strBuf.WriteString(")/")
+	strBuf.WriteString(dbname.Dbname)
+	return strBuf.String(),nil
 }

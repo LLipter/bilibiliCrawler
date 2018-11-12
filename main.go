@@ -114,12 +114,26 @@ func main() {
 	}
 
 	util.PrintJson(info)
-	fmt.Println(info)
+	fmt.Printf("%+v\n",info)
+
+	if info.Code != 0{
+		fmt.Println(info.Message)
+	}else{
+		connStr,err := util.LoadDBConf("dbconfig.json")
+		fmt.Println(connStr)
+		if err != nil{
+			log.Fatal(err)
+		}
+		db, err := sql.Open("mysql", connStr)
+		if err != nil{
+			log.Fatal(err)
+		}
+		defer db.Close()
+		Insert(info.Data, db)
+	}
 
 
-	db, err := sql.Open("mysql", "root:5720@tcp(www.irran.top:3306)/bilibili")
-	defer db.Close()
-	Insert(info.Data, db)
+
 
 
 }
