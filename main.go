@@ -68,7 +68,7 @@ func sendRequest(addr string) (Info, error) {
 		return Info{}, err
 	}
 
-	return info,nil
+	return info, nil
 }
 
 func Insert(video Video, db *sql.DB) {
@@ -105,8 +105,6 @@ func Insert(video Video, db *sql.DB) {
 	fmt.Printf("ID=%d, affected=%d\n", lastId, rowCnt)
 }
 
-
-
 func main() {
 	info, err := sendRequest("https://api.bilibili.com/archive_stat/stat?aid=2")
 	if err != nil {
@@ -114,26 +112,23 @@ func main() {
 	}
 
 	util.PrintJson(info)
-	fmt.Printf("%+v\n",info)
+	fmt.Printf("%+v\n", info)
 
-	if info.Code != 0{
+	if info.Code != 0 {
 		fmt.Println(info.Message)
-	}else{
-		connStr,err := util.LoadDBConf("dbconfig.json")
+	} else {
+		// change to your database configuration file path, see dbconfig-sample.json
+		connStr, err := util.LoadDBConf("dbconfig.json")
 		fmt.Println(connStr)
-		if err != nil{
+		if err != nil {
 			log.Fatal(err)
 		}
 		db, err := sql.Open("mysql", connStr)
-		if err != nil{
+		if err != nil {
 			log.Fatal(err)
 		}
 		defer db.Close()
 		Insert(info.Data, db)
 	}
-
-
-
-
 
 }

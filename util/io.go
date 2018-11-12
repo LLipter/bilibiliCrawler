@@ -8,30 +8,30 @@ import (
 	"io/ioutil"
 )
 
-func PrintJson(data interface{}){
-	buf, err := json.MarshalIndent(data,"","    ")
-	if err != nil{
+func PrintJson(data interface{}) {
+	buf, err := json.MarshalIndent(data, "", "    ")
+	if err != nil {
 		fmt.Println(err)
 	}
 	fmt.Println(string(buf))
 }
 
 type DBConf struct {
-	User	string
-	Passwd	string
-	Host	string
-	Dbname	string
+	User   string
+	Passwd string
+	Host   string
+	Dbname string
 }
 
 func LoadDBConf(path string) (string, error) {
 	buf, err := ioutil.ReadFile(path)
-	if err != nil{
-		return "",err
+	if err != nil {
+		return "", err
 	}
 
-	var dbname DBConf;
+	var dbname DBConf
 	err = json.Unmarshal(buf, &dbname)
-	if err != nil{
+	if err != nil {
 		return "", errors.New("invalid database configuration file")
 	}
 
@@ -43,5 +43,5 @@ func LoadDBConf(path string) (string, error) {
 	strBuf.WriteString(dbname.Host)
 	strBuf.WriteString(")/")
 	strBuf.WriteString(dbname.Dbname)
-	return strBuf.String(),nil
+	return strBuf.String(), nil
 }
