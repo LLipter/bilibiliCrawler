@@ -16,12 +16,6 @@ func PrintJson(data interface{}) {
 	fmt.Println(string(buf))
 }
 
-type DBConf struct {
-	User   string
-	Passwd string
-	Host   string
-	Dbname string
-}
 
 func LoadDBConf(path string) (string, error) {
 	buf, err := ioutil.ReadFile(path)

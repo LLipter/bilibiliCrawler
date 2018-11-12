@@ -6,30 +6,36 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"net/url"
+	"strconv"
 
 	"github.com/LLipter/bilibili-report/util"
 )
 
 
-func sendRequest(addr string) (util.Info, error) {
-	//urlproxy, err := url.Parse("http://183.245.99.52:80")
-	//if err != nil {
-	//	return err
-	//}
-	//
-	//client := http.Client{
-	//	Transport: &http.Transport{
-	//		Proxy: http.ProxyURL(urlproxy),
-	//	},
-	//}
-	//resp, err := client.Get(addr)
-	//if err != nil {
-	//	return err
-	//}
-
-	resp, err := http.Get(addr)
-	if err != nil {
-		return util.Info{}, err
+func sendRequest(addr string, useProxy bool) (util.Info, error) {
+	var resp *http.Response
+	var err error
+	if useProxy{
+		// TODO: add proxies pool
+		urlproxy, err := url.Parse("http://183.245.99.52:80")
+		if err != nil {
+			return util.Info{}, err
+		}
+		client := http.Client{
+			Transport: &http.Transport{
+				Proxy: http.ProxyURL(urlproxy),
+			},
+		}
+		resp, err = client.Get(addr)
+		if err != nil {
+			return util.Info{}, err
+		}
+	}else{
+		resp, err = http.Get(addr)
+		if err != nil {
+			return util.Info{}, err
+		}
 	}
 
 	defer resp.Body.Close()
@@ -47,8 +53,6 @@ func sendRequest(addr string) (util.Info, error) {
 	return info, nil
 }
 
-
-
 func init(){
 	log.SetFlags(log.Lshortfile | log.LstdFlags)
 	log.Println("init successfully. ")
@@ -56,19 +60,34 @@ func init(){
 	//log.SetOutput()
 }
 
-func main() {
-	info, err := sendRequest("https://api.bilibili.com/archive_stat/stat?aid=12")
+func spider(aid int) error{
+	info, err := sendRequest("https://api.bilibili.com/archive_stat/stat?aid=" + strconv.Itoa(aid), false)
 	if err != nil {
-		fmt.Println(err)
+		return err
 	}
 
-	util.PrintJson(info)
 	fmt.Printf("%+v\n", info)
+	var video util.Video
 
 	if info.Code != 0 {
-		fmt.Println(info.Message)
+		video.Status = 1
+		video.Aid = aid
 	} else {
-		err := util.InsertVideo(info.Data)
+		video = info.Data
+	}
+
+	err = util.InsertVideo(video)
+	if err != nil{
+		return err
+	}
+
+	return nil
+}
+
+func main() {
+
+	for i:=1;i<=10;i++{
+		err := spider(i)
 		if err != nil{
 			fmt.Println(err)
 		}

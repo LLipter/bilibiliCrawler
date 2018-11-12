@@ -23,3 +23,10 @@ type Info struct {
 	Message string
 	Data    Video
 }
+
+type DBConf struct {
+	User   string
+	Passwd string
+	Host   string
+	Dbname string
+}
