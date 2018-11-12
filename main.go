@@ -8,16 +8,19 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"runtime"
 	"strconv"
 	"sync"
+	"time"
 
 	"github.com/LLipter/bilibili-report/util"
 )
 
 var(
-	retryTimes = 3
-	wg sync.WaitGroup
-	logFile *os.File
+	retryTimes 			= 3
+	maxGoroutinueNum	= 100
+	wg					sync.WaitGroup
+	logFile				*os.File
 )
 
 
@@ -125,7 +128,10 @@ func cleanup(){
 
 func main() {
 
-	for i:=1;i<=100;i++{
+	for i:=101;i<=300;i++{
+		for runtime.NumGoroutine() > maxGoroutinueNum{
+			time.Sleep(time.Second)
+		}
 		wg.Add(1)
 		go crawlerRoutine(i)
 	}
