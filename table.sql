@@ -16,11 +16,11 @@ CREATE TABLE video(
     no_reprint INT,
     copyright INT,
     PRIMARY KEY(aid)
-);
+)charset=utf8;
 
 CREATE TABLE chatid(
     aid INT,
     cid INT,
     PRIMARY KEY(aid,cid),
     FOREIGN KEY(cid) REFERENCES video(aid)
-);
+)charset=utf8;
