@@ -18,7 +18,7 @@ import (
 
 var(
 	retryTimes 			= 3
-	maxGoroutinueNum	= 100
+	maxGoroutinueNum	= 200
 	wg					sync.WaitGroup
 	logFile				*os.File
 )
@@ -128,7 +128,7 @@ func cleanup(){
 
 func main() {
 
-	for i:=101;i<=300;i++{
+	for i:=301;i<=1000;i++{
 		for runtime.NumGoroutine() > maxGoroutinueNum{
 			time.Sleep(time.Second)
 		}

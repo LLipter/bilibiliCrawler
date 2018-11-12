@@ -5,12 +5,16 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"time"
 
 	_ "github.com/go-sql-driver/mysql"
 )
 
 var(
-	db	*sql.DB		// database connection pool
+	connPool		*sql.DB // database connection pool
+	maxOpenConn		= 100
+	maxIdleConn 	= 30
+	maxConnLifeTime = time.Minute * 10
 )
 
 func init(){
@@ -20,25 +24,35 @@ func init(){
 		fmt.Printf("cannot open database configuration file, %v", err)
 		os.Exit(1)
 	}
-	db, err = sql.Open("mysql", connStr)
+	connPool, err = sql.Open("mysql", connStr)
+	if err != nil {
+		fmt.Printf("cannot create database connection pool, %v", err)
+		os.Exit(1)
+	}
+	err = connPool.Ping()
 	if err != nil {
 		fmt.Printf("cannot access database, %v", err)
 		os.Exit(1)
 	}
+
+	connPool.SetMaxOpenConns(maxOpenConn)
+	connPool.SetMaxIdleConns(maxIdleConn)
+	connPool.SetConnMaxLifetime(maxConnLifeTime)
 }
 
 func CloseDatabase(){
-	if db != nil{
-		db.Close()
+	if connPool != nil{
+		connPool.Close()
 	}
 }
 
 
 func InsertVideo(video Video) error{
-	stmt, err := db.Prepare("INSERT INTO video VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);")
+	stmt, err := connPool.Prepare("INSERT INTO video VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);")
 	if err != nil {
 		log.Fatal(err)
 	}
+	defer stmt.Close()
 	_, err = stmt.Exec(
 		video.Aid,
 		video.Status,
