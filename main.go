@@ -1,7 +1,6 @@
 package main
 
 import (
-	"database/sql"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -9,33 +8,10 @@ import (
 	"net/http"
 
 	"github.com/LLipter/bilibili-report/util"
-	_ "github.com/go-sql-driver/mysql"
 )
 
-type Video struct {
-	Aid        int
-	Status     int
-	View       int
-	Dannmaku   int
-	Reply      int
-	Favorite   int
-	Coin       int
-	Share      int
-	Now_rank   int
-	His_rank   int
-	Support    int
-	Dislike    int
-	No_reprint int
-	Copyright  int
-}
 
-type Info struct {
-	Code    int
-	Message string
-	Data    Video
-}
-
-func sendRequest(addr string) (Info, error) {
+func sendRequest(addr string) (util.Info, error) {
 	//urlproxy, err := url.Parse("http://183.245.99.52:80")
 	//if err != nil {
 	//	return err
@@ -53,60 +29,35 @@ func sendRequest(addr string) (Info, error) {
 
 	resp, err := http.Get(addr)
 	if err != nil {
-		return Info{}, err
+		return util.Info{}, err
 	}
 
 	defer resp.Body.Close()
 	data, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		return Info{}, err
+		return util.Info{}, err
 	}
 
-	var info Info
+	var info util.Info
 	err = json.Unmarshal(data, &info)
 	if err != nil {
-		return Info{}, err
+		return util.Info{}, err
 	}
 
 	return info, nil
 }
 
-func Insert(video Video, db *sql.DB) {
-	stmt, err := db.Prepare("INSERT INTO video VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);")
-	if err != nil {
-		log.Fatal(err)
-	}
-	res, err := stmt.Exec(
-		video.Aid,
-		video.Status,
-		video.View,
-		video.Dannmaku,
-		video.Reply,
-		video.Favorite,
-		video.Coin,
-		video.Share,
-		video.Now_rank,
-		video.His_rank,
-		video.Support,
-		video.Dislike,
-		video.No_reprint,
-		video.Copyright)
-	if err != nil {
-		log.Fatal(err)
-	}
-	lastId, err := res.LastInsertId()
-	if err != nil {
-		log.Fatal(err)
-	}
-	rowCnt, err := res.RowsAffected()
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Printf("ID=%d, affected=%d\n", lastId, rowCnt)
+
+
+func init(){
+	log.SetFlags(log.Lshortfile | log.LstdFlags)
+	log.Println("init successfully. ")
+	log.Println("Other logs will be store in log file. No information will appear here")
+	//log.SetOutput()
 }
 
 func main() {
-	info, err := sendRequest("https://api.bilibili.com/archive_stat/stat?aid=2")
+	info, err := sendRequest("https://api.bilibili.com/archive_stat/stat?aid=12")
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -117,18 +68,12 @@ func main() {
 	if info.Code != 0 {
 		fmt.Println(info.Message)
 	} else {
-		// change to your database configuration file path, see dbconfig-sample.json
-		connStr, err := util.LoadDBConf("dbconfig.json")
-		fmt.Println(connStr)
-		if err != nil {
-			log.Fatal(err)
+		err := util.InsertVideo(info.Data)
+		if err != nil{
+			fmt.Println(err)
 		}
-		db, err := sql.Open("mysql", connStr)
-		if err != nil {
-			log.Fatal(err)
-		}
-		defer db.Close()
-		Insert(info.Data, db)
 	}
+
+	util.CloseDatabase()
 
 }
