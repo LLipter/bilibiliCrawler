@@ -2,7 +2,9 @@ package util
 
 import (
 	"database/sql"
+	"fmt"
 	"log"
+	"os"
 
 	_ "github.com/go-sql-driver/mysql"
 )
@@ -15,11 +17,13 @@ func init(){
 	// change to your database configuration file path, see dbconfig-sample.json
 	connStr, err := LoadDBConf("dbconfig.json")
 	if err != nil {
-		log.Fatal(err)
+		fmt.Printf("cannot open database configuration file, %v", err)
+		os.Exit(1)
 	}
 	db, err = sql.Open("mysql", connStr)
 	if err != nil {
-		log.Fatal(err)
+		fmt.Printf("cannot access database, %v", err)
+		os.Exit(1)
 	}
 }
 

@@ -2,10 +2,12 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"net/url"
+	"os"
 	"strconv"
 	"sync"
 
@@ -15,6 +17,7 @@ import (
 var(
 	retryTimes = 3
 	wg sync.WaitGroup
+	logFile *os.File
 )
 
 
@@ -60,9 +63,14 @@ func sendRequest(addr string, useProxy bool) (util.Info, error) {
 
 func init(){
 	log.SetFlags(log.Lshortfile | log.LstdFlags)
-	log.Println("init successfully. ")
-	log.Println("Other logs will be store in log file. No information will appear here")
-	//log.SetOutput()
+	var err error
+	logFile, err = os.OpenFile("log.txt", os.O_APPEND | os.O_WRONLY | os.O_CREATE, 0644)
+	if err != nil {
+		log.Fatal(fmt.Sprintf("cannot open log file, %v", err))
+	}
+	log.SetOutput(logFile)
+
+	fmt.Println("init successfully. ")
 }
 
 func crawler(aid int) error{
@@ -108,6 +116,13 @@ func crawlerRoutine(aid int){
 	}
 }
 
+func cleanup(){
+	if logFile != nil {
+		logFile.Close()
+	}
+	util.CloseDatabase()
+}
+
 func main() {
 
 	for i:=1;i<=100;i++{
@@ -117,6 +132,6 @@ func main() {
 
 	wg.Wait()
 
-	util.CloseDatabase()
+	cleanup()
 
 }
