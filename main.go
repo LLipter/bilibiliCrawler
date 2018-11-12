@@ -2,14 +2,19 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"net/url"
 	"strconv"
+	"sync"
 
 	"github.com/LLipter/bilibili-report/util"
+)
+
+var(
+	retryTimes = 3
+	wg sync.WaitGroup
 )
 
 
@@ -60,13 +65,12 @@ func init(){
 	//log.SetOutput()
 }
 
-func spider(aid int) error{
+func crawler(aid int) error{
 	info, err := sendRequest("https://api.bilibili.com/archive_stat/stat?aid=" + strconv.Itoa(aid), false)
 	if err != nil {
 		return err
 	}
 
-	fmt.Printf("%+v\n", info)
 	var video util.Video
 
 	if info.Code != 0 {
@@ -84,14 +88,34 @@ func spider(aid int) error{
 	return nil
 }
 
-func main() {
-
-	for i:=1;i<=10;i++{
-		err := spider(i)
-		if err != nil{
-			fmt.Println(err)
+func crawlerRoutine(aid int){
+	defer wg.Done()
+	for t:=0;t<retryTimes;t++{
+		err := crawler(aid)
+		if err == nil{
+			return
+		}else{
+			log.Printf("aid=%d crawler failed, %v\n", aid, err)
 		}
 	}
+	// failed with unknown reason
+	var video util.Video
+	video.Status = 2
+	video.Aid = aid
+	err := util.InsertVideo(video)
+	if err != nil{
+		log.Printf("aid=%d insertion failed, %v\n", aid, err)
+	}
+}
+
+func main() {
+
+	for i:=1;i<=100;i++{
+		wg.Add(1)
+		go crawlerRoutine(i)
+	}
+
+	wg.Wait()
 
 	util.CloseDatabase()
 

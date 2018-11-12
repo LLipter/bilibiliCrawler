@@ -2,7 +2,6 @@ package util
 
 import (
 	"database/sql"
-	"fmt"
 	"log"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -15,7 +14,6 @@ var(
 func init(){
 	// change to your database configuration file path, see dbconfig-sample.json
 	connStr, err := LoadDBConf("dbconfig.json")
-	fmt.Println(connStr)
 	if err != nil {
 		log.Fatal(err)
 	}
