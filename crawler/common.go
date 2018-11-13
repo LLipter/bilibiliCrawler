@@ -2,6 +2,8 @@ package crawler
 
 import (
 	"github.com/LLipter/bilibili-report/conf"
+	"github.com/LLipter/bilibili-report/proxy"
+	"math/rand"
 	"net/http"
 	"net/url"
 	"sync"
@@ -16,14 +18,15 @@ func getResp(addr string) (*http.Response, error) {
 	req, err := http.NewRequest("GET", addr, nil)
 	req.Header.Add("User-Agent", conf.UserAgent)
 	if conf.UseProxy {
-		// TODO: add proxies pool
-		urlproxy, err := url.Parse("http://183.245.99.52:80")
+		length := len(proxy.ProxyPool)
+		proxyAddr := proxy.ProxyPool[rand.Intn(length)]
+		urlProxy, err := url.Parse("http://" + proxyAddr)
 		if err != nil {
 			return nil, err
 		}
 		client = http.Client{
 			Transport: &http.Transport{
-				Proxy: http.ProxyURL(urlproxy),
+				Proxy: http.ProxyURL(urlProxy),
 			},
 		}
 	}

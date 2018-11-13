@@ -2,11 +2,14 @@ package main
 
 import (
 	"fmt"
+	"github.com/LLipter/bilibili-report/conf"
 	_ "github.com/LLipter/bilibili-report/conf"
 	"github.com/LLipter/bilibili-report/crawler"
+	"github.com/LLipter/bilibili-report/proxy"
 	"github.com/LLipter/bilibili-report/util/db"
 	"log"
 	"os"
+	"time"
 )
 
 var (
@@ -22,6 +25,13 @@ func init() {
 	}
 	log.SetOutput(logFile)
 
+	// start proxy
+	if conf.UseProxy {
+		go proxy.GetProxies()
+	}
+	// make sure proxies is available
+	time.Sleep(time.Second)
+
 	fmt.Println("init successfully. ")
 }
 
@@ -33,6 +43,6 @@ func cleanup() {
 }
 
 func main() {
-	crawler.CrawlVideo(1001, 2000)
+	crawler.CrawlVideo(10001, 30000)
 	cleanup()
 }
