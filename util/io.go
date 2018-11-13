@@ -36,5 +36,6 @@ func LoadDBConf(path string) (string, error) {
 	strBuf.WriteString(dbname.Host)
 	strBuf.WriteString(")/")
 	strBuf.WriteString(dbname.DBname)
+	strBuf.WriteString("?charset=utf8")
 	return strBuf.String(), nil
 }

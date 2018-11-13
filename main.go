@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"runtime"
 	"strconv"
 	"strings"
 	"sync"
@@ -56,10 +57,14 @@ func getVideoData(aid int) (util.Info, error) {
 		return util.Info{}, err
 	}
 
-	err = getVideoMoreData(aid, &data.Data)
-	if err != nil {
-		return util.Info{}, err
+	// if this video exists, crawl more data
+	if data.Code == 0{
+		err = getVideoMoreData(aid, &data.Data)
+		if err != nil {
+			return util.Info{}, err
+		}
 	}
+
 
 	return data, nil
 }
@@ -114,8 +119,6 @@ func getVideoMoreData(aid int, video *util.Video) error {
 
 	var jsonObj map[string]interface{}
 	json.Unmarshal([]byte(jsonstr), &jsonObj)
-
-	util.PrintJson(jsonObj)
 
 	videoJson, err := util.JsonGetDict(jsonObj, "videoData")
 	if err != nil {
@@ -258,19 +261,13 @@ func cleanup() {
 
 func main() {
 
-	//for i := 1; i <= 300; i++ {
-	//	for runtime.NumGoroutine() > maxGoroutinueNum {
-	//		time.Sleep(time.Second)
-	//	}
-	//	wg.Add(1)
-	//	go crawlerRoutine(i)
-	//}
-
-	data, err := getVideoData(35679613)
-	if err != nil {
-		fmt.Println(err)
+	for i := 1; i <= 10; i++ {
+		for runtime.NumGoroutine() > maxGoroutinueNum {
+			time.Sleep(time.Second)
+		}
+		wg.Add(1)
+		go crawlerRoutine(i)
 	}
-	fmt.Printf("%+v", data)
 
 	wg.Wait()
 

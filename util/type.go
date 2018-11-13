@@ -38,8 +38,8 @@ type DBConf struct {
 }
 
 type Page struct {
+	PageNo   int64
 	Chatid   int64
 	Duration int64
 	Subtitle string
-	PageNo   int64
 }

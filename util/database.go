@@ -2,8 +2,8 @@ package util
 
 import (
 	"database/sql"
+	"errors"
 	"fmt"
-	"log"
 	"os"
 	"time"
 
@@ -47,14 +47,26 @@ func CloseDatabase() {
 }
 
 func InsertVideo(video Video) error {
-	stmt, err := connPool.Prepare("INSERT INTO video VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);")
-	if err != nil {
-		log.Fatal(err)
+	tx, err := connPool.Begin()
+	if err != nil{
+		return errors.New("transaction begin failed : " + err.Error())
 	}
-	defer stmt.Close()
-	_, err = stmt.Exec(
+
+	var pubdate interface{}
+	if video.Pubdate.IsZero(){
+		pubdate = nil
+	}else{
+		pubdate = video.Pubdate
+	}
+
+	_, err = tx.Exec(
+		"INSERT INTO video VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);",
 		video.Aid,
 		video.Status,
+		video.Title,
+		pubdate,
+		video.Owner,
+		video.Duration,
 		video.View,
 		video.Dannmaku,
 		video.Reply,
@@ -68,7 +80,34 @@ func InsertVideo(video Video) error {
 		video.No_reprint,
 		video.Copyright)
 	if err != nil {
-		return err
+		return rollback(tx, err)
+	}
+
+	for _, page := range video.Pages{
+		_, err = tx.Exec(
+			"INSERT INTO pages VALUES(?, ?, ?, ?, ?);",
+			video.Aid,
+			page.PageNo,
+			page.Chatid,
+			page.Duration,
+			page.Subtitle,
+		)
+		if err != nil {
+			return rollback(tx, err)
+		}
+	}
+
+	err = tx.Commit()
+	if err != nil {
+		return errors.New("transaction Commit failed : " + err.Error())
 	}
 	return nil
+}
+
+func rollback(tx *sql.Tx, oldErr error) error{
+	err := tx.Rollback()
+	if err != nil{
+		return errors.New(oldErr.Error() + " : " + err.Error())
+	}
+	return oldErr
 }
