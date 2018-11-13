@@ -3,12 +3,12 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/PuerkitoBio/goquery"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"net/url"
 	"os"
-	"runtime"
 	"strconv"
 	"strings"
 	"sync"
@@ -18,35 +18,42 @@ import (
 )
 
 var (
-	retryTimes       = 3
-	maxGoroutinueNum = 200
-	wg               sync.WaitGroup
-	logFile          *os.File
+	retryTimes			= 3
+	maxGoroutinueNum	= 200
+	useProxy			= false
+	userAgent			= "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36"
+	wg               	sync.WaitGroup
+	logFile          	*os.File
 )
 
-func sendRequest(addr string, useProxy bool) (util.Info, error) {
-	var resp *http.Response
-	var err error
+func getResp(addr string) (*http.Response,error){
+	client := http.Client{}
+	req, err := http.NewRequest("GET", addr, nil)
+	req.Header.Add("User-Agent", userAgent)
 	if useProxy {
 		// TODO: add proxies pool
 		urlproxy, err := url.Parse("http://183.245.99.52:80")
 		if err != nil {
-			return util.Info{}, err
+			return nil, err
 		}
-		client := http.Client{
+		client = http.Client{
 			Transport: &http.Transport{
 				Proxy: http.ProxyURL(urlproxy),
 			},
 		}
-		resp, err = client.Get(addr)
-		if err != nil {
-			return util.Info{}, err
-		}
-	} else {
-		resp, err = http.Get(addr)
-		if err != nil {
-			return util.Info{}, err
-		}
+	}
+	resp, err := client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	return resp,nil
+}
+
+func getVideoBasicData(aid int) (util.Info, error){
+	addr := "https://api.bilibili.com/archive_stat/stat?aid="+strconv.Itoa(aid)
+	resp, err := getResp(addr)
+	if err != nil {
+		return util.Info{}, err
 	}
 
 	defer resp.Body.Close()
@@ -67,6 +74,45 @@ func sendRequest(addr string, useProxy bool) (util.Info, error) {
 	return info, nil
 }
 
+func getVideoPostTime(aid int) (time.Time, error){
+	addr := "https://www.bilibili.com/video/av"+strconv.Itoa(aid)
+	resp, err := getResp(addr)
+	if err != nil {
+		return time.Now(), err
+	}
+
+	defer resp.Body.Close()
+	doc, err := goquery.NewDocumentFromReader(resp.Body)
+	if err != nil {
+		return time.Now(), err
+	}
+
+	doc.Find("script").EachWithBreak(func(i int, selection *goquery.Selection) bool {
+		fmt.Println(i)
+		content := selection.Text()
+		if(strings.HasPrefix(content, "window.__INITIAL_STATE__=")){
+
+			fmt.Println(content)
+			return false
+		}
+		return true
+	})
+
+
+	return time.Now(),nil
+}
+
+
+func getVideoData(aid int) (util.Info, error) {
+	data, err := getVideoBasicData(aid)
+	if err != nil {
+		return data, err
+	}
+
+
+	return data, nil
+}
+
 func init() {
 	log.SetFlags(log.Lshortfile | log.LstdFlags)
 	var err error
@@ -80,7 +126,7 @@ func init() {
 }
 
 func crawler(aid int) error {
-	info, err := sendRequest("https://api.bilibili.com/archive_stat/stat?aid="+strconv.Itoa(aid), false)
+	info, err := getVideoData(aid)
 	if err != nil {
 		return err
 	}
@@ -131,13 +177,15 @@ func cleanup() {
 
 func main() {
 
-	for i := 3501; i <= 4000; i++ {
-		for runtime.NumGoroutine() > maxGoroutinueNum {
-			time.Sleep(time.Second)
-		}
-		wg.Add(1)
-		go crawlerRoutine(i)
-	}
+	//for i := 1; i <= 300; i++ {
+	//	for runtime.NumGoroutine() > maxGoroutinueNum {
+	//		time.Sleep(time.Second)
+	//	}
+	//	wg.Add(1)
+	//	go crawlerRoutine(i)
+	//}
+
+	getVideoPostTime(2)
 
 	wg.Wait()
 
