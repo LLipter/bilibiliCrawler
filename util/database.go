@@ -59,6 +59,12 @@ func InsertVideo(video Video) error {
 		pubdate = video.Pubdate
 	}
 
+	// sometimes if there's only 1p, subtitle may be missing
+	// I don't know way
+	if len(video.Pages) == 1 && video.Pages[0].Subtitle == ""{
+		video.Pages[0].Subtitle = video.Title
+	}
+
 	_, err = tx.Exec(
 		"INSERT INTO video VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);",
 		video.Aid,

@@ -261,13 +261,16 @@ func cleanup() {
 
 func main() {
 
-	for i := 1; i <= 10; i++ {
+	for i := 1; i <= 300; i++ {
 		for runtime.NumGoroutine() > maxGoroutinueNum {
 			time.Sleep(time.Second)
 		}
 		wg.Add(1)
 		go crawlerRoutine(i)
 	}
+
+	//data, _ := getVideoData(35733869)
+	//fmt.Printf("%+v\n", data)
 
 	wg.Wait()
 

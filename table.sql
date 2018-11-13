@@ -1,4 +1,5 @@
-CREATE DATABASE bilibili;
+-- use `set names utf-8 to ensure all charset is correct`
+CREATE DATABASE bilibili character set utf8;
 
 CREATE TABLE video(
     aid INT,
@@ -22,12 +23,14 @@ CREATE TABLE video(
     PRIMARY KEY(aid)
 )charset=utf8;
 
-CREATE TABLE chatid(
+CREATE TABLE pages(
     aid INT,
     pageno INT,
     cid INT,
     duration INT,
     subtitle VARCHAR(200),
-    PRIMARY KEY(aid,pageno),
-    FOREIGN KEY(aid) REFERENCES video(aid)
+    PRIMARY KEY(aid,pageno)
 )charset=utf8;
+
+
+SELECT aid,status,title,pubdate,duration,view FROM video;
