@@ -7,9 +7,10 @@ type Video struct {
 	Status     int64
 	Title      string
 	Pubdate    time.Time
+	Owner      int64
 	Duration   int64
 	View       int64
-	Dannmaku   int64
+	Dannmaku   int64 `json:"danmaku"`
 	Reply      int64
 	Favorite   int64
 	Coin       int64
@@ -20,7 +21,7 @@ type Video struct {
 	Dislike    int64
 	No_reprint int64
 	Copyright  int64
-	Pages	   []Page
+	Pages      []Page
 }
 
 type Info struct {
@@ -33,7 +34,7 @@ type DBConf struct {
 	User   string
 	Passwd string
 	Host   string
-	Dbname string
+	DBname string
 }
 
 type Page struct {

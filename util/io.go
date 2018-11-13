@@ -35,6 +35,6 @@ func LoadDBConf(path string) (string, error) {
 	strBuf.WriteString("@tcp(")
 	strBuf.WriteString(dbname.Host)
 	strBuf.WriteString(")/")
-	strBuf.WriteString(dbname.Dbname)
+	strBuf.WriteString(dbname.DBname)
 	return strBuf.String(), nil
 }

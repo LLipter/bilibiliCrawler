@@ -49,32 +49,47 @@ func getResp(addr string) (*http.Response, error) {
 	return resp, nil
 }
 
-func getVideoBasicData(aid int) (util.Info, error) {
+func getVideoData(aid int) (util.Info, error) {
+	var data util.Info
+	err := getVideoBasicData(aid, &data)
+	if err != nil {
+		return util.Info{}, err
+	}
+
+	err = getVideoMoreData(aid, &data.Data)
+	if err != nil {
+		return util.Info{}, err
+	}
+
+	return data, nil
+}
+
+func getVideoBasicData(aid int, data *util.Info) error {
 	addr := "https://api.bilibili.com/archive_stat/stat?aid=" + strconv.Itoa(aid)
 	resp, err := getResp(addr)
 	if err != nil {
-		return util.Info{}, err
+		return err
 	}
 
 	defer resp.Body.Close()
-	data, err := ioutil.ReadAll(resp.Body)
+	buf, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		return util.Info{}, err
+		return err
 	}
 
-	var info util.Info
-	err = json.Unmarshal(data, &info)
+	err = json.Unmarshal(buf, data)
 	if err != nil {
 		if strings.HasPrefix(err.Error(), "json: cannot unmarshal string into Go struct field") {
-			return util.Info{Code: -1}, nil
+			data.Code = -1
+		} else {
+			return err
 		}
-		return util.Info{}, err
 	}
 
-	return info, nil
+	return nil
 }
 
-func getVideoPostTime(aid int, video *util.Video) error {
+func getVideoMoreData(aid int, video *util.Video) error {
 	addr := "https://www.bilibili.com/video/av" + strconv.Itoa(aid)
 	resp, err := getResp(addr)
 	if err != nil {
@@ -102,38 +117,48 @@ func getVideoPostTime(aid int, video *util.Video) error {
 
 	util.PrintJson(jsonObj)
 
-	videoData, err := util.JsonGetDict(jsonObj, "videoData")
+	videoJson, err := util.JsonGetDict(jsonObj, "videoData")
 	if err != nil {
 		return err
 	}
 
 	// get title
-	video.Title, err = util.JsonGetStr(videoData, "title")
+	video.Title, err = util.JsonGetStr(videoJson, "title")
 	if err != nil {
 		return err
 	}
 
 	// get pubdate
-	pubdate, err := util.JsonGetInt64(videoData, "pubdate")
+	pubdate, err := util.JsonGetInt64(videoJson, "pubdate")
 	if err != nil {
 		return err
 	}
 	video.Pubdate = time.Unix(pubdate, 0)
 
 	// get duration
-	video.Duration, err = util.JsonGetInt64(videoData, "duration")
+	video.Duration, err = util.JsonGetInt64(videoJson, "duration")
+	if err != nil {
+		return err
+	}
+
+	// get ownerJson id
+	ownerJson, err := util.JsonGetDict(videoJson, "owner")
+	if err != nil {
+		return err
+	}
+	video.Owner, err = util.JsonGetInt64(ownerJson, "mid")
 	if err != nil {
 		return err
 	}
 
 	// get pages
-	pages, err := util.JsonGetArray(videoData, "pages")
+	pages, err := util.JsonGetArray(videoJson, "pages")
 	if err != nil {
 		return err
 	}
 	for _, pageObj := range pages {
 		pageJson, ok := pageObj.(map[string]interface{})
-		if !ok{
+		if !ok {
 			return util.TypeError("pages")
 		}
 
@@ -144,20 +169,29 @@ func getVideoPostTime(aid int, video *util.Video) error {
 			return err
 		}
 
+		// get duration
+		page.Duration, err = util.JsonGetInt64(pageJson, "duration")
+		if err != nil {
+			return err
+		}
+
+		// get pageNo
+		page.PageNo, err = util.JsonGetInt64(pageJson, "page")
+		if err != nil {
+			return err
+		}
+
+		// get subtititle
+		page.Subtitle, err = util.JsonGetStr(pageJson, "part")
+		if err != nil {
+			return err
+		}
+
+		video.Pages = append(video.Pages, page)
+
 	}
-	fmt.Printf("%T\n", pages)
 
 	return nil
-}
-
-
-func getVideoData(aid int) (util.Info, error) {
-	data, err := getVideoBasicData(aid)
-	if err != nil {
-		return data, err
-	}
-
-	return data, nil
 }
 
 func init() {
@@ -173,18 +207,18 @@ func init() {
 }
 
 func crawler(aid int) error {
-	info, err := getVideoData(aid)
+	data, err := getVideoData(aid)
 	if err != nil {
 		return err
 	}
 
 	var video util.Video
 
-	if info.Code != 0 {
+	if data.Code != 0 {
 		video.Status = 1
 		video.Aid = int64(aid)
 	} else {
-		video = info.Data
+		video = data.Data
 	}
 
 	err = util.InsertVideo(video)
@@ -232,11 +266,11 @@ func main() {
 	//	go crawlerRoutine(i)
 	//}
 
-	var v util.Video
-	getVideoPostTime(35679613, &v)
-	fmt.Println(v.Title)
-	fmt.Println(v.Pubdate)
-	fmt.Println(v.Duration)
+	data, err := getVideoData(35679613)
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Printf("%+v", data)
 
 	wg.Wait()
 

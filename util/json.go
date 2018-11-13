@@ -5,15 +5,15 @@ import (
 	"fmt"
 )
 
-func MissingError(key string) error{
+func MissingError(key string) error {
 	return errors.New(fmt.Sprintf("missing '%s'", key))
 }
 
-func TypeError(key string) error{
+func TypeError(key string) error {
 	return errors.New(fmt.Sprintf("'%s' type error", key))
 }
 
-func JsonGetDict(dict map[string]interface{}, key string) (map[string]interface{}, error){
+func JsonGetDict(dict map[string]interface{}, key string) (map[string]interface{}, error) {
 	obj, ok := dict[key]
 	if !ok {
 		return nil, MissingError(key)
@@ -25,7 +25,7 @@ func JsonGetDict(dict map[string]interface{}, key string) (map[string]interface{
 	return res, nil
 }
 
-func JsonGetArray(dict map[string]interface{}, key string) ([]interface{}, error){
+func JsonGetArray(dict map[string]interface{}, key string) ([]interface{}, error) {
 	obj, ok := dict[key]
 	if !ok {
 		return nil, MissingError(key)
@@ -37,7 +37,7 @@ func JsonGetArray(dict map[string]interface{}, key string) ([]interface{}, error
 	return res, nil
 }
 
-func JsonGetStr(dict map[string]interface{}, key string) (string, error){
+func JsonGetStr(dict map[string]interface{}, key string) (string, error) {
 	obj, ok := dict[key]
 	if !ok {
 		return "", MissingError(key)
@@ -49,7 +49,7 @@ func JsonGetStr(dict map[string]interface{}, key string) (string, error){
 	return res, nil
 }
 
-func JsonGetInt64(dict map[string]interface{}, key string) (int64, error){
+func JsonGetInt64(dict map[string]interface{}, key string) (int64, error) {
 	obj, ok := dict[key]
 	if !ok {
 		return 0, MissingError(key)
