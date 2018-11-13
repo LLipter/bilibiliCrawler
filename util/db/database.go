@@ -1,4 +1,4 @@
-package util
+package db
 
 import (
 	"database/sql"
@@ -10,17 +10,12 @@ import (
 )
 
 var (
-	connPool *sql.DB // database connection pool
+	connPool *sql.DB // database connection poold
 )
 
 func init() {
-	// change to your database configuration file path, see dbconfig-sample.json
-	connStr, err := LoadDBConf("dbconfig.json")
-	if err != nil {
-		fmt.Printf("cannot open database configuration file, %v", err)
-		os.Exit(1)
-	}
-	connPool, err = sql.Open("mysql", connStr)
+	var err error
+	connPool, err = sql.Open("mysql", conf.DBConnStr)
 	if err != nil {
 		fmt.Printf("cannot create database connection pool, %v", err)
 		os.Exit(1)
@@ -30,7 +25,6 @@ func init() {
 		fmt.Printf("cannot access database, %v", err)
 		os.Exit(1)
 	}
-
 	connPool.SetMaxOpenConns(conf.MaxOpenConn)
 	connPool.SetMaxIdleConns(conf.MaxIdleConn)
 	connPool.SetConnMaxLifetime(conf.MaxConnLifeTime)
@@ -42,7 +36,7 @@ func CloseDatabase() {
 	}
 }
 
-func InsertVideo(video Video) error {
+func InsertVideo(video conf.Video) error {
 	tx, err := connPool.Begin()
 	if err != nil {
 		return errors.New("transaction begin failed : " + err.Error())

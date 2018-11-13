@@ -4,23 +4,19 @@ import (
 	"encoding/json"
 	"github.com/LLipter/bilibili-report/conf"
 	"github.com/LLipter/bilibili-report/util"
+	"github.com/LLipter/bilibili-report/util/db"
 	"github.com/PuerkitoBio/goquery"
 	"io/ioutil"
 	"log"
 	"runtime"
 	"strconv"
 	"strings"
-	"sync"
 	"time"
-)
-
-var (
-	wg sync.WaitGroup
 )
 
 func CrawlVideo(startAid int, endAid int) {
 	for i := startAid; i <= endAid; i++ {
-		for runtime.NumGoroutine() > conf.MaxGoroutinueNum {
+		for runtime.NumGoroutine() > conf.MaxGoroutineNum {
 			time.Sleep(time.Second)
 		}
 		wg.Add(1)
@@ -41,17 +37,17 @@ func videoCrawlerRoutine(aid int) {
 		}
 	}
 	// failed with unknown reason
-	var video util.Video
+	var video conf.Video
 	video.Status = 2
 	video.Aid = int64(aid)
-	err := util.InsertVideo(video)
+	err := db.InsertVideo(video)
 	if err != nil {
 		log.Printf("aid=%d insertion failed, %v\n", aid, err)
 	}
 }
 
 func getVideoData(aid int) error {
-	var data util.Info
+	var data conf.Info
 	err := getVideoBasicData(aid, &data)
 	if err != nil {
 		return err
@@ -65,7 +61,7 @@ func getVideoData(aid int) error {
 		}
 	}
 
-	var video util.Video
+	var video conf.Video
 	if data.Code != 0 {
 		video.Status = 1
 		video.Aid = int64(aid)
@@ -73,7 +69,7 @@ func getVideoData(aid int) error {
 		video = data.Data
 	}
 
-	err = util.InsertVideo(video)
+	err = db.InsertVideo(video)
 	if err != nil {
 		return err
 	}
@@ -81,7 +77,7 @@ func getVideoData(aid int) error {
 	return nil
 }
 
-func getVideoBasicData(aid int, data *util.Info) error {
+func getVideoBasicData(aid int, data *conf.Info) error {
 	addr := "https://api.bilibili.com/archive_stat/stat?aid=" + strconv.Itoa(aid)
 	resp, err := getResp(addr)
 	if err != nil {
@@ -106,7 +102,7 @@ func getVideoBasicData(aid int, data *util.Info) error {
 	return nil
 }
 
-func getVideoMoreData(aid int, video *util.Video) error {
+func getVideoMoreData(aid int, video *conf.Video) error {
 	addr := "https://www.bilibili.com/video/av" + strconv.Itoa(aid)
 	resp, err := getResp(addr)
 	if err != nil {
@@ -178,7 +174,7 @@ func getVideoMoreData(aid int, video *util.Video) error {
 		}
 
 		// get chatid
-		var page util.Page
+		var page conf.Page
 		page.Chatid, err = util.JsonGetInt64(pageJson, "cid")
 		if err != nil {
 			return err

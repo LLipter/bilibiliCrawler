@@ -1,0 +1,21 @@
+{
+    "database":{
+        "user":"LLipter",
+        "passwd":"123456",
+        "host":"localhost:3306",
+        "dbname":"(づ｡◕‿‿◕｡)づ",
+        "maxOpenConn":100,
+        "maxIdleConn":30,
+        "maxConnLifeTime":10
+    },
+
+    
+    "maxGoroutineNum":200,
+
+    "network":{
+        "useProxy":false,
+        "userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36",
+        "retryTimes":3
+    }
+
+}

@@ -4,6 +4,11 @@ import (
 	"github.com/LLipter/bilibili-report/conf"
 	"net/http"
 	"net/url"
+	"sync"
+)
+
+var (
+	wg sync.WaitGroup
 )
 
 func getResp(addr string) (*http.Response, error) {

@@ -2,8 +2,9 @@ package main
 
 import (
 	"fmt"
+	_ "github.com/LLipter/bilibili-report/conf"
 	"github.com/LLipter/bilibili-report/crawler"
-	"github.com/LLipter/bilibili-report/util"
+	"github.com/LLipter/bilibili-report/util/db"
 	"log"
 	"os"
 )
@@ -28,10 +29,10 @@ func cleanup() {
 	if logFile != nil {
 		logFile.Close()
 	}
-	util.CloseDatabase()
+	db.CloseDatabase()
 }
 
 func main() {
-	crawler.CrawlVideo(301, 1000)
+	crawler.CrawlVideo(1001, 2000)
 	cleanup()
 }

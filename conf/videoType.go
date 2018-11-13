@@ -1,4 +1,4 @@
-package util
+package conf
 
 import "time"
 
@@ -28,13 +28,6 @@ type Info struct {
 	Code    int64
 	Message string
 	Data    Video
-}
-
-type DBConf struct {
-	User   string
-	Passwd string
-	Host   string
-	DBname string
 }
 
 type Page struct {
