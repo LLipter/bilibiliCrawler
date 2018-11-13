@@ -3,6 +3,10 @@ CREATE DATABASE bilibili;
 CREATE TABLE video(
     aid INT,
     status INT,
+    title VARCHAR(200),
+    pubdate DATETIME,
+    mid INT,
+    duration INT,
     view INT,
     dannmaku INT,
     reply INT,
@@ -20,7 +24,10 @@ CREATE TABLE video(
 
 CREATE TABLE chatid(
     aid INT,
+    pageno INT,
     cid INT,
-    PRIMARY KEY(aid,cid),
-    FOREIGN KEY(cid) REFERENCES video(aid)
+    duration INT,
+    subtitle VARCHAR(200),
+    PRIMARY KEY(aid,pageno),
+    FOREIGN KEY(aid) REFERENCES video(aid)
 )charset=utf8;
