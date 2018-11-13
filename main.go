@@ -10,6 +10,7 @@ import (
 	"os"
 	"runtime"
 	"strconv"
+	"strings"
 	"sync"
 	"time"
 
@@ -57,6 +58,9 @@ func sendRequest(addr string, useProxy bool) (util.Info, error) {
 	var info util.Info
 	err = json.Unmarshal(data, &info)
 	if err != nil {
+		if strings.HasPrefix(err.Error(), "json: cannot unmarshal string into Go struct field"){
+			return util.Info{Code:-1},nil
+		}
 		return util.Info{}, err
 	}
 
@@ -127,7 +131,7 @@ func cleanup() {
 
 func main() {
 
-	for i := 301; i <= 1000; i++ {
+	for i := 3501; i <= 4000; i++ {
 		for runtime.NumGoroutine() > maxGoroutinueNum {
 			time.Sleep(time.Second)
 		}
