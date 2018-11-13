@@ -1,4 +1,4 @@
--- use `set names utf-8 to ensure all charset is correct`
+-- use `set names utf8` to ensure all charset is correct
 CREATE DATABASE bilibili character set utf8;
 
 CREATE TABLE video(
