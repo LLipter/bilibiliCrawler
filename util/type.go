@@ -5,8 +5,8 @@ import "time"
 type Video struct {
 	Aid        int
 	Status     int
-	Title	   string
-	Pubdate	   time.Time
+	Title      string
+	Pubdate    time.Time
 	Duration   int
 	View       int
 	Dannmaku   int
@@ -35,9 +35,9 @@ type DBConf struct {
 	Dbname string
 }
 
-type Page struct{
-	Chatid	int
+type Page struct {
+	Chatid   int
 	Duration int
 	Subtitle string
-	PageNo int
+	PageNo   int
 }
