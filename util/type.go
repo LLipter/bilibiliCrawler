@@ -3,27 +3,28 @@ package util
 import "time"
 
 type Video struct {
-	Aid        int
-	Status     int
+	Aid        int64
+	Status     int64
 	Title      string
 	Pubdate    time.Time
-	Duration   int
-	View       int
-	Dannmaku   int
-	Reply      int
-	Favorite   int
-	Coin       int
-	Share      int
-	Now_rank   int
-	His_rank   int
-	Support    int
-	Dislike    int
-	No_reprint int
-	Copyright  int
+	Duration   int64
+	View       int64
+	Dannmaku   int64
+	Reply      int64
+	Favorite   int64
+	Coin       int64
+	Share      int64
+	Now_rank   int64
+	His_rank   int64
+	Support    int64
+	Dislike    int64
+	No_reprint int64
+	Copyright  int64
+	Pages	   []Page
 }
 
 type Info struct {
-	Code    int
+	Code    int64
 	Message string
 	Data    Video
 }
@@ -36,8 +37,8 @@ type DBConf struct {
 }
 
 type Page struct {
-	Chatid   int
-	Duration int
+	Chatid   int64
+	Duration int64
 	Subtitle string
-	PageNo   int
+	PageNo   int64
 }

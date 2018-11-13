@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"errors"
 	"fmt"
 	"github.com/PuerkitoBio/goquery"
 	"io/ioutil"
@@ -108,36 +107,43 @@ func getVideoPostTime(aid int, video *util.Video) error {
 		return err
 	}
 
-	// retrieve title
+	// get title
 	video.Title, err = util.JsonGetStr(videoData, "title")
 	if err != nil {
 		return err
 	}
 
-	// retrieve pubdate
+	// get pubdate
 	pubdate, err := util.JsonGetInt64(videoData, "pubdate")
 	if err != nil {
 		return err
 	}
 	video.Pubdate = time.Unix(pubdate, 0)
 
-	// retrieve duration
-	duration, err := util.JsonGetInt64(videoData, "duration")
+	// get duration
+	video.Duration, err = util.JsonGetInt64(videoData, "duration")
 	if err != nil {
 		return err
 	}
-	video.Duration = int(duration)
 
-	// retrieve pages
+	// get pages
 	pages, err := util.JsonGetArray(videoData, "pages")
 	if err != nil {
 		return err
 	}
 	for _, pageObj := range pages {
-		page, ok := pageObj.(map[string]interface{})
+		pageJson, ok := pageObj.(map[string]interface{})
 		if !ok{
 			return util.TypeError("pages")
 		}
+
+		// get chatid
+		var page util.Page
+		page.Chatid, err = util.JsonGetInt64(pageJson, "cid")
+		if err != nil {
+			return err
+		}
+
 	}
 	fmt.Printf("%T\n", pages)
 
@@ -176,7 +182,7 @@ func crawler(aid int) error {
 
 	if info.Code != 0 {
 		video.Status = 1
-		video.Aid = aid
+		video.Aid = int64(aid)
 	} else {
 		video = info.Data
 	}
@@ -202,7 +208,7 @@ func crawlerRoutine(aid int) {
 	// failed with unknown reason
 	var video util.Video
 	video.Status = 2
-	video.Aid = aid
+	video.Aid = int64(aid)
 	err := util.InsertVideo(video)
 	if err != nil {
 		log.Printf("aid=%d insertion failed, %v\n", aid, err)
