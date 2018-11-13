@@ -75,17 +75,17 @@ func getVideoBasicData(aid int) (util.Info, error){
 	return info, nil
 }
 
-func getVideoPostTime(aid int) (time.Time, error){
+func getVideoPostTime(aid int, video *util.Video) error{
 	addr := "https://www.bilibili.com/video/av"+strconv.Itoa(aid)
 	resp, err := getResp(addr)
 	if err != nil {
-		return time.Now(), err
+		return err
 	}
 
 	defer resp.Body.Close()
 	doc, err := goquery.NewDocumentFromReader(resp.Body)
 	if err != nil {
-		return time.Now(), err
+		return err
 	}
 
 	var jsonstr string
@@ -101,14 +101,69 @@ func getVideoPostTime(aid int) (time.Time, error){
 	var jsonObj map[string]interface{}
 	json.Unmarshal([]byte(jsonstr), &jsonObj)
 
+	util.PrintJson(jsonObj)
+
 	videoData, ok := jsonObj["videoData"]
 	if !ok {
-		return time.Now(), errors.New("missing 'videoData'")
+		return errors.New("missing 'videoData'")
+	}
+	videoDataMap, ok := videoData.(map[string]interface{})
+	if !ok {
+		return errors.New("'videoData' type error")
 	}
 
+	// retrieve title
+	title, ok := videoDataMap["title"]
+	if !ok {
+		return  errors.New("missing 'title'")
+	}
+	titleStr, ok := title.(string)
+	if !ok {
+		return  errors.New("'title' type error")
+	}
+	video.Title = titleStr
+
+	// retrieve pubdate
+	pubdate, ok := videoDataMap["pubdate"]
+	if !ok {
+		return errors.New("missing 'pubdate'")
+	}
+	pubdateFloat, ok := pubdate.(float64)
+	if !ok {
+		return errors.New("'pubdate' type error")
+	}
+	video.Pubdate = time.Unix(int64(pubdateFloat), 0)
+
+	// retrieve duration
+	duration, ok := videoDataMap["duration"]
+	if !ok {
+		return errors.New("missing 'duration'")
+	}
+	durationFloat, ok := duration.(float64)
+	if !ok {
+		return errors.New("'duration' type error")
+	}
+	video.Duration = int(durationFloat)
+
+	// retrieve pages
+	pages, ok := videoDataMap["pages"]
+	if !ok {
+		return errors.New("missing 'pages'")
+	}
+	pagesArray, ok := pages.([]interface {})
+	if !ok {
+		return errors.New("'pages' type error")
+	}
+	for page := range pagesArray{
+		
+	}
+	fmt.Printf("%T\n", pages)
 
 
-	return time.Now(),nil
+
+
+
+	return nil
 }
 
 
@@ -194,7 +249,11 @@ func main() {
 	//	go crawlerRoutine(i)
 	//}
 
-	getVideoPostTime(2)
+	var v util.Video
+	getVideoPostTime(35679613, &v)
+	fmt.Println(v.Title)
+	fmt.Println(v.Pubdate)
+	fmt.Println(v.Duration)
 
 
 	wg.Wait()

@@ -1,8 +1,13 @@
 package util
 
+import "time"
+
 type Video struct {
 	Aid        int
 	Status     int
+	Title	   string
+	Pubdate	   time.Time
+	Duration   int
 	View       int
 	Dannmaku   int
 	Reply      int
@@ -28,4 +33,11 @@ type DBConf struct {
 	Passwd string
 	Host   string
 	Dbname string
+}
+
+type Page struct{
+	Chatid	int
+	Duration int
+	Subtitle string
+	PageNo int
 }
