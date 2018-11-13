@@ -4,17 +4,13 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
-	"os"
-	"time"
-
+	"github.com/LLipter/bilibili-report/conf"
 	_ "github.com/go-sql-driver/mysql"
+	"os"
 )
 
 var (
-	connPool        *sql.DB // database connection pool
-	maxOpenConn     = 100
-	maxIdleConn     = 30
-	maxConnLifeTime = time.Minute * 10
+	connPool *sql.DB // database connection pool
 )
 
 func init() {
@@ -35,9 +31,9 @@ func init() {
 		os.Exit(1)
 	}
 
-	connPool.SetMaxOpenConns(maxOpenConn)
-	connPool.SetMaxIdleConns(maxIdleConn)
-	connPool.SetConnMaxLifetime(maxConnLifeTime)
+	connPool.SetMaxOpenConns(conf.MaxOpenConn)
+	connPool.SetMaxIdleConns(conf.MaxIdleConn)
+	connPool.SetConnMaxLifetime(conf.MaxConnLifeTime)
 }
 
 func CloseDatabase() {
@@ -48,20 +44,20 @@ func CloseDatabase() {
 
 func InsertVideo(video Video) error {
 	tx, err := connPool.Begin()
-	if err != nil{
+	if err != nil {
 		return errors.New("transaction begin failed : " + err.Error())
 	}
 
 	var pubdate interface{}
-	if video.Pubdate.IsZero(){
+	if video.Pubdate.IsZero() {
 		pubdate = nil
-	}else{
+	} else {
 		pubdate = video.Pubdate
 	}
 
 	// sometimes if there's only 1p, subtitle may be missing
 	// I don't know way
-	if len(video.Pages) == 1 && video.Pages[0].Subtitle == ""{
+	if len(video.Pages) == 1 && video.Pages[0].Subtitle == "" {
 		video.Pages[0].Subtitle = video.Title
 	}
 
@@ -89,7 +85,7 @@ func InsertVideo(video Video) error {
 		return rollback(tx, err)
 	}
 
-	for _, page := range video.Pages{
+	for _, page := range video.Pages {
 		_, err = tx.Exec(
 			"INSERT INTO pages VALUES(?, ?, ?, ?, ?);",
 			video.Aid,
@@ -110,9 +106,9 @@ func InsertVideo(video Video) error {
 	return nil
 }
 
-func rollback(tx *sql.Tx, oldErr error) error{
+func rollback(tx *sql.Tx, oldErr error) error {
 	err := tx.Rollback()
-	if err != nil{
+	if err != nil {
 		return errors.New(oldErr.Error() + " : " + err.Error())
 	}
 	return oldErr
