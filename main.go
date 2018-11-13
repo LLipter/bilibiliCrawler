@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"github.com/PuerkitoBio/goquery"
 	"io/ioutil"
@@ -87,16 +88,24 @@ func getVideoPostTime(aid int) (time.Time, error){
 		return time.Now(), err
 	}
 
+	var jsonstr string
 	doc.Find("script").EachWithBreak(func(i int, selection *goquery.Selection) bool {
-		fmt.Println(i)
 		content := selection.Text()
 		if(strings.HasPrefix(content, "window.__INITIAL_STATE__=")){
-
-			fmt.Println(content)
+			jsonstr = content[25:len(content)-122]
 			return false
 		}
 		return true
 	})
+
+	var jsonObj map[string]interface{}
+	json.Unmarshal([]byte(jsonstr), &jsonObj)
+
+	videoData, ok := jsonObj["videoData"]
+	if !ok {
+		return time.Now(), errors.New("missing 'videoData'")
+	}
+
 
 
 	return time.Now(),nil
@@ -186,6 +195,7 @@ func main() {
 	//}
 
 	getVideoPostTime(2)
+
 
 	wg.Wait()
 
