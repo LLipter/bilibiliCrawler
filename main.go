@@ -129,16 +129,15 @@ func getVideoPostTime(aid int, video *util.Video) error {
 	video.Duration = int(duration)
 
 	// retrieve pages
-	pages, ok := videoData["pages"]
-	if !ok {
-		return errors.New("missing 'pages'")
+	pages, err := util.JsonGetArray(videoData, "pages")
+	if err != nil {
+		return err
 	}
-	pagesArray, ok := pages.([]interface{})
-	if !ok {
-		return errors.New("'pages' type error")
-	}
-	for page := range pagesArray {
-
+	for _, pageObj := range pages {
+		page, ok := pageObj.(map[string]interface{})
+		if !ok{
+			return util.TypeError("pages")
+		}
 	}
 	fmt.Printf("%T\n", pages)
 
