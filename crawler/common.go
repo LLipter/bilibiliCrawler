@@ -1,8 +1,8 @@
 package crawler
 
 import (
-	"github.com/LLipter/bilibili-report/conf"
-	"github.com/LLipter/bilibili-report/proxy"
+	"github.com/LLipter/bilibiliVideoDataCrawler/conf"
+	"github.com/LLipter/bilibiliVideoDataCrawler/proxy"
 	"math/rand"
 	"net/http"
 	"net/url"

@@ -2,9 +2,9 @@ package crawler
 
 import (
 	"encoding/json"
-	"github.com/LLipter/bilibili-report/conf"
-	"github.com/LLipter/bilibili-report/util"
-	"github.com/LLipter/bilibili-report/util/db"
+	"github.com/LLipter/bilibiliVideoDataCrawler/conf"
+	"github.com/LLipter/bilibiliVideoDataCrawler/util"
+	"github.com/LLipter/bilibiliVideoDataCrawler/util/db"
 	"github.com/PuerkitoBio/goquery"
 	"io/ioutil"
 	"log"

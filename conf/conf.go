@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"github.com/LLipter/bilibili-report/daemon"
+	"github.com/LLipter/bilibiliVideoDataCrawler/daemon"
 	"io/ioutil"
 	"os"
 	"time"

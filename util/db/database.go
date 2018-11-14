@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
-	"github.com/LLipter/bilibili-report/conf"
+	"github.com/LLipter/bilibiliVideoDataCrawler/conf"
 	_ "github.com/go-sql-driver/mysql"
 	"os"
 )
