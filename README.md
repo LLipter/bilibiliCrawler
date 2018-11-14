@@ -33,7 +33,7 @@ If you want to use proxy, change `GetProxy()` function in proxy/proxy.go to prov
 
 ### maxCrawlerNum
 
-This parameter determine the max number of crawler go routines. Although a go routinue is much lighter than a thread, this number cannot be **too large**. Because in many operator system, there's a limit on how many file descripter one process can use. Since a socket will consume a file descripter, if this number is too large, the following error may occur. In my labtop, `1500` seems reasonable. You may use `ulimit -a` to check the limit of file descripter in your system.
+This parameter determine the max number of crawler go routines. Although a go routinue is much lighter than a thread, this number cannot be **too large**. Because in many operator system, there's a limit on how many file descripter one process can use. Since a socket will consume a file descripter, if this number is too large, the following error may occur. In my labtop, `500` seems reasonable. You may use `ulimit -a` to check the limit of file descripter in your system.
 
 `proxyconnect tcp: dial tcp 112.74.41.42:80: socket: too many open files`
 
