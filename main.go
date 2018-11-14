@@ -19,13 +19,16 @@ func init() {
 	var err error
 	logFile, err = os.OpenFile("log.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0644)
 	if err != nil {
-		log.Fatal(fmt.Sprintf("cannot open log file, %v", err))
+		log.Fatalln(fmt.Sprintf("cannot open log file, %v", err))
 	}
 	log.SetOutput(logFile)
 
 	// start proxy
 	if conf.UseProxy {
-		proxy.GetProxy()
+		err = proxy.GetProxy()
+		if err != nil {
+			log.Fatalln(err)
+		}
 		go proxy.GetProxyRoutine()
 	}
 
