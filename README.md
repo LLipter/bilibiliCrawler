@@ -5,6 +5,10 @@ This is a simple crawler design for [bilibili](www.bilibili.com) that can collec
 # Performance
 After tuning parameters in configuration file and run it in my server, it can collect approximately 100k video data per hour. However, this number is trivial compared with the total video number in [bilibili](www.bilibili.com). By the time 2018/11/14, the max `av` number is larger than 35 million, which means it will cost this program half a month to collect all video data, hopefully.
 
+### Bottleneck
+
+The speed of Internet.
+
 # How to run it
 
 ### Database
@@ -19,13 +23,13 @@ rename `config-default.json` to `config.json` and edit it.
 
 ### Proxy
 
-If you want to use proxy, change `GetProxy()` function in proxy/proxy.go to provide your proxy ip address. **The quality of your proxy server has a great influence on the overall performance**
+If you want to use proxy, change `GetProxy()` function in `proxy/proxy.go` to provide your proxy ip addresses. **The quality of your proxy server has a great influence on the overall performance**
 
 ### Compile codes
 
 `go build`
 
-### Start run it!
+### Start running it!
 
 `./bilibiliVideoDataCrawler`
 
@@ -39,7 +43,7 @@ This parameter determine the max number of crawler go routines. Although a go ro
 
 ### retryTimes
 
-This parameter determine the max number a go routine failed to crawl a video data until it gives up. It highly depends on your internet reliability and your proxy server's reliability if you choose to use proxy. No one knows why some data isn't properly transmitted. If you're not confident with your internet, try a `higher` value. In my case, I use `10`, `20` or even `50`.
+This parameter determine the max number a go routine failed to crawl a video data until it gives up. It highly depends on your internet reliability and your proxy server's reliability if you choose to use proxy. No one knows why some data isn't properly transmitted. If you're not confident with your internet, try a higher value. In my case, I use `10`, `20` or even `50`.
 
 ### maxOpenConn
 
