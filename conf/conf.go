@@ -18,7 +18,7 @@ var (
 	RetryTimes      int
 	UseProxy        bool
 	UserAgent       string
-	MaxGoroutineNum int
+	MaxCrawlerNum   int
 	StartAid        int
 	EndAid          int
 )
@@ -59,7 +59,7 @@ func init() {
 	UserAgent = config.Network.UserAgent
 
 	// get go routine max number
-	MaxGoroutineNum = config.MaxGoroutineNum
+	MaxCrawlerNum = config.MaxCrawlerNum
 
 	// get start aid and end aid
 	StartAid = config.StartAid

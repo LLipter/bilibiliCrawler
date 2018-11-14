@@ -1,7 +1,7 @@
 package conf
 
 type Conf struct {
-	MaxGoroutineNum int
+	MaxCrawlerNum int
 	DB              DBConf `json:"database"`
 	Network         NetworkConf
 	StartAid        int

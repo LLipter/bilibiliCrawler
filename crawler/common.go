@@ -11,7 +11,12 @@ import (
 
 var (
 	wg sync.WaitGroup
+	curCrawlerNo chan bool
 )
+
+func init(){
+	curCrawlerNo = make(chan bool, conf.MaxCrawlerNum)
+}
 
 func getResp(addr string) (*http.Response, error) {
 	client := http.Client{}

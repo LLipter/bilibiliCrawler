@@ -8,7 +8,6 @@ import (
 	"github.com/PuerkitoBio/goquery"
 	"io/ioutil"
 	"log"
-	"runtime"
 	"strconv"
 	"strings"
 	"time"
@@ -16,31 +15,40 @@ import (
 
 func CrawlVideo(startAid int, endAid int) {
 	for i := startAid; i <= endAid; i++ {
-		for runtime.NumGoroutine() > conf.MaxGoroutineNum {
-			time.Sleep(time.Second)
-		}
-		wg.Add(1)
+		// control max number of crawler go routine
+		curCrawlerNo <- true
 		go videoCrawlerRoutine(i)
 	}
 
+	// make sure all crawler go routine finish their job
 	wg.Wait()
+
 }
 
 func videoCrawlerRoutine(aid int) {
+	wg.Add(1)
 	defer wg.Done()
+	defer func() {
+		<- curCrawlerNo
+	}()
+
+	var err error
 	for t := 0; t < conf.RetryTimes; t++ {
-		err := getVideoData(aid)
+		err = getVideoData(aid)
 		if err == nil {
 			return
-		} else {
-			log.Printf("aid=%d crawler failed, %v\n", aid, err)
 		}
 	}
+
+	if err != nil {
+		log.Printf("aid=%d crawler failed, %v\n", aid, err)
+	}
+
 	// failed with unknown reason
 	var video conf.Video
 	video.Status = 2
 	video.Aid = int64(aid)
-	err := db.InsertVideo(video)
+	err = db.InsertVideo(video)
 	if err != nil {
 		log.Printf("aid=%d insertion failed, %v\n", aid, err)
 	}
@@ -78,7 +86,7 @@ func getVideoData(aid int) error {
 }
 
 func getVideoBasicData(aid int, data *conf.Info) error {
-	addr := "https://api.bilibili.com/archive_stat/stat?aid=" + strconv.Itoa(aid)
+	addr := "http://api.bilibili.com/archive_stat/stat?aid=" + strconv.Itoa(aid)
 	resp, err := getResp(addr)
 	if err != nil {
 		return err
@@ -103,7 +111,7 @@ func getVideoBasicData(aid int, data *conf.Info) error {
 }
 
 func getVideoMoreData(aid int, video *conf.Video) error {
-	addr := "https://www.bilibili.com/video/av" + strconv.Itoa(aid)
+	addr := "http://www.bilibili.com/video/av" + strconv.Itoa(aid)
 	resp, err := getResp(addr)
 	if err != nil {
 		return err

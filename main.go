@@ -44,5 +44,7 @@ func cleanup() {
 
 func main() {
 	defer cleanup()
+	log.Println("begin crawling")
 	crawler.CrawlVideo(conf.StartAid, conf.EndAid)
+	log.Println("end crawling")
 }
