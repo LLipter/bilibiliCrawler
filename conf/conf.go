@@ -18,8 +18,8 @@ var (
 	UseProxy        bool
 	UserAgent       string
 	MaxGoroutineNum int
-	StartAid int
-	EndAid int
+	StartAid        int
+	EndAid          int
 )
 
 func init() {

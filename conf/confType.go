@@ -4,8 +4,8 @@ type Conf struct {
 	MaxGoroutineNum int
 	DB              DBConf `json:"database"`
 	Network         NetworkConf
-	StartAid int
-	EndAid int
+	StartAid        int
+	EndAid          int
 }
 
 type DBConf struct {
@@ -16,7 +16,6 @@ type DBConf struct {
 	MaxOpenConn     int
 	MaxIdleConn     int
 	MaxConnLifeTime int
-
 }
 
 type NetworkConf struct {
