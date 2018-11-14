@@ -10,11 +10,11 @@ import (
 )
 
 var (
-	wg sync.WaitGroup
+	wg           sync.WaitGroup
 	curCrawlerNo chan bool
 )
 
-func init(){
+func init() {
 	curCrawlerNo = make(chan bool, conf.MaxCrawlerNum)
 }
 

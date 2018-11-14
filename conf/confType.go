@@ -2,11 +2,11 @@ package conf
 
 type Conf struct {
 	MaxCrawlerNum int
-	DB              DBConf `json:"database"`
-	Network         NetworkConf
-	StartAid        int
-	EndAid          int
-	IsDaemon        bool
+	DB            DBConf `json:"database"`
+	Network       NetworkConf
+	StartAid      int
+	EndAid        int
+	IsDaemon      bool
 }
 
 type DBConf struct {

@@ -29,7 +29,7 @@ func videoCrawlerRoutine(aid int) {
 	wg.Add(1)
 	defer wg.Done()
 	defer func() {
-		<- curCrawlerNo
+		<-curCrawlerNo
 	}()
 
 	var err error
