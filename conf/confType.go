@@ -6,6 +6,7 @@ type Conf struct {
 	Network         NetworkConf
 	StartAid        int
 	EndAid          int
+	IsDaemon        bool
 }
 
 type DBConf struct {

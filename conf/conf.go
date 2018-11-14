@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"github.com/LLipter/bilibili-report/daemon"
 	"io/ioutil"
 	"os"
 	"time"
@@ -63,4 +64,10 @@ func init() {
 	// get start aid and end aid
 	StartAid = config.StartAid
 	EndAid = config.EndAid
+
+	// check whether run as daemon
+	if config.IsDaemon {
+		daemon.Daemonize()
+	}
+
 }

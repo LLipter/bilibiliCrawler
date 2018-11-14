@@ -2,14 +2,12 @@ package main
 
 import (
 	"fmt"
-	_ "github.com/LLipter/bilibili-report/daemon"
 	"github.com/LLipter/bilibili-report/conf"
 	"github.com/LLipter/bilibili-report/crawler"
 	"github.com/LLipter/bilibili-report/proxy"
 	"github.com/LLipter/bilibili-report/util/db"
 	"log"
 	"os"
-	"time"
 )
 
 var (
@@ -27,10 +25,9 @@ func init() {
 
 	// start proxy
 	if conf.UseProxy {
-		go proxy.GetProxies()
+		proxy.GetProxy()
+		go proxy.GetProxyRoutine()
 	}
-	// make sure proxies is available
-	time.Sleep(time.Second)
 
 	fmt.Println("init successfully. ")
 }
