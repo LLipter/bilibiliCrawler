@@ -19,13 +19,13 @@ rename `config-default.json` to `config.json` and edit it.
 
 ### Proxy
 
-If you want to use proxy, change `GetProxy()` function in `proxy/proxy.go` to provide your proxy ip address. **The quality of your proxy server has a great influence on the overall performance**
+If you want to use proxy, change `GetProxy()` function in `proxy/proxy.go` to provide your proxy ip addresses. **The quality of your proxy server has a great influence on the overall performance**
 
 ### Compile codes
 
 `go build`
 
-### Start run it!
+### Start running it!
 
 `./bilibiliVideoDataCrawler`
 
