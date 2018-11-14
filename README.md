@@ -5,6 +5,10 @@ This is a simple crawler design for [bilibili](www.bilibili.com) that can collec
 # Performance
 After tuning parameters in configuration file and run it in my server, it can collect approximately 100k video data per hour. However, this number is trivial compared with the total video number in [bilibili](www.bilibili.com). By the time 2018/11/14, the max `av` number is larger than 35 million, which means it will cost this program half a month to collect all video data, hopefully.
 
+### Bottleneck
+
+The speed of Internet.
+
 # How to run it
 
 ### Database
