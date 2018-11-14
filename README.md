@@ -39,7 +39,7 @@ This parameter determine the max number of crawler go routines. Although a go ro
 
 ### retryTimes
 
-This parameter determine the max number a go routine failed to crawl a video data until it gives up. It highly depends on your internet reliability and your proxy server's reliability if you choose to use proxy. No one knows why some data isn't properly transmitted. If you're not confident with your internet, try a `higher` value. In my case, I use `10`, `20` or even `50`.
+This parameter determine the max number a go routine failed to crawl a video data until it gives up. It highly depends on your internet reliability and your proxy server's reliability if you choose to use proxy. No one knows why some data isn't properly transmitted. If you're not confident with your internet, try a higher value. In my case, I use `10`, `20` or even `50`.
 
 ### maxOpenConn
 
