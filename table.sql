@@ -1,6 +1,8 @@
 -- use `set names utf8` to ensure all charset is correct
 CREATE DATABASE bilibili character set utf8;
 
+USE bilibili
+
 CREATE TABLE video(
     aid INT,
     status INT,
@@ -31,6 +33,3 @@ CREATE TABLE pages(
     subtitle VARCHAR(200),
     PRIMARY KEY(aid,pageno)
 )charset=utf8;
-
-
-SELECT aid,status,title,pubdate,duration,view FROM video;

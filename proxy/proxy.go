@@ -24,6 +24,7 @@ type proxyJson struct {
 	Data data
 }
 
+// change to your own codes to get proxy
 func GetProxy() error {
 	apiAddr := "https://dev.kdlapi.com/api/getproxy/?orderid=904212196080767&num=1000&b_pcchrome=1&b_pcie=1&b_pcff=1&protocol=2&method=2&an_tr=1&an_an=1&an_ha=1&sp1=1&sp2=1&quality=1&format=json&sep=1"
 	resp, err := http.Get(apiAddr)
@@ -51,7 +52,6 @@ func GetProxy() error {
 	return nil
 }
 
-// change to your own codes to get proxy
 func GetProxyRoutine() []string {
 	for {
 		err := GetProxy()
