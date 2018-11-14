@@ -18,6 +18,8 @@ var (
 	UseProxy        bool
 	UserAgent       string
 	MaxGoroutineNum int
+	StartAid int
+	EndAid int
 )
 
 func init() {
@@ -57,4 +59,8 @@ func init() {
 
 	// get go routine max number
 	MaxGoroutineNum = config.MaxGoroutineNum
+
+	// get start aid and end aid
+	StartAid = config.StartAid
+	EndAid = config.EndAid
 }
