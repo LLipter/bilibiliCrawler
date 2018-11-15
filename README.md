@@ -7,7 +7,11 @@ After tuning parameters in configuration file and run it in my server, it can co
 
 ### Bottleneck
 
-The speed of Internet.
+The speed of Internet. 
+
+As you can see, outward internet flow reaches upper limit as soon as I running this program
+
+![](assets/monitor.png)
 
 # How to run it
 
@@ -36,6 +40,11 @@ If you want to use proxy, change `GetProxy()` function in `proxy/proxy.go` to pr
 ### Initiate auto-restart system
 
 `python3 autoRestart.py`
+
+~~I don't know whether this is necessary, I will run my program for several days and then decide whether remove this part.~~
+
+It seems that, this process will crash without a proper reason. So it's necessary
+
 
 # Tuning parameters in configuration file
 
