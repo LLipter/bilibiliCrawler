@@ -14,8 +14,6 @@ type DBConf struct {
 	Host            string
 	DBname          string
 	MaxOpenConn     int
-	MaxIdleConn     int
-	MaxConnLifeTime int
 }
 
 type NetworkConf struct {

@@ -3,36 +3,29 @@ package conf
 import "time"
 
 type Video struct {
-	Aid        int64
-	Status     int64
-	Title      string
-	Pubdate    time.Time
-	Owner      int64
-	Duration   int64
-	View       int64
-	Dannmaku   int64 `json:"danmaku"`
-	Reply      int64
-	Favorite   int64
-	Coin       int64
-	Share      int64
-	Now_rank   int64
-	His_rank   int64
-	Support    int64
-	Dislike    int64
-	No_reprint int64
-	Copyright  int64
-	Pages      []Page
+	Status int64
+
+	Aid       int64 `json:"aid"`
+	View      int64 `json:"view"`
+	Dannmaku  int64 `json:"danmaku"`
+	Reply     int64 `json:"reply"`
+	Favorite  int64 `json:"favorite"`
+	Coin      int64 `json:"coin"`
+	Share     int64 `json:"share"`
+	His_rank  int64 `json:"his_rank"`
+	Support   int64 `json:"like"`
+	Dislike   int64 `json:"dislike"`
+	Copyright int64 `json:"copyright"`
+
+	Cid     int64     `json:"cid"`
+	Tid     int64     `json:"tid"`
+	Title   string    `json:"title"`
+	Pubdate time.Time `json:"created"`
+	Mid     int64     `json:"mid"`
 }
 
 type Info struct {
-	Code    int64
-	Message string
-	Data    Video
-}
-
-type Page struct {
-	PageNo   int64
-	Chatid   int64
-	Duration int64
-	Subtitle string
+	Code    int64  `json:"code"`
+	Message string `json:"message"`
+	Data    Video  `json:"data"`
 }

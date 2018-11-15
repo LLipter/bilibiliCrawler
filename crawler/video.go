@@ -5,7 +5,6 @@ import (
 	"github.com/LLipter/bilibiliVideoDataCrawler/conf"
 	"github.com/LLipter/bilibiliVideoDataCrawler/util"
 	"github.com/LLipter/bilibiliVideoDataCrawler/util/db"
-	"github.com/PuerkitoBio/goquery"
 	"io/ioutil"
 	"log"
 	"strconv"
@@ -67,17 +66,12 @@ func getVideoData(aid int) error {
 		if err != nil {
 			return err
 		}
-	}
-
-	var video conf.Video
-	if data.Code != 0 {
-		video.Status = 1
-		video.Aid = int64(aid)
 	} else {
-		video = data.Data
+		data.Data.Status = 1
+		data.Data.Aid = int64(aid)
 	}
 
-	err = db.InsertVideo(video)
+	err = db.InsertVideo(data.Data)
 	if err != nil {
 		return err
 	}
@@ -91,8 +85,8 @@ func getVideoBasicData(aid int, data *conf.Info) error {
 	if err != nil {
 		return err
 	}
-
 	defer resp.Body.Close()
+
 	buf, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		return err
@@ -111,103 +105,49 @@ func getVideoBasicData(aid int, data *conf.Info) error {
 }
 
 func getVideoMoreData(aid int, video *conf.Video) error {
-	addr := "http://www.bilibili.com/video/av" + strconv.Itoa(aid)
+	addr := "http://api.bilibili.com/view?appkey=8e9fc618fbd41e28&id=" + strconv.Itoa(aid)
 	resp, err := getResp(addr)
 	if err != nil {
 		return err
 	}
-
 	defer resp.Body.Close()
-	doc, err := goquery.NewDocumentFromReader(resp.Body)
+
+	buf, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		return err
 	}
-
-	var jsonstr string
-	doc.Find("script").EachWithBreak(func(i int, selection *goquery.Selection) bool {
-		content := selection.Text()
-		if strings.HasPrefix(content, "window.__INITIAL_STATE__=") {
-			jsonstr = content[25 : len(content)-122]
-			return false
-		}
-		return true
-	})
-
 	var jsonObj map[string]interface{}
-	json.Unmarshal([]byte(jsonstr), &jsonObj)
+	json.Unmarshal(buf, &jsonObj)
 
-	videoJson, err := util.JsonGetDict(jsonObj, "videoData")
+	// get tid
+	video.Tid, err = util.JsonGetInt64(jsonObj, "tid")
 	if err != nil {
 		return err
 	}
 
 	// get title
-	video.Title, err = util.JsonGetStr(videoJson, "title")
+	video.Title, err = util.JsonGetStr(jsonObj, "title")
+	if err != nil {
+		return err
+	}
+
+	// get mid
+	video.Mid, err = util.JsonGetInt64(jsonObj, "mid")
 	if err != nil {
 		return err
 	}
 
 	// get pubdate
-	pubdate, err := util.JsonGetInt64(videoJson, "pubdate")
+	pubdate, err := util.JsonGetInt64(jsonObj, "created")
 	if err != nil {
 		return err
 	}
 	video.Pubdate = time.Unix(pubdate, 0)
 
-	// get duration
-	video.Duration, err = util.JsonGetInt64(videoJson, "duration")
+	// get cid
+	video.Cid, err = util.JsonGetInt64(jsonObj, "cid")
 	if err != nil {
 		return err
-	}
-
-	// get ownerJson id
-	ownerJson, err := util.JsonGetDict(videoJson, "owner")
-	if err != nil {
-		return err
-	}
-	video.Owner, err = util.JsonGetInt64(ownerJson, "mid")
-	if err != nil {
-		return err
-	}
-
-	// get pages
-	pages, err := util.JsonGetArray(videoJson, "pages")
-	if err != nil {
-		return err
-	}
-	for _, pageObj := range pages {
-		pageJson, ok := pageObj.(map[string]interface{})
-		if !ok {
-			return util.TypeError("pages")
-		}
-
-		// get chatid
-		var page conf.Page
-		page.Chatid, err = util.JsonGetInt64(pageJson, "cid")
-		if err != nil {
-			return err
-		}
-
-		// get duration
-		page.Duration, err = util.JsonGetInt64(pageJson, "duration")
-		if err != nil {
-			return err
-		}
-
-		// get pageNo
-		page.PageNo, err = util.JsonGetInt64(pageJson, "page")
-		if err != nil {
-			return err
-		}
-
-		// get subtititle
-		page.Subtitle, err = util.JsonGetStr(pageJson, "part")
-		if err != nil {
-			return err
-		}
-
-		video.Pages = append(video.Pages, page)
-
 	}
 
 	return nil

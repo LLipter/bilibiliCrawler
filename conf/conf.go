@@ -7,14 +7,11 @@ import (
 	"github.com/LLipter/bilibiliVideoDataCrawler/daemon"
 	"io/ioutil"
 	"os"
-	"time"
 )
 
 var (
 	DBConnStr       string
 	MaxOpenConn     int
-	MaxIdleConn     int
-	MaxConnLifeTime time.Duration
 	RetryTimes      int
 	UseProxy        bool
 	UserAgent       string
@@ -50,8 +47,6 @@ func init() {
 
 	// get database connection parameters
 	MaxOpenConn = config.DB.MaxOpenConn
-	MaxIdleConn = config.DB.MaxIdleConn
-	MaxConnLifeTime = time.Duration(config.DB.MaxConnLifeTime) * time.Minute
 
 	// get network configuration
 	RetryTimes = config.Network.RetryTimes
