@@ -46,18 +46,15 @@ func init() {
 
 func queryMaxAid() (int, error) {
 	row := connPool.QueryRow("SELECT max(aid) FROM video;")
-	var maxAid interface{}
+	var maxAid int
 	err := row.Scan(&maxAid)
 	if err != nil {
+		if err.Error() == "sql: Scan error on column index 0, name \"max(aid)\": converting driver.Value type <nil> (\"<nil>\") to a int: invalid syntax" {
+			return 0, nil
+		}
 		return 0, errors.New("failed to query max aid: " + err.Error())
 	}
-	var res int
-	if maxAid == nil {
-		res = 0
-	} else {
-		res = maxAid.(int)
-	}
-	return res, nil
+	return maxAid, nil
 }
 
 // remove all record where aid >= `aid`
