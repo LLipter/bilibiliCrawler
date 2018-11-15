@@ -8,7 +8,7 @@
     },
     
     "videoCrawler":{
-        "maxCrawlerNum":1000,
+        "maxCrawlerNum":300,
         "isDaemon":false,
         "startAid":1,
         "endAid":35000000
