@@ -61,8 +61,7 @@ func init() {
 	// get go routine max number
 	MaxCrawlerNum = config.MaxCrawlerNum
 
-	// get start aid and end aid
-	StartAid = config.StartAid
+	// get end aid
 	EndAid = config.EndAid
 
 	// check whether run as daemon

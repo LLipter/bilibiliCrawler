@@ -11,7 +11,6 @@
 
     "maxCrawlerNum":500,
     "isDaemon":false,
-    "startAid":35000001,
     "endAid":35001000,
 
     "network":{
