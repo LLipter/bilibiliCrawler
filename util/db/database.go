@@ -25,6 +25,7 @@ func init() {
 		os.Exit(1)
 	}
 	connPool.SetMaxOpenConns(conf.DBconfig.MaxOpenConn)
+	connPool.SetMaxIdleConns(0)
 
 }
 

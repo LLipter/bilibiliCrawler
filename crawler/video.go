@@ -53,7 +53,7 @@ func videoCrawlerRoutine(aid int) {
 }
 
 func getVideoData(aid int) error {
-	var data conf.Info
+	var data conf.VideoJson
 	err := getVideoBasicData(aid, &data)
 	if err != nil {
 		return err
@@ -78,7 +78,7 @@ func getVideoData(aid int) error {
 	return nil
 }
 
-func getVideoBasicData(aid int, data *conf.Info) error {
+func getVideoBasicData(aid int, data *conf.VideoJson) error {
 	addr := "http://api.bilibili.com/archive_stat/stat?aid=" + strconv.Itoa(aid)
 	resp, err := getResp(addr)
 	if err != nil {

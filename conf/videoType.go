@@ -24,7 +24,7 @@ type Video struct {
 	Mid     int64     `json:"mid"`
 }
 
-type Info struct {
+type VideoJson struct {
 	Code    int64  `json:"code"`
 	Message string `json:"message"`
 	Data    Video  `json:"data"`
