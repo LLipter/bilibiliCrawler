@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"net/url"
 	"sync"
+	"time"
 )
 
 var (
@@ -33,6 +34,7 @@ func getResp(addr string) (*http.Response, error) {
 			Transport: &http.Transport{
 				Proxy: http.ProxyURL(urlProxy),
 			},
+			Timeout: time.Second * 30,
 		}
 	}
 	resp, err := client.Do(req)
