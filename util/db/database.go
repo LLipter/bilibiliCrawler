@@ -52,9 +52,9 @@ func queryMaxAid() (int, error) {
 		return 0, errors.New("failed to query max aid: " + err.Error())
 	}
 	var res int
-	if maxAid == nil{
+	if maxAid == nil {
 		res = 0
-	}else{
+	} else {
 		res = maxAid.(int)
 	}
 	return res, nil
