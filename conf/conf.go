@@ -10,17 +10,24 @@ import (
 )
 
 var (
-	DBConnStr       string
-	MaxOpenConn     int
-	RetryTimes      int
-	UseProxy        bool
-	UserAgent       string
-	MaxCrawlerNum   int
-	StartAid        int
-	EndAid          int
+	DBconfig           DBConf
+	NetworkConfig      NetworkConf
+	VideoCrawlerConfig VideoCrawlerConf
+
+	DBConnStr string
 )
 
 func init() {
+	if len(os.Args) != 2 {
+		usage()
+	}
+
+	if isValidParameter(os.Args[1]) {
+		fmt.Println("unknown parameter")
+		usage()
+		os.Exit(1)
+	}
+
 	buf, err := ioutil.ReadFile("config.json")
 	if err != nil {
 		fmt.Printf("cannot open configuration file, %v", err)
@@ -32,6 +39,11 @@ func init() {
 		fmt.Printf("invalid configuration file, %v", err)
 		os.Exit(1)
 	}
+
+	// get configuration
+	DBconfig = config.DB
+	NetworkConfig = config.Network
+	VideoCrawlerConfig = config.VideoCrawler
 
 	// get database connection string
 	var strBuf bytes.Buffer
@@ -45,23 +57,21 @@ func init() {
 	strBuf.WriteString("?charset=utf8")
 	DBConnStr = strBuf.String()
 
-	// get database connection parameters
-	MaxOpenConn = config.DB.MaxOpenConn
-
-	// get network configuration
-	RetryTimes = config.Network.RetryTimes
-	UseProxy = config.Network.UseProxy
-	UserAgent = config.Network.UserAgent
-
-	// get go routine max number
-	MaxCrawlerNum = config.MaxCrawlerNum
-
-	// get end aid
-	EndAid = config.EndAid
-
 	// check whether run as daemon
-	if config.IsDaemon {
+	if os.Args[1] == "-v" && config.VideoCrawler.IsDaemon {
 		daemon.Daemonize()
 	}
 
+}
+
+func usage() {
+	fmt.Println("usage: bilibiliCrawler [-v]")
+	os.Exit(1)
+}
+
+func isValidParameter(arg string) bool {
+	if arg == "-v" {
+		return true
+	}
+	return false
 }

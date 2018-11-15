@@ -2,7 +2,6 @@ package db
 
 import (
 	"database/sql"
-	"errors"
 	"fmt"
 	"github.com/LLipter/bilibiliVideoDataCrawler/conf"
 	_ "github.com/go-sql-driver/mysql"
@@ -25,60 +24,8 @@ func init() {
 		fmt.Printf("cannot access database, %v\n", err)
 		os.Exit(1)
 	}
-	connPool.SetMaxOpenConns(conf.MaxOpenConn)
+	connPool.SetMaxOpenConns(conf.DBconfig.MaxOpenConn)
 
-	maxAid, err := queryMaxAid()
-	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
-
-	// avoid duplicate primary key error
-	conf.StartAid = maxAid - conf.MaxCrawlerNum
-	err = deleteRecord(conf.StartAid)
-	if err != nil {
-		fmt.Println("delete record failed: " + err.Error())
-		os.Exit(1)
-	}
-}
-
-func queryMaxAid() (int, error) {
-	row := connPool.QueryRow("SELECT max(aid) FROM video;")
-	var maxAid int
-	err := row.Scan(&maxAid)
-	if err != nil {
-		if err.Error() == "sql: Scan error on column index 0, name \"max(aid)\": converting driver.Value type <nil> (\"<nil>\") to a int: invalid syntax" {
-			return 0, nil
-		}
-		return 0, errors.New("failed to query max aid: " + err.Error())
-	}
-	return maxAid, nil
-}
-
-// remove all record where aid >= `aid`
-func deleteRecord(aid int) error {
-	tx, err := connPool.Begin()
-	if err != nil {
-		return errors.New("transaction begin failed : " + err.Error())
-	}
-
-	_, err = tx.Exec(
-		"DELETE FROM video WHERE aid >= ?;", aid)
-	if err != nil {
-		return rollback(tx, err)
-	}
-
-	_, err = tx.Exec(
-		"DELETE FROM pages WHERE aid >= ?;", aid)
-	if err != nil {
-		return rollback(tx, err)
-	}
-
-	err = tx.Commit()
-	if err != nil {
-		return errors.New("transaction Commit failed : " + err.Error())
-	}
-	return nil
 }
 
 func CloseDatabase() {
@@ -121,4 +68,3 @@ func InsertVideo(video conf.Video) error {
 
 	return nil
 }
-

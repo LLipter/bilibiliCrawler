@@ -32,18 +32,17 @@ func videoCrawlerRoutine(aid int) {
 	}()
 
 	var err error
-	for t := 0; t < conf.RetryTimes; t++ {
+	for t := 0; t < conf.NetworkConfig.RetryTimes; t++ {
 		err = getVideoData(aid)
 		if err == nil {
 			return
 		}
 	}
 
+	// failed with unknown reason
 	if err != nil {
 		log.Printf("aid=%d crawler failed, %v\n", aid, err)
 	}
-
-	// failed with unknown reason
 	var video conf.Video
 	video.Status = 2
 	video.Aid = int64(aid)

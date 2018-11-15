@@ -3,6 +3,7 @@ package proxy
 import (
 	"encoding/json"
 	"errors"
+	"github.com/LLipter/bilibiliVideoDataCrawler/conf"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -26,7 +27,7 @@ type proxyJson struct {
 
 // change to your own codes to get proxy
 func GetProxy() error {
-	apiAddr := "http://dev.kdlapi.com/api/getproxy/?orderid=904212196080767&num=100&b_pcchrome=1&b_pcie=1&b_pcff=1&protocol=1&method=1&an_ha=1&sp1=1&sp2=1&quality=1&format=json&sep=1"
+	apiAddr := "http://dev.kdlapi.com/api/getproxy/?orderid=904212196080767&num=1000&b_pcchrome=1&b_pcie=1&b_pcff=1&protocol=1&method=1&an_ha=1&sp1=1&sp2=1&quality=1&format=json&sep=1"
 	resp, err := http.Get(apiAddr)
 	if err != nil {
 		return errors.New("get proxy failed, " + err.Error())
@@ -53,14 +54,18 @@ func GetProxy() error {
 }
 
 func GetProxyRoutine() []string {
+	cnt := 0
 	for {
 		err := GetProxy()
 		if err != nil {
 			log.Println(err)
-			// retry after 10 seconds
-			time.Sleep(time.Second * 10)
+			cnt++
+			if cnt == conf.NetworkConfig.RetryTimes{
+				log.Fatal("cannot get proxy")
+			}
 			continue
 		}
+		cnt = 0
 
 		// refresh proxy pool every 30 second
 		time.Sleep(time.Second * 30)

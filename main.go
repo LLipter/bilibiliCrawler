@@ -24,7 +24,7 @@ func init() {
 	log.SetOutput(logFile)
 
 	// start proxy
-	if conf.UseProxy {
+	if conf.NetworkConfig.UseProxy {
 		err = proxy.GetProxy()
 		if err != nil {
 			log.Fatalln(err)
@@ -45,6 +45,8 @@ func cleanup() {
 func main() {
 	defer cleanup()
 	log.Println("begin crawling")
-	crawler.CrawlVideo(conf.StartAid, conf.EndAid)
+	if os.Args[1] == "-v" {
+		crawler.CrawlVideo(conf.VideoCrawlerConfig.StartAid, conf.VideoCrawlerConfig.EndAid)
+	}
 	log.Println("end crawling")
 }
