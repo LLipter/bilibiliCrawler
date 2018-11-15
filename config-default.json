@@ -1,22 +1,23 @@
 {
     "database":{
-        "user":"LLipter",
+        "user":"root",
         "passwd":"123456",
-        "host":"localhost:3306",
-        "dbname":"(づ｡◕‿‿◕｡)づ",
-        "maxOpenConn":90,
-        "maxIdleConn":30,
-        "maxConnLifeTime":10
+        "host":"127.0.0.1:3306",
+        "dbname":"bilibili",
+        "maxOpenConn":90
+    },
+    
+    "videoCrawler":{
+        "maxCrawlerNum":1000,
+        "isDaemon":false,
+        "startAid":1,
+        "endAid":35000000
     },
 
-    "maxCrawlerNum":1000,
-    "isDaemon":false,
-    "endAid":35001000,
-
     "network":{
-        "useProxy":false,
+        "useProxy":true,
         "userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36",
-        "retryTimes":30
+        "retryTimes":50
     }
 
 }
