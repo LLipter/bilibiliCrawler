@@ -9,7 +9,7 @@
         "maxConnLifeTime":10
     },
 
-    "maxCrawlerNum":500,
+    "maxCrawlerNum":1000,
     "isDaemon":false,
     "endAid":35001000,
 

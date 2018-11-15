@@ -33,11 +33,15 @@ If you want to use proxy, change `GetProxy()` function in `proxy/proxy.go` to pr
 
 `./bilibiliVideoDataCrawler`
 
+### Initiate auto-restart system
+
+`python3 autoRestart.py`
+
 # Tuning parameters in configuration file
 
 ### maxCrawlerNum
 
-This parameter determine the max number of crawler go routines. Although a go routine is much lighter than a thread, this number cannot be **too large**. Because in many operator system, there's a limit on how many file descriptor one process can use, **especially in MacOS**. Since a socket will consume a file descriptor, if this number is too large, the following error may occur. In my server, `500` seems reasonable. You may use `ulimit -a` to check the limit of file descriptor in your system.
+This parameter determine the max number of crawler go routines. Although a go routine is much lighter than a thread, this number cannot be **too large**. Because in many operator system, there's a limit on how many file descriptor one process can use, **especially in MacOS**. Since a socket will consume a file descriptor, if this number is too large, the following error may occur. In my server, `1000` seems reasonable. You may use `ulimit -a` to check the limit of file descriptor in your system.
 
 `proxyconnect tcp: dial tcp 112.74.41.42:80: socket: too many open files`
 
