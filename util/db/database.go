@@ -3,7 +3,7 @@ package db
 import (
 	"database/sql"
 	"fmt"
-	"github.com/LLipter/bilibiliVideoDataCrawler/conf"
+	"github.com/LLipter/bilibiliCrawler/conf"
 	_ "github.com/go-sql-driver/mysql"
 	"os"
 )

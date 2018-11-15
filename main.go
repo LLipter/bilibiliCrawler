@@ -2,10 +2,10 @@ package main
 
 import (
 	"fmt"
-	"github.com/LLipter/bilibiliVideoDataCrawler/conf"
-	"github.com/LLipter/bilibiliVideoDataCrawler/crawler"
-	"github.com/LLipter/bilibiliVideoDataCrawler/proxy"
-	"github.com/LLipter/bilibiliVideoDataCrawler/util/db"
+	"github.com/LLipter/bilibiliCrawler/conf"
+	"github.com/LLipter/bilibiliCrawler/crawler"
+	"github.com/LLipter/bilibiliCrawler/proxy"
+	"github.com/LLipter/bilibiliCrawler/util/db"
 	"log"
 	"os"
 )

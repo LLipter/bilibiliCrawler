@@ -3,7 +3,7 @@ package proxy
 import (
 	"encoding/json"
 	"errors"
-	"github.com/LLipter/bilibiliVideoDataCrawler/conf"
+	"github.com/LLipter/bilibiliCrawler/conf"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -60,7 +60,7 @@ func GetProxyRoutine() []string {
 		if err != nil {
 			log.Println(err)
 			cnt++
-			if cnt == conf.NetworkConfig.RetryTimes{
+			if cnt == conf.NetworkConfig.RetryTimes {
 				log.Fatal("cannot get proxy")
 			}
 			continue

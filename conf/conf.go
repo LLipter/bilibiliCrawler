@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"github.com/LLipter/bilibiliVideoDataCrawler/daemon"
+	"github.com/LLipter/bilibiliCrawler/daemon"
 	"io/ioutil"
 	"os"
 )
@@ -22,7 +22,7 @@ func init() {
 		usage()
 	}
 
-	if isValidParameter(os.Args[1]) {
+	if !isValidParameter(os.Args[1]) {
 		fmt.Println("unknown parameter")
 		usage()
 		os.Exit(1)

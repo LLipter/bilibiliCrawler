@@ -2,9 +2,9 @@ package crawler
 
 import (
 	"encoding/json"
-	"github.com/LLipter/bilibiliVideoDataCrawler/conf"
-	"github.com/LLipter/bilibiliVideoDataCrawler/util"
-	"github.com/LLipter/bilibiliVideoDataCrawler/util/db"
+	"github.com/LLipter/bilibiliCrawler/conf"
+	"github.com/LLipter/bilibiliCrawler/util"
+	"github.com/LLipter/bilibiliCrawler/util/db"
 	"io/ioutil"
 	"log"
 	"strconv"
