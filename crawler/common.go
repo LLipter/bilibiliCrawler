@@ -35,7 +35,7 @@ func getResp(addr string) ([]byte, error) {
 			Transport: &http.Transport{
 				Proxy: http.ProxyURL(urlProxy),
 			},
-			Timeout: time.Second * 30,
+			Timeout: time.Second * 20,
 		}
 	}
 	resp, err := client.Do(req)
