@@ -22,7 +22,7 @@ func CrawOnline() {
 			continue
 		}
 		cnt = 0
-		
+
 		// crawl data every seconde
 		time.Sleep(time.Minute)
 	}

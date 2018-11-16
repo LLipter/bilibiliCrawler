@@ -62,9 +62,15 @@ func getVideoData(aid int) error {
 	if data.Code == 0 {
 		err = getVideoMoreData(aid, &data.Data)
 		if err != nil {
-			return err
+			if err.Error() == "'cid' type error" {
+				data.Code = -1
+			} else {
+				return err
+			}
 		}
-	} else {
+	}
+
+	if data.Code != 0 {
 		data.Data.Status = 1
 		data.Data.Aid = int64(aid)
 	}
