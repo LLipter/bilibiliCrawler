@@ -60,17 +60,23 @@ func init() {
 	// check whether run as daemon
 	if os.Args[1] == "-v" && config.VideoCrawler.IsDaemon {
 		daemon.Daemonize()
+	}else if os.Args[1] == "-o"{
+		daemon.Daemonize()
 	}
 
 }
 
 func usage() {
-	fmt.Println("usage: bilibiliCrawler [-v]")
+	fmt.Println("usage: bilibiliCrawler [-vo]")
+	fmt.Println("   -v: crawl video data")
+	fmt.Println("   -o: crawl online data")
 	os.Exit(1)
 }
 
 func isValidParameter(arg string) bool {
 	if arg == "-v" {
+		return true
+	} else if arg == "-o"{
 		return true
 	}
 	return false

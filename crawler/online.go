@@ -5,8 +5,25 @@ import (
 	"errors"
 	"github.com/LLipter/bilibiliCrawler/conf"
 	"github.com/LLipter/bilibiliCrawler/util/db"
+	"log"
 	"time"
 )
+
+func CrawOnline(){
+	cnt := 0
+	for{
+		err := getOnlineData()
+		if err != nil{
+			cnt++
+			if cnt == conf.NetworkConfig.RetryTimes{
+				log.Fatalln("cannot get online data")
+			}
+			continue
+		}
+		// crawl data every seconde
+		time.Sleep(time.Minute)
+	}
+}
 
 func getOnlineData() error {
 	addr := "http://api.bilibili.com/x/web-interface/online"
