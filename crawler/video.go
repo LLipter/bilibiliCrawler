@@ -146,5 +146,11 @@ func getVideoMoreData(aid int, video *conf.Video) error {
 		return err
 	}
 
+	// get pages
+	video.Pages, err = util.JsonGetInt64(jsonObj, "pages")
+	if err != nil {
+		return err
+	}
+
 	return nil
 }

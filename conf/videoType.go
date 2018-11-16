@@ -22,6 +22,7 @@ type Video struct {
 	Title   string    `json:"title"`
 	Pubdate time.Time `json:"created"`
 	Mid     int64     `json:"mid"`
+	Pages   int64     `json:"pages"`
 }
 
 type VideoJson struct {

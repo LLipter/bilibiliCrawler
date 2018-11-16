@@ -20,6 +20,7 @@ CREATE TABLE video(
     support INT,
     dislike INT,
     copyright INT,
+    pages INT,
     PRIMARY KEY(aid)
 )charset=utf8;
 
