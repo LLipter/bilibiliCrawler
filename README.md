@@ -60,4 +60,6 @@ A crawler program is actually pretty simple, however, when requiring the program
 
 After I finish main part of my crawler, I run it in my server. A strange situation occurred. After running smoothly for several hours, my program cashes suddenly. I checked `mysql` error log and my crawler's error log, but found nothing. I took me a whole day to realize that it results from **memory leaking**. After several hours running my program, my program occupied almost all available memory. Then linux system kill this process because of running out of memory, this mechanism also referred as `OOM Killer` or `Out Of Memory Killer`. The following link explains the detail of this leak and how to fix it.
 
-[Closing HTTP Response Body to avoid memory leak](http://devs.cloudimmunity.com/gotchas-and-common-mistakes-in-go-golang/index.html#close_http_resp_body)
+[Closing HTTP Response Body](http://devs.cloudimmunity.com/gotchas-and-common-mistakes-in-go-golang/index.html#close_http_resp_body)
+
+[Closing HTTP Connections](http://devs.cloudimmunity.com/gotchas-and-common-mistakes-in-go-golang/index.html#close_http_conn)
