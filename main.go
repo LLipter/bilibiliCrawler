@@ -47,7 +47,7 @@ func main() {
 	log.Println("begin crawling")
 	if os.Args[1] == "-v" {
 		crawler.CrawlVideo(conf.VideoCrawlerConfig.StartAid, conf.VideoCrawlerConfig.EndAid)
-	} else if os.Args[1] == "-o"{
+	} else if os.Args[1] == "-o" {
 		crawler.CrawOnline()
 	}
 	log.Println("end crawling")

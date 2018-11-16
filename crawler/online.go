@@ -9,13 +9,13 @@ import (
 	"time"
 )
 
-func CrawOnline(){
+func CrawOnline() {
 	cnt := 0
-	for{
+	for {
 		err := getOnlineData()
-		if err != nil{
+		if err != nil {
 			cnt++
-			if cnt == conf.NetworkConfig.RetryTimes{
+			if cnt == conf.NetworkConfig.RetryTimes {
 				log.Fatalln("cannot get online data")
 			}
 			continue

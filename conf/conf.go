@@ -54,13 +54,13 @@ func init() {
 	strBuf.WriteString(config.DB.Host)
 	strBuf.WriteString(")/")
 	strBuf.WriteString(config.DB.DBname)
-	strBuf.WriteString("?charset=utf8")
+	strBuf.WriteString("?charset=utf8&parseTime=true&loc=Local")
 	DBConnStr = strBuf.String()
 
 	// check whether run as daemon
 	if os.Args[1] == "-v" && config.VideoCrawler.IsDaemon {
 		daemon.Daemonize()
-	}else if os.Args[1] == "-o"{
+	} else if os.Args[1] == "-o" {
 		daemon.Daemonize()
 	}
 
@@ -76,7 +76,7 @@ func usage() {
 func isValidParameter(arg string) bool {
 	if arg == "-v" {
 		return true
-	} else if arg == "-o"{
+	} else if arg == "-o" {
 		return true
 	}
 	return false
