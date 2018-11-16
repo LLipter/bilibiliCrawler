@@ -23,6 +23,8 @@ func init() {
 func getResp(addr string) ([]byte, error) {
 	client := http.Client{}
 	req, err := http.NewRequest("GET", addr, nil)
+	// http://devs.cloudimmunity.com/gotchas-and-common-mistakes-in-go-golang/index.html#close_http_conn
+	req.Close = true
 	req.Header.Add("User-Agent", conf.NetworkConfig.UserAgent)
 	if conf.NetworkConfig.UseProxy {
 		length := len(proxy.ProxyPool)
