@@ -14,12 +14,15 @@ func CrawOnline() {
 	for {
 		err := getOnlineData()
 		if err != nil {
+			log.Println(err)
 			cnt++
 			if cnt == conf.NetworkConfig.RetryTimes {
 				log.Fatalln("cannot get online data")
 			}
 			continue
 		}
+		cnt = 0
+		
 		// crawl data every seconde
 		time.Sleep(time.Minute)
 	}
