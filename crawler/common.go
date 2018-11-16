@@ -3,6 +3,7 @@ package crawler
 import (
 	"github.com/LLipter/bilibiliCrawler/conf"
 	"github.com/LLipter/bilibiliCrawler/proxy"
+	"io/ioutil"
 	"math/rand"
 	"net/http"
 	"net/url"
@@ -19,7 +20,7 @@ func init() {
 	curCrawlerNo = make(chan bool, conf.VideoCrawlerConfig.MaxCrawlerNum)
 }
 
-func getResp(addr string) (*http.Response, error) {
+func getResp(addr string) ([]byte, error) {
 	client := http.Client{}
 	req, err := http.NewRequest("GET", addr, nil)
 	req.Header.Add("User-Agent", conf.NetworkConfig.UserAgent)
@@ -41,5 +42,12 @@ func getResp(addr string) (*http.Response, error) {
 	if err != nil {
 		return nil, err
 	}
-	return resp, nil
+	defer resp.Body.Close()
+
+	buf, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return nil, err
+	}
+
+	return buf, nil
 }

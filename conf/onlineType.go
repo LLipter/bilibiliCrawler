@@ -1,12 +1,16 @@
 package conf
 
+import "time"
+
 type OnlineJson struct {
 	Code       int64       `json:"code"`
 	Message    string      `json:"message"`
 	Data       RegionCount `json:"data"`
-	AllCount   int64       `json:"all_count"`
-	WebOnline  int64       `json:"web_online"`
+	AllCount   int64       `json:"all_count"`  // 最新投稿
+	WebOnline  int64       `json:"web_online"` // 在线人数
 	PlayOnline int64       `json:"play_online"`
+
+	Timestamp time.Time
 }
 
 type RegionCount struct {

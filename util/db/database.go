@@ -6,6 +6,7 @@ import (
 	"github.com/LLipter/bilibiliCrawler/conf"
 	_ "github.com/go-sql-driver/mysql"
 	"os"
+	"time"
 )
 
 var (
@@ -25,7 +26,7 @@ func init() {
 		os.Exit(1)
 	}
 	connPool.SetMaxOpenConns(conf.DBconfig.MaxOpenConn)
-	connPool.SetMaxIdleConns(0)
+	connPool.SetConnMaxLifetime(time.Second * 9)
 
 }
 
@@ -62,6 +63,37 @@ func InsertVideo(video conf.Video) error {
 		video.Support,
 		video.Dislike,
 		video.Copyright,
+	)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func InsertOnline(online conf.OnlineJson) error {
+	_, err := connPool.Exec(
+		"INSERT INTO online VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);",
+		online.Timestamp,
+		online.Data.Douga,
+		online.Data.Anime,
+		online.Data.Guochuang,
+		online.Data.Music,
+		online.Data.Dance,
+		online.Data.Game,
+		online.Data.Technology,
+		online.Data.Life,
+		online.Data.Kichiku,
+		online.Data.Fashion,
+		online.Data.Ad,
+		online.Data.Ent,
+		online.Data.Cinephile,
+		online.Data.Cinema,
+		online.Data.Tv,
+		online.Data.Movie,
+		online.AllCount,
+		online.WebOnline,
+		online.PlayOnline,
 	)
 	if err != nil {
 		return err

@@ -22,3 +22,28 @@ CREATE TABLE video(
     copyright INT,
     PRIMARY KEY(aid)
 )charset=utf8;
+
+CREATE TABLE online(
+    ts         DATETIME,
+	douga      INT, -- 动画
+	anime      INT, -- 番剧
+	guochuang  INT, -- 国创
+	music      INT, -- 音乐
+	dance      INT, -- 舞蹈
+	game       INT, -- 游戏
+	technology INT, -- 科技
+	life       INT, -- 生活
+	kichiku    INT, -- 鬼畜
+	fashion    INT, -- 时尚
+	ad         INT, -- 广告
+	ent        INT, -- 娱乐
+	cinephile  INT, -- 影视
+	cinema     INT, -- 放映厅
+	tv         INT, -- 电视剧
+	movie      INT, -- 电影
+    
+    allcount   INT, -- 最新投稿
+	webonline  INT, -- 在线人数
+	playonline INT, 
+    PRIMARY KEY(ts)
+);

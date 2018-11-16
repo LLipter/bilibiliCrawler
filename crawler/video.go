@@ -5,7 +5,6 @@ import (
 	"github.com/LLipter/bilibiliCrawler/conf"
 	"github.com/LLipter/bilibiliCrawler/util"
 	"github.com/LLipter/bilibiliCrawler/util/db"
-	"io/ioutil"
 	"log"
 	"strconv"
 	"strings"
@@ -80,13 +79,7 @@ func getVideoData(aid int) error {
 
 func getVideoBasicData(aid int, data *conf.VideoJson) error {
 	addr := "http://api.bilibili.com/archive_stat/stat?aid=" + strconv.Itoa(aid)
-	resp, err := getResp(addr)
-	if err != nil {
-		return err
-	}
-	defer resp.Body.Close()
-
-	buf, err := ioutil.ReadAll(resp.Body)
+	buf, err := getResp(addr)
 	if err != nil {
 		return err
 	}
@@ -105,18 +98,16 @@ func getVideoBasicData(aid int, data *conf.VideoJson) error {
 
 func getVideoMoreData(aid int, video *conf.Video) error {
 	addr := "http://api.bilibili.com/view?appkey=8e9fc618fbd41e28&id=" + strconv.Itoa(aid)
-	resp, err := getResp(addr)
+	buf, err := getResp(addr)
 	if err != nil {
 		return err
 	}
-	defer resp.Body.Close()
 
-	buf, err := ioutil.ReadAll(resp.Body)
+	var jsonObj map[string]interface{}
+	err = json.Unmarshal(buf, &jsonObj)
 	if err != nil {
 		return err
 	}
-	var jsonObj map[string]interface{}
-	json.Unmarshal(buf, &jsonObj)
 
 	// get tid
 	video.Tid, err = util.JsonGetInt64(jsonObj, "tid")
