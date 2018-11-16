@@ -39,10 +39,20 @@ func getResp(addr string) ([]byte, error) {
 		}
 	}
 	resp, err := client.Do(req)
+	// http://devs.cloudimmunity.com/gotchas-and-common-mistakes-in-go-golang/index.html#close_http_resp_body
+	/*
+	Most of the time when your http request fails the `resp` variable will be nil
+	and the `err` variable will be non-nil.
+	However, when you get a redirection failure both variables will be non-nil.
+	This means you can still end up with a leak.
+	 */
+	if resp != nil{
+		defer resp.Body.Close()
+	}
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+
 
 	buf, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
