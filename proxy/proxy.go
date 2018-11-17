@@ -53,21 +53,17 @@ func GetProxy() error {
 	return nil
 }
 
-func GetProxyRoutine() []string {
-	cnt := 0
-	for {
+func GetProxyRoutine() {
+	for t := 0; t < conf.NetworkConfig.RetryTimes; t++ {
 		err := GetProxy()
 		if err != nil {
 			log.Println(err)
-			cnt++
-			if cnt == conf.NetworkConfig.RetryTimes {
-				log.Fatal("cannot get proxy")
-			}
 			continue
 		}
-		cnt = 0
+		t = 0
 
 		// refresh proxy pool every 30 second
 		time.Sleep(time.Second * 30)
 	}
+	log.Fatal("cannot get proxy")
 }

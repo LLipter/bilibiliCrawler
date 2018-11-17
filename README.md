@@ -52,6 +52,10 @@ This parameter determine the max number a go routine failed to crawl a video dat
 
 This parameter determine the max number of connection that mysql connection pool holds. Mysql server limits the number of connection to `100` by default, so I set this parameter to `95` in case some emergency may occur.
 
+# Explanation of Data Field
+
+// TODO
+
 # Summary
 
 A crawler program is actually pretty simple, however, when requiring the program running several hours or even forever; it indeed becomes difficult. A simple bug may not matter for a small program running a few seconds, but is fatal to a long-staying service program. It took me 4 days finally fix all bugs. In this process, I met lots of strange bugs that I even never think about. Some relate to `mysql`, some relate to network knowledge. Here I want to explain the most challenging bug in detail. 

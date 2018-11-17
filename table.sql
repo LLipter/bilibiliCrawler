@@ -60,3 +60,12 @@ CREATE TABLE bangumi(
     view INT,
     PRIMARY KEY(sid)
 )charset=utf8;
+
+CREATE TABLE episode(
+	aid   INT,
+    index VARCHAR(200),
+    view  INT,
+	cid   INT,
+	epid  INT,
+    PRIMARY KEY(aid,index)
+)charset=utf8;

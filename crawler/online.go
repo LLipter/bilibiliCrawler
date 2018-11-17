@@ -10,22 +10,18 @@ import (
 )
 
 func CrawOnline() {
-	cnt := 0
-	for {
+	for t := 0; t < conf.NetworkConfig.RetryTimes; t++ {
 		err := getOnlineData()
 		if err != nil {
 			log.Println(err)
-			cnt++
-			if cnt == conf.NetworkConfig.RetryTimes {
-				log.Fatalln("cannot get online data")
-			}
 			continue
 		}
-		cnt = 0
+		t = 0
 
-		// crawl data every seconde
+		// crawl data every second
 		time.Sleep(time.Minute)
 	}
+	log.Fatalln("cannot get online data")
 }
 
 func getOnlineData() error {
