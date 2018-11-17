@@ -22,7 +22,7 @@ func CrawlBangumi() {
 		}
 	}
 	if err != nil {
-		fmt.Println("cannot get total number: " + err.Error())
+		log.Println("cannot get total number: " + err.Error())
 	}
 
 	pageSize := 20
@@ -71,7 +71,7 @@ func pageCrawlerRoutine(page int) {
 		}
 	}
 
-	fmt.Println(fmt.Sprintf("cannot get page %d: ", page) + err.Error())
+	log.Println(fmt.Sprintf("cannot get page %d: ", page) + err.Error())
 
 }
 
@@ -91,7 +91,7 @@ func getPage(page int) error {
 	for idx, data := range bangumiJson.Data.Bangumis {
 		bangumi, err := convertBangumi(data)
 		if err != nil {
-			fmt.Println(fmt.Sprintf("page=%d,idx=%d bangumi crawler failed: ", page, idx) + err.Error())
+			log.Println(fmt.Sprintf("page=%d,idx=%d bangumi crawler failed: ", page, idx) + err.Error())
 			continue
 		}
 
