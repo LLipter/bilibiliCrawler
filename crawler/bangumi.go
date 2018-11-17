@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-func CrawlBangumi() error {
+func CrawlBangumi() {
 	var err error
 	var totalNo int
 	for t := 0; t < conf.NetworkConfig.RetryTimes; t++ {
@@ -36,8 +36,6 @@ func CrawlBangumi() error {
 		curCrawlerNo <- true
 		go pageCrawlerRoutine(page)
 	}
-
-	return nil
 }
 
 func getTotalNumber() (int, error) {

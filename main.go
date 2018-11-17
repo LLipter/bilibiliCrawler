@@ -50,10 +50,7 @@ func main() {
 	} else if os.Args[1] == "-o" {
 		crawler.CrawOnline()
 	} else if os.Args[1] == "-b" {
-		err := crawler.CrawlBangumi()
-		if err != nil {
-			fmt.Println(err)
-		}
+		crawler.CrawlBangumi()
 	}
 	log.Println("end crawling")
 
