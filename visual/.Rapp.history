@@ -1,0 +1,549 @@
+decode()
+Encoding(t)
+Encoding(t) <- 'utf-8'
+t
+Encoding(t) <- 'utf-8'
+Encoding(t)
+Encoding(t) <- 'UTF-T'
+Encoding(t) <- 'UTF-8'
+Encoding(t)
+t
+T
+t
+t_encoded <- enc2utf8(t)
+t_encoded
+a <- "是多少"
+a
+a <- "是多少"
+a
+Encoding(a)
+a <- <-'GB2312'
+Encoding(a)<-'GB2312'
+a
+Encoding(a)
+Encoding(a)<-'GB2312'
+x=c('中華民族');x; y <- data.frame(x, stringsAsFactors=FALSE)
+q<-'天'#
+#
+q
+Sys.setlocale("LC_CTYPE", locale="Chinese")
+Sys.setlocale( locale="UTF-8" )
+q<-'天'#
+#
+q
+dbGetQuery(con, "SELECT * FROM bangumi where abs(view-view_calculated) < view*0.1 order by view desc limit 10")
+library(DBI)#
+library(RMySQL)#
+con <- dbConnect(MySQL(), host="localhost", dbname="bilibili", user="root", password="57575207")#
+dbGetQuery(con, "SELECT * FROM bangumi where abs(view-view_calculated) < view*0.1 order by view desc limit 10")
+Sys.setlocale( locale="UTF-8" )
+dbGetQuery(con, "SELECT * FROM bangumi where abs(view-view_calculated) < view*0.1 order by view desc limit 10")
+ÒdbGetQuery(con, "SELECT * FROM bangumi where abs(view-view_calculated) < view*0.1 order by view desc limit 10")
+dbGetQuery(con, "SELECT * FROM bangumi where abs(view-view_calculated) < view*0.1 order by view desc limit 10")
+data(nutrient, package = "flexclust")
+nutrient
+type(nutrient)
+data <- dbGetQuery(con, "SELECT * FROM bangumi where abs(view-view_calculated) < view*0.1 order by view desc limit 10")
+data
+data[,"title"]
+data[:,"title"]
+data[,"title"]
+data2 <= data[,c("title","follow","view_calculated")]
+data2 <- data[,c("title","follow","view_calculated")]
+data2
+data2 <- data[,c("title","follow","view_calculated")]
+data2
+data2
+data2
+row.names(data2) <- data2$title
+data2
+data2 <- data2[,c(follow, view_calculated)]
+data2 <- data2[,c("follow", "view_calculated")]
+data2
+data$title
+data$follow
+data <- rawdata[,c("folllw", "view_calculated")]#
+row.names(data) <- rawdata$title
+rawdata <- dbGetQuery(con, "SELECT * FROM bangumi where abs(view-view_calculated) < view*0.1 order by view desc limit 10")
+data <- rawdata[,c("folllw", "view_calculated")]#
+row.names(data) <- rawdata$title
+data <- rawdata[,c("follow", "view_calculated")]#
+row.names(data) <- rawdata$title
+data
+rawdata <- dbGetQuery(con, "SELECT * FROM bangumi where abs(view-view_calculated) < view*0.1 order by view desc limit 10")#
+data <- rawdata[c("follow", "view_calculated")]#
+row.names(data) <- rawdata$title
+data
+rawdata$sid
+rawdata
+a <- "s"
+b <- "b"
+a + b
+c <- a + b
+sid <- 10
+sqlstr <- paste("SELECT * FROM episode WHERE sid =", sid)
+sqlstr
+data
+rawdata$sid
+sid <- 5070
+epdata <- dbGetQuery(con, sqlstr)
+epdata
+sqlstr <- paste("SELECT * FROM episode WHERE sid =", sid)
+sqlstr
+epdata <- dbGetQuery(con, sqlstr)
+epdata
+sqlstr <- paste("SELECT view FROM episode WHERE sid =", sid)#
+    epdata <- dbGetQuery(con, sqlstr)
+epdata
+sqlstr <- paste("SELECT * FROM episode WHERE sid =", sid, "ORDER BY idx")
+epdata <- dbGetQuery(con, sqlstr)
+epdata
+sqlstr <- paste("SELECT * FROM episode WHERE sid =", sid, "ORDER BY aid")
+epdata <- dbGetQuery(con, sqlstr)
+epdata
+rawdata <- dbGetQuery(con, "SELECT * FROM bangumi WHERE ABS(view-view_calculated) < view*0.1 ORDER BT view DESC LIMIT 10")
+rawdata <- dbGetQuery(con, "SELECT * FROM bangumi WHERE ABS(view-view_calculated) < view*0.1 ORDER BY view DESC LIMIT 10")
+rawdata
+data <- rawdata[c("follow", "view_calculated")]#
+row.names(data) <- rawdata$title
+data
+rawdata$sid
+sid <- 24588
+sqlstr <- paste("SELECT * FROM episode WHERE sid =", sid, "ORDER BY aid")
+sqlstr
+sqlstr <- paste("SELECT * FROM episode WHERE sid =", sid, "ORDER BY idx")
+epdata <- dbGetQuery(con, sqlstr)
+epdata
+sqlstr <- paste("SELECT view FROM episode WHERE sid =", sid, "ORDER BY idx")#
+    epdata <- dbGetQuery(con, sqlstr)
+epdata
+epdata_scaled <- scale(epdata$view)
+epdata_scaled
+mydata <- data.frame(age = numeric(0), gender = character(0), weight = numeric(0))
+mydata
+viewdata <- data.frame(view1=numeric(0),view3=numeric(0),view1n=numeric(0),view3n=numeric(0))
+viewdata
+viewdata <- data.frame(view1=numeric(0),#
+view3=numeric(0),view1n=numeric(0),#
+view3n=numeric(0))
+viewdata <- data.frame(view1=numeric(0),
+view3=numeric(0),view1n=numeric(0),
+view3n=numeric(0))
+a <- numeric()
+a
+viewdata <- data.frame(view1=numeric(),#
+                        view3=numeric(),#
+                        view1n=numeric(),#
+                        view3n=numeric())
+viewdata
+help(numeric)
+help(numeric)
+help(rbind)
+help(rbind)
+length(c(1,2))
+len <- length(epdata)#
+    row <- c(epdata[1],epdata[3],epdata[len],epdata[len-3])
+epdata <- epdata$view
+len <- length(epdata)#
+    row <- c(epdata[1],epdata[3],epdata[len],epdata[len-3])
+row
+epdata
+epdata <- scale(epdata)
+epdata
+row <- c(epdata[1],epdata[3],epdata[len],epdata[len-3])
+row
+viewdata <- rbind(viewdata, row)
+viewdata
+viewdata <- data.frame(view1=numeric(),#
+                        view3=numeric(),#
+                        view1n=numeric(),#
+                        view3n=numeric())
+viewdata
+rbind(viewdata, row)
+row.names(viewdata) <- c("view1","view3","view1n","view3n")
+column.names(viewdata) <- c("view1","view3","view1n","view3n")
+names(viewdata) <- c("view1","view3","view1n","view3n")
+viewdata
+viewdata <- rbind(viewdata, row)
+viewdata
+viewdata <- data.frame(view1=numeric(),#
+                        view3=numeric(),#
+                        view1n=numeric(),#
+                        view3n=numeric())
+for(sid in rawdata$sid){#
+    sqlstr <- paste("SELECT view FROM episode WHERE sid =", sid, "ORDER BY idx")#
+    epdata <- dbGetQuery(con, sqlstr)#
+    epdata <- epdata$view#
+    epdata <- scale(epdata)#
+    len <- length(epdata)#
+    row <- c(epdata[1],epdata[3],epdata[len],epdata[len-3])#
+    viewdata <- rbind(viewdata, row)#
+}#
+names(viewdata) <- c("view1","view3","view1n","view3n")
+viewdata
+data
+cbind(data, viewdata)
+source(bangumiCluster.R)
+source("bangumiCluster.R")
+getwd()
+setwd("/Users/llipter/go/src/github.com/LLipter/bilibiliCrawler")
+source("bangumiCluster.R")
+setwd("visul")
+setwd("visual")
+source("bangumiCluster.R")
+data
+source("bangumiCluster.R")
+data
+dbDisconnect(conn)
+dbDisconnect(con)
+con <- dbConnect(MySQL(), host="localhost", dbname="bilibili", user="root", password="57575207")#
+rawdata <- dbGetQuery(con, "SELECT * FROM bangumi WHERE ABS(view-view_calculated) < view*0.1 AND epno>10 ORDER BY view DESC LIMIT 10")#
+data <- rawdata[c("follow", "view_calculated")]#
+row.names(data) <- rawdata$title#
+#
+viewdata <- data.frame(view1=numeric(),#
+                        view3=numeric(),#
+                        view1n=numeric(),#
+                        view3n=numeric())    #
+for(sid in rawdata$sid){#
+    sqlstr <- paste("SELECT view FROM episode WHERE sid =", sid, "ORDER BY idx")#
+    epdata <- dbGetQuery(con, sqlstr)#
+    epdata <- epdata$view#
+    epdata <- scale(epdata)#
+    len <- length(epdata)#
+    row <- c(epdata[1],epdata[3],epdata[len],epdata[len-3])#
+    viewdata <- rbind(viewdata, row)#
+}#
+names(viewdata) <- c("view1","view3","view1n","view3n") #
+data <- cbind(data, viewdata)#
+#
+dbDisconnect(con)
+data
+data
+d <- dist(nutrient.scaled)
+con <- dbConnect(MySQL(), host="localhost", dbname="bilibili", user="root", password="57575207")#
+rawdata <- dbGetQuery(con, "SELECT * FROM bangumi WHERE ABS(view-view_calculated) < view*0.1 AND epno>10 ORDER BY view DESC LIMIT 10")#
+bangumidata <- rawdata[c("follow", "view_calculated")]#
+row.names(bangumidata) <- rawdata$title#
+#
+viewdata <- data.frame(view1=numeric(),#
+                        view3=numeric(),#
+                        view1n=numeric(),#
+                        view3n=numeric())    #
+for(sid in rawdata$sid){#
+    sqlstr <- paste("SELECT view FROM episode WHERE sid =", sid, "ORDER BY idx")#
+    epdata <- dbGetQuery(con, sqlstr)#
+    epdata <- epdata$view#
+    epdata <- scale(epdata)#
+    len <- length(epdata)#
+    row <- c(epdata[1],epdata[3],epdata[len],epdata[len-3])#
+    viewdata <- rbind(viewdata, row)#
+}#
+names(viewdata) <- c("view1","view3","view1n","view3n") #
+bangumidata <- cbind(data, viewdata)#
+#
+# d <- dist(bangumidata)#
+#
+dbDisconnect(con)
+bangumidata
+data
+bangumidata
+bangumidata <- rawdata[c("follow", "view_calculated")]
+bangumidata
+row.names(bangumidata) <- rawdata$title
+bangumidata
+viewdata <- data.frame(view1=numeric(),#
+                        view3=numeric(),#
+                        view1n=numeric(),#
+                        view3n=numeric())
+for(sid in rawdata$sid){#
+    sqlstr <- paste("SELECT view FROM episode WHERE sid =", sid, "ORDER BY idx")#
+    epdata <- dbGetQuery(con, sqlstr)#
+    epdata <- epdata$view#
+    epdata <- scale(epdata)#
+    len <- length(epdata)#
+    row <- c(epdata[1],epdata[3],epdata[len],epdata[len-3])#
+    viewdata <- rbind(viewdata, row)#
+}
+con <- dbConnect(MySQL(), host="localhost", dbname="bilibili", user="root", password="57575207")#
+rawdata <- dbGetQuery(con, "SELECT * FROM bangumi WHERE ABS(view-view_calculated) < view*0.1 AND epno>10 ORDER BY view DESC LIMIT 10")#
+bangumidata <- rawdata[c("follow", "view_calculated")]#
+row.names(bangumidata) <- rawdata$title#
+#
+viewdata <- data.frame(view1=numeric(),#
+                        view3=numeric(),#
+                        view1n=numeric(),#
+                        view3n=numeric())
+bangumidata
+for(sid in rawdata$sid){#
+    sqlstr <- paste("SELECT view FROM episode WHERE sid =", sid, "ORDER BY idx")#
+    epdata <- dbGetQuery(con, sqlstr)#
+    epdata <- epdata$view#
+    epdata <- scale(epdata)#
+    len <- length(epdata)#
+    row <- c(epdata[1],epdata[3],epdata[len],epdata[len-3])#
+    viewdata <- rbind(viewdata, row)#
+}
+viewdata
+bangumidata
+names(viewdata) <- c("view1","view3","view1n","view3n") #
+bangumidata <- cbind(data, viewdata)
+bangumidata
+viewdata <- data.frame(view1=numeric(),#
+                        view3=numeric(),#
+                        view1n=numeric(),#
+                        view3n=numeric())    #
+for(sid in rawdata$sid){#
+    sqlstr <- paste("SELECT view FROM episode WHERE sid =", sid, "ORDER BY idx")#
+    epdata <- dbGetQuery(con, sqlstr)#
+    epdata <- epdata$view#
+    epdata <- scale(epdata)#
+    len <- length(epdata)#
+    row <- c(epdata[1],epdata[3],epdata[len],epdata[len-3])#
+    viewdata <- rbind(viewdata, row)#
+}
+viewdata
+names(viewdata) <- c("view1","view3","view1n","view3n")
+viewdata
+cbind(data, viewdata)
+help(cbind)
+cbind(1, 1:7)
+con <- dbConnect(MySQL(), host="localhost", dbname="bilibili", user="root", password="57575207")#
+rawdata <- dbGetQuery(con, "SELECT * FROM bangumi WHERE ABS(view-view_calculated) < view*0.1 AND epno>10 ORDER BY view DESC LIMIT 10")#
+bangumidata <- rawdata[c("follow", "view_calculated")]#
+row.names(bangumidata) <- rawdata$title#
+#
+viewdata <- data.frame(view1=numeric(),#
+                        view3=numeric(),#
+                        view1n=numeric(),#
+                        view3n=numeric())    #
+for(sid in rawdata$sid){#
+    sqlstr <- paste("SELECT view FROM episode WHERE sid =", sid, "ORDER BY idx")#
+    epdata <- dbGetQuery(con, sqlstr)#
+    epdata <- epdata$view#
+    epdata <- scale(epdata)#
+    len <- length(epdata)#
+    row <- c(epdata[1],epdata[3],epdata[len],epdata[len-3])#
+    viewdata <- rbind(viewdata, row)#
+}
+bangumidata
+viewdata
+row.names(view) <- rawdata$title
+row.names(viewdata) <- rawdata$title
+viewdata
+cbind(data, viewdata)
+rawdata <- dbGetQuery(con, "SELECT * FROM bangumi WHERE ABS(view-view_calculated) < view*0.1 AND epno>10 ORDER BY view DESC LIMIT 10")#
+bangumidata <- rawdata[c("follow", "view_calculated")]#
+row.names(bangumidata) <- rawdata$title#
+#
+viewdata <- data.frame(view1=numeric(),#
+                        view3=numeric(),#
+                        view1n=numeric(),#
+                        view3n=numeric())    #
+for(sid in rawdata$sid){#
+    sqlstr <- paste("SELECT view FROM episode WHERE sid =", sid, "ORDER BY idx")#
+    epdata <- dbGetQuery(con, sqlstr)#
+    epdata <- epdata$view#
+    epdata <- scale(epdata)#
+    len <- length(epdata)#
+    row <- c(epdata[1],epdata[3],epdata[len],epdata[len-3])#
+    viewdata <- rbind(viewdata, row)#
+}#
+names(viewdata) <- c("view1","view3","view1n","view3n") #
+# row.names(viewdata) <- rawdata$title#
+bangumidata <- cbind(data, viewdata)
+bangumidata
+bangumi[["工作细胞"]]
+bangumidata[["工作细胞"]]
+bangumidata[["OVERLORDⅡ"]]
+bangumidata[[OVERLORDⅡ]]
+bangumidata
+bangumidata
+viewdata
+rawdata <- dbGetQuery(con, "SELECT * FROM bangumi WHERE ABS(view-view_calculated) < view*0.1 AND epno>10 ORDER BY view DESC LIMIT 10")#
+bangumidata <- rawdata[c("follow", "view_calculated")]#
+row.names(bangumidata) <- rawdata$title#
+#
+viewdata <- data.frame(view1=numeric(),#
+                        view3=numeric(),#
+                        view1n=numeric(),#
+                        view3n=numeric())    #
+for(sid in rawdata$sid){#
+    sqlstr <- paste("SELECT view FROM episode WHERE sid =", sid, "ORDER BY idx")#
+    epdata <- dbGetQuery(con, sqlstr)#
+    epdata <- epdata$view#
+    epdata <- scale(epdata)#
+    len <- length(epdata)#
+    row <- c(epdata[1],epdata[3],epdata[len],epdata[len-3])#
+    viewdata <- rbind(viewdata, row)#
+}#
+names(viewdata) <- c("view1","view3","view1n","view3n")
+viewdata
+bangumidata
+bangumidata <- cbind(bangumidata, viewdata)
+bangumidata
+d <- dist(bangumidata)
+fit.average <- hclust(d, method = "average")
+plot(fit.average, hang = -1, cex = .8, main = "Average Linkage Clustering")
+d
+bangumidata
+rawdata <- dbGetQuery(con, "SELECT * FROM bangumi WHERE ABS(view-view_calculated) < view*0.1 AND epno>10 ORDER BY view DESC LIMIT 10")#
+bangumidata <- rawdata[c("follow", "view_calculated")]#
+row.names(bangumidata) <- rawdata$title
+bangumidata
+scale(bangumidata)
+rawdata <- dbGetQuery(con, "SELECT * FROM bangumi WHERE ABS(view-view_calculated) < view*0.1 AND epno>10 ORDER BY view DESC LIMIT 10")#
+bangumidata <- rawdata[c("follow", "view_calculated")]#
+bangumidata <- scale(bangumidata)#
+row.names(bangumidata) <- rawdata$title#
+#
+viewdata <- data.frame(view1=numeric(),#
+                        view3=numeric(),#
+                        view1n=numeric(),#
+                        view3n=numeric())    #
+for(sid in rawdata$sid){#
+    sqlstr <- paste("SELECT view FROM episode WHERE sid =", sid, "ORDER BY idx")#
+    epdata <- dbGetQuery(con, sqlstr)#
+    epdata <- epdata$view#
+    epdata <- scale(epdata)#
+    len <- length(epdata)#
+    row <- c(epdata[1],epdata[3],epdata[len],epdata[len-3])#
+    viewdata <- rbind(viewdata, row)#
+}#
+names(viewdata) <- c("view1","view3","view1n","view3n") #
+bangumidata <- cbind(bangumidata, viewdata)
+bangumidata
+d <- dist(bangumidata)
+d
+fit.average <- hclust(d, method = "average")
+plot(fit.average, hang = -1, cex = .8, main = "Average Linkage Clustering")
+plot(fit.average, hang = -1, cex = .8, main = "Average Linkage Clustering",family='STXihei')
+plot(fit.average, hang = -1, cex = .8, main = "Average Linkage Clustering",#
+family="Source Han Sans")
+plot(fit.average, hang = -1, cex = .8, main = "Average Linkage Clustering",#
+family='STXihei')
+plot(fit.average, hang = -1, main = "Average Linkage Clustering",#
+family='STXihei')
+con <- dbConnect(MySQL(), host="localhost", dbname="bilibili", user="root", password="57575207")#
+rawdata <- dbGetQuery(con, "SELECT * FROM bangumi WHERE ABS(view-view_calculated) < view*0.1 AND epno>10 ORDER BY view DESC LIMIT 100")#
+bangumidata <- rawdata[c("follow", "view_calculated")]#
+bangumidata <- scale(bangumidata)#
+row.names(bangumidata) <- rawdata$title#
+#
+viewdata <- data.frame(view1=numeric(),#
+                        view3=numeric(),#
+                        view1n=numeric(),#
+                        view3n=numeric())    #
+for(sid in rawdata$sid){#
+    sqlstr <- paste("SELECT view FROM episode WHERE sid =", sid, "ORDER BY idx")#
+    epdata <- dbGetQuery(con, sqlstr)#
+    epdata <- epdata$view#
+    epdata <- scale(epdata)#
+    len <- length(epdata)#
+    row <- c(epdata[1],epdata[3],epdata[len],epdata[len-3])#
+    viewdata <- rbind(viewdata, row)#
+}#
+names(viewdata) <- c("view1","view3","view1n","view3n") #
+bangumidata <- cbind(bangumidata, viewdata)#
+#
+d <- dist(bangumidata)#
+fit.average <- hclust(d, method = "average")#
+plot(fit.average, hang = -1, cex = .8, main = "Average Linkage Clustering",#
+family='STXihei')
+plot(fit.average, hang = -1, cex = .3, main = "Average Linkage Clustering",#
+family='STXihei')
+con <- dbConnect(MySQL(), host="localhost", dbname="bilibili", user="root", password="57575207")#
+rawdata <- dbGetQuery(con, "SELECT * FROM bangumi WHERE ABS(view-view_calculated) < view*0.1 AND epno>10 ORDER BY view DESC LIMIT 50")#
+bangumidata <- rawdata[c("follow", "view_calculated")]#
+bangumidata <- scale(bangumidata)#
+row.names(bangumidata) <- rawdata$title#
+#
+viewdata <- data.frame(view1=numeric(),#
+                        view3=numeric(),#
+                        view1n=numeric(),#
+                        view3n=numeric())    #
+for(sid in rawdata$sid){#
+    sqlstr <- paste("SELECT view FROM episode WHERE sid =", sid, "ORDER BY idx")#
+    epdata <- dbGetQuery(con, sqlstr)#
+    epdata <- epdata$view#
+    epdata <- scale(epdata)#
+    len <- length(epdata)#
+    row <- c(epdata[1],epdata[3],epdata[len],epdata[len-3])#
+    viewdata <- rbind(viewdata, row)#
+}#
+names(viewdata) <- c("view1","view3","view1n","view3n") #
+bangumidata <- cbind(bangumidata, viewdata)#
+#
+d <- dist(bangumidata)#
+fit.average <- hclust(d, method = "average")#
+plot(fit.average, hang = -1, cex = .5, main = "Average Linkage Clustering",#
+family='STXihei')
+con <- dbConnect(MySQL(), host="localhost", dbname="bilibili", user="root", password="57575207")#
+rawdata <- dbGetQuery(con, "SELECT * FROM bangumi WHERE ABS(view-view_calculated) < view*0.1 AND epno>10 ORDER BY view DESC LIMIT 50")#
+bangumidata <- rawdata[c("follow", "view_calculated")]#
+bangumidata <- scale(bangumidata)#
+row.names(bangumidata) <- rawdata$title#
+#
+viewdata <- data.frame(view1=numeric(),#
+                        view3=numeric(),#
+                        view1n=numeric(),#
+                        view3n=numeric())    #
+for(sid in rawdata$sid){#
+    sqlstr <- paste("SELECT view FROM episode WHERE sid =", sid, "ORDER BY idx")#
+    epdata <- dbGetQuery(con, sqlstr)#
+    epdata <- epdata$view#
+    epdata <- scale(epdata)#
+    len <- length(epdata)#
+    row <- c(epdata[1],epdata[3],epdata[len],epdata[len-3])#
+    viewdata <- rbind(viewdata, row)#
+}#
+names(viewdata) <- c("view1","view3","view1n","view3n") #
+bangumidata <- cbind(bangumidata, viewdata)#
+#
+d <- dist(bangumidata)#
+fit.average <- hclust(d, method = "average")#
+plot(fit.average, hang = -1, cex = .5, main = "Average Linkage Clustering",#
+family='STXihei')
+help(plot)
+help(par)
+plot(fit.average, hang = -1, cex = .5, main = "Average Linkage Clustering",#
+family='STXihei',#
+col=c("red", "blue"))
+plot(fit.average, hang = -1, cex = .5, main = "Average Linkage Clustering",#
+family='STXihei')
+plot(fit.average, hang = -1, cex = .5, main = "Average Linkage Clustering",#
+family='STXihei',#
+xlab="111")
+plot(fit.average, hang = -1, cex = .5, main = "Average Linkage Clustering",#
+family='STXihei',#
+xlab="50 Most popular Anime in Bilibili")
+plot(fit.average, hang = -1, cex = .5, main = "Average Linkage Clustering",#
+family='STXihei',#
+xlab="50 Most popular Anime in Bilibili",#
+sub="")
+plot(fit.average, hang = -1, cex = .5, main = "Average Linkage Clustering",#
+family='STXihei',#
+xlab="50 Most popular Anime in Bilibili",#
+ylab="",#
+sub="")
+library(NbClust)
+install.package(NbClust)
+package.install(NbClust)
+packages.install(NbClust)
+install.packages(NbClust)
+install.packages("NbClust")
+library(NbClust)
+devAskNewPage(ask = TRUE)
+nc <- NbClust(df, min.nc = 2, max.nc = 15, method = "kmeans")#
+    table(nc$Best.n[1,])#
+    barplot(table(nc$Best.n[1,]),#
+        xlab = "Number of Clusters", ylab = "Number of Criteria",#
+        main = "Number of Clusters Chosen by 26 Criteria")
+library(NbClust)#
+    set.seed(1234)#
+    devAskNewPage(ask = TRUE)#
+    nc <- NbClust(bangumidata, min.nc = 2, max.nc = 15, method = "kmeans")#
+    table(nc$Best.n[1,])#
+    barplot(table(nc$Best.n[1,]),#
+        xlab = "Number of Clusters", ylab = "Number of Criteria",#
+        main = "Number of Clusters Chosen by 26 Criteria")

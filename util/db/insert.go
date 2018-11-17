@@ -3,6 +3,7 @@ package db
 import (
 	"errors"
 	"github.com/LLipter/bilibiliCrawler/conf"
+	"strconv"
 )
 
 func InsertVideo(video conf.Video) error {
@@ -78,17 +79,33 @@ func InsertBangumi(bangumi conf.Bangumi) error {
 		return errors.New("transaction begin failed : " + err.Error())
 	}
 
+	for _, ep := range bangumi.Eplist {
+		idx, err := strconv.Atoi(ep.Index)
+		if err != nil{
+			continue
+		}
+		bangumi.ViewCalculated += ep.View
+		bangumi.Epno += 1
+		_, err = connPool.Exec(
+			"INSERT INTO episode VALUES(?, ?, ?, ?, ?, ?);",
+			bangumi.Sid,
+			idx,
+			ep.Aid,
+			ep.View,
+			ep.Cid,
+			ep.Epid,
+		)
+		if err != nil {
+			return rollback(tx, err)
+		}
+	}
+
 	// some bangumi doesn't have score
 	var score interface{}
 	if bangumi.Score < 0 {
 		score = nil
 	} else {
 		score = bangumi.Score
-	}
-
-	// view_calculated = the sum of view of each episode
-	for _, ep := range bangumi.Eplist {
-		bangumi.ViewCalculated += ep.View
 	}
 
 	_, err = connPool.Exec(
@@ -107,20 +124,7 @@ func InsertBangumi(bangumi conf.Bangumi) error {
 		return rollback(tx, err)
 	}
 
-	for _, ep := range bangumi.Eplist {
-		_, err = connPool.Exec(
-			"INSERT INTO episode VALUES(?, ?, ?, ?, ?, ?);",
-			bangumi.Sid,
-			ep.Index,
-			ep.Aid,
-			ep.View,
-			ep.Cid,
-			ep.Epid,
-		)
-		if err != nil {
-			return rollback(tx, err)
-		}
-	}
+
 
 	err = tx.Commit()
 	if err != nil {

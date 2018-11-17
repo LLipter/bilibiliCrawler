@@ -126,6 +126,44 @@ func eplistCrawlerRoutine(bangumi conf.Bangumi) {
 	}
 }
 
+func getEplist(sid int, bangumi conf.Bangumi) error {
+	addr := "http://bangumi.bilibili.com/web_api/get_ep_list?season_type=1?&season_id=" + strconv.Itoa(sid)
+	buf, err := getResp(addr)
+	if err != nil {
+		return errors.New(fmt.Sprintf("sid=%d cannot get eplist: ", sid) + err.Error())
+	}
+
+	var eplistJson conf.EplistJson
+	err = json.Unmarshal(buf, &eplistJson)
+	if err != nil {
+		return errors.New(fmt.Sprintf("sid=%d cannot get eplist: ", sid) + err.Error())
+	}
+
+	for i := 0; i < len(eplistJson.Data); i++ {
+		aid := int(eplistJson.Data[i].Aid)
+		var videoJson conf.VideoJson
+		for t := 0; t < conf.NetworkConfig.RetryTimes; t++ {
+			err = getVideoBasicData(aid, &videoJson)
+			if err == nil {
+				break
+			}
+		}
+		if err != nil {
+			return errors.New(fmt.Sprintf("aid=%d cannot get view: ", aid) + err.Error())
+		}
+		eplistJson.Data[i].View = videoJson.Data.View
+	}
+
+	bangumi.Eplist = eplistJson.Data
+
+	err = db.InsertBangumi(bangumi)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func convertBangumi(data interface{}) (conf.Bangumi, error) {
 	dataDict, ok := data.(map[string]interface{})
 	if !ok {
@@ -224,43 +262,4 @@ func convertBangumi(data interface{}) (conf.Bangumi, error) {
 	}
 
 	return bangumi, nil
-}
-
-func getEplist(sid int, bangumi conf.Bangumi) error {
-	addr := "http://bangumi.bilibili.com/web_api/get_ep_list?season_type=1?&season_id=" + strconv.Itoa(sid)
-	buf, err := getResp(addr)
-	if err != nil {
-		return errors.New(fmt.Sprintf("sid=%d cannot get eplist: ", sid) + err.Error())
-	}
-
-	var eplistJson conf.EplistJson
-	err = json.Unmarshal(buf, &eplistJson)
-	if err != nil {
-		return errors.New(fmt.Sprintf("sid=%d cannot get eplist: ", sid) + err.Error())
-	}
-
-	for i := 0; i < len(eplistJson.Data); i++ {
-		aid := int(eplistJson.Data[i].Aid)
-		var videoJson conf.VideoJson
-		for t := 0; t < conf.NetworkConfig.RetryTimes; t++ {
-			err = getVideoBasicData(aid, &videoJson)
-			if err == nil {
-				break
-			}
-		}
-		if err != nil {
-			return errors.New(fmt.Sprintf("aid=%d cannot get view: ", aid) + err.Error())
-		}
-		eplistJson.Data[i].View = videoJson.Data.View
-	}
-
-	bangumi.Epno = int64(len(eplistJson.Data))
-	bangumi.Eplist = eplistJson.Data
-
-	err = db.InsertBangumi(bangumi)
-	if err != nil {
-		return err
-	}
-
-	return nil
 }

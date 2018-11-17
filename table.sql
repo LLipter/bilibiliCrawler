@@ -64,7 +64,7 @@ CREATE TABLE bangumi(
 
 CREATE TABLE episode(
     sid   INT,
-    idx   VARCHAR(200),
+    idx   INT,
     aid   INT,
     view  INT,
 	cid   INT,
