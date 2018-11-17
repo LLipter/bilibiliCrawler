@@ -86,27 +86,6 @@ func InsertBangumi(bangumi conf.Bangumi) error {
 		score = bangumi.Score
 	}
 
-	// for some bangumi, all episodes' view are identical
-	// clearly, it's illegal data
-	viewFirst := bangumi.Eplist[0].View
-	isValid := false
-	viewSum := int64(0)
-	for _, ep := range bangumi.Eplist {
-		viewSum += ep.View
-		if ep.View != viewFirst {
-			isValid = true
-			break
-		}
-	}
-
-	// use more accurate view
-	var view interface{}
-	if isValid {
-		view = viewSum
-	} else {
-		view = bangumi.View
-	}
-
 	_, err = connPool.Exec(
 		"INSERT INTO bangumi VALUES(?, ?, ?, ?, ?, ?, ?, ?);",
 		bangumi.Sid,
@@ -115,7 +94,7 @@ func InsertBangumi(bangumi conf.Bangumi) error {
 		bangumi.Epno,
 		score,
 		bangumi.Follow,
-		view,
+		bangumi.View,
 		bangumi.MediaID,
 	)
 	if err != nil {
@@ -123,19 +102,12 @@ func InsertBangumi(bangumi conf.Bangumi) error {
 	}
 
 	for _, ep := range bangumi.Eplist {
-		// use null replace illegal data
-		if isValid {
-			view = ep.View
-		} else {
-			view = nil
-		}
-
 		_, err = connPool.Exec(
 			"INSERT INTO episode VALUES(?, ?, ?, ?, ?, ?);",
 			bangumi.Sid,
 			ep.Index,
 			ep.Aid,
-			view,
+			ep.View,
 			ep.Cid,
 			ep.Epid,
 		)
