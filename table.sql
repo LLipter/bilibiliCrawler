@@ -57,6 +57,7 @@ CREATE TABLE bangumi(
     score DOUBLE(3,2),
     follow INT,
     view INT,
+    view_calculated INT,
     media_id INT,
     PRIMARY KEY(sid)
 )charset=utf8;

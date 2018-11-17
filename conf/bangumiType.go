@@ -20,15 +20,16 @@ type Page struct {
 }
 
 type Bangumi struct {
-	Sid     int64
-	Title   string
-	Pubdate time.Time
-	Epno    int64
-	MediaID int64
-	Score   float64
-	Follow  int64
-	View    int64
-	Eplist  []Ep
+	Sid            int64
+	Title          string
+	Pubdate        time.Time
+	Epno           int64
+	MediaID        int64
+	Score          float64
+	Follow         int64
+	View           int64
+	ViewCalculated int64
+	Eplist         []Ep
 }
 
 type EplistJson struct {
