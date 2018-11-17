@@ -45,11 +45,11 @@ func cleanup() {
 func main() {
 	defer cleanup()
 	log.Println("begin crawling")
-	if os.Args[1] == "-v" {
-		crawler.CrawlVideo(conf.VideoCrawlerConfig.StartAid, conf.VideoCrawlerConfig.EndAid)
-	} else if os.Args[1] == "-o" {
+	if conf.IsCrawlVideo {
+		crawler.CrawlVideo(conf.StartAid, conf.EndAid)
+	} else if conf.IsCrawlOnline {
 		crawler.CrawOnline()
-	} else if os.Args[1] == "-b" {
+	} else if conf.IsCrawlBangumi {
 		crawler.CrawlBangumi()
 	}
 	log.Println("end crawling")

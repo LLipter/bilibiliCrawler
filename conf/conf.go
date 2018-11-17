@@ -7,25 +7,24 @@ import (
 	"github.com/LLipter/bilibiliCrawler/daemon"
 	"io/ioutil"
 	"os"
+	"strconv"
 )
 
 var (
-	DBconfig           DBConf
-	NetworkConfig      NetworkConf
-	VideoCrawlerConfig VideoCrawlerConf
-
-	DBConnStr string
+	DBconfig       DBConf
+	NetworkConfig  NetworkConf
+	DBConnStr      string
+	isDaemon       = false
+	IsCrawlVideo   = false
+	IsCrawlOnline  = false
+	IsCrawlBangumi = false
+	StartAid       int
+	EndAid         int
 )
 
 func init() {
-	if len(os.Args) != 2 {
+	if !isValidParameter() {
 		usage()
-	}
-
-	if !isValidParameter(os.Args[1]) {
-		fmt.Println("unknown parameter")
-		usage()
-		os.Exit(1)
 	}
 
 	buf, err := ioutil.ReadFile("config.json")
@@ -43,7 +42,6 @@ func init() {
 	// get configuration
 	DBconfig = config.DB
 	NetworkConfig = config.Network
-	VideoCrawlerConfig = config.VideoCrawler
 
 	// get database connection string
 	var strBuf bytes.Buffer
@@ -58,29 +56,78 @@ func init() {
 	DBConnStr = strBuf.String()
 
 	// check whether run as daemon
-	if os.Args[1] == "-v" && config.VideoCrawler.IsDaemon {
-		daemon.Daemonize()
-	} else if os.Args[1] == "-o" {
+	if isDaemon {
 		daemon.Daemonize()
 	}
 
 }
 
 func usage() {
-	fmt.Println("usage: bilibiliCrawler [-vo]")
+	fmt.Println("usage: bilibiliCrawler [-v[d] startAid endAid][-o[d]][-b[d]]")
 	fmt.Println("   -v: crawl video data")
 	fmt.Println("   -o: crawl online data")
 	fmt.Println("   -b: crawl bangumi data")
+	fmt.Println("   -d: run as daemon process")
+
 	os.Exit(1)
 }
 
-func isValidParameter(arg string) bool {
+func isValidParameter() bool {
+	if len(os.Args) < 2 {
+		return false
+	}
+	var err error
+	arg := os.Args[1]
 	if arg == "-v" {
+		if len(os.Args) < 4 {
+			return false
+		}
+		StartAid, err = strconv.Atoi(os.Args[2])
+		if err != nil {
+			fmt.Println(err)
+			return false
+		}
+		EndAid, err = strconv.Atoi(os.Args[3])
+		if err != nil {
+			fmt.Println(err)
+			return false
+		}
+		IsCrawlVideo = true
 		return true
 	} else if arg == "-o" {
+		IsCrawlOnline = true
 		return true
 	} else if arg == "-b" {
+		IsCrawlBangumi = true
 		return true
+	} else if arg == "-vd" {
+		if len(os.Args) < 4 {
+			return false
+		}
+		StartAid, err = strconv.Atoi(os.Args[2])
+		if err != nil {
+			fmt.Println(err)
+			return false
+		}
+		EndAid, err = strconv.Atoi(os.Args[3])
+		if err != nil {
+			fmt.Println(err)
+			return false
+		}
+		IsCrawlVideo = true
+		isDaemon = true
+		return true
+	} else if arg == "-od" {
+		IsCrawlOnline = true
+		isDaemon = true
+		return true
+	} else if arg == "-bd" {
+		IsCrawlBangumi = true
+		isDaemon = true
+		return true
+	} else {
+		fmt.Println("unknown parameter")
 	}
+
 	return false
 }

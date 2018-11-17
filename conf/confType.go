@@ -1,9 +1,8 @@
 package conf
 
 type Conf struct {
-	DB           DBConf `json:"database"`
-	Network      NetworkConf
-	VideoCrawler VideoCrawlerConf
+	DB      DBConf `json:"database"`
+	Network NetworkConf
 }
 
 type DBConf struct {
@@ -15,14 +14,8 @@ type DBConf struct {
 }
 
 type NetworkConf struct {
-	UseProxy   bool
-	UserAgent  string
-	RetryTimes int
-}
-
-type VideoCrawlerConf struct {
-	StartAid      int
-	EndAid        int
-	IsDaemon      bool
+	UseProxy      bool
+	UserAgent     string
+	RetryTimes    int
 	MaxCrawlerNum int
 }
