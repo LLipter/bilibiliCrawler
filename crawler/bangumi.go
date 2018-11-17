@@ -33,6 +33,7 @@ func CrawlBangumi() {
 
 	for page := 1; page <= pageNo; page++ {
 		// control max number of crawler go routine
+		fmt.Println("page=", page)
 		curCrawlerNo <- true
 		wg.Add(1)
 		go pageCrawlerRoutine(page)
@@ -96,6 +97,7 @@ func getPage(page int) error {
 		}
 
 		// control max number of crawler go routine
+		fmt.Printf("page=%d, index=%d, bangumi=%s\n", page, bangumi.Title, idx)
 		curCrawlerNo <- true
 		wg.Add(1)
 		go eplistCrawlerRoutine(bangumi)
