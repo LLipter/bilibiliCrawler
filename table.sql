@@ -63,9 +63,10 @@ CREATE TABLE bangumi(
 
 CREATE TABLE episode(
 	aid   INT,
+    sid   INT,
     idx   VARCHAR(200),
     view  INT,
 	cid   INT,
 	epid  INT,
-    PRIMARY KEY(aid,idx)
+    PRIMARY KEY(aid)
 )charset=utf8;

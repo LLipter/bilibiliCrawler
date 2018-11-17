@@ -122,8 +122,9 @@ func InsertBangumi(bangumi conf.Bangumi) error {
 		}
 
 		_, err = connPool.Exec(
-			"INSERT INTO episode VALUES(?, ?, ?, ?, ?);",
+			"INSERT INTO episode VALUES(?, ?, ?, ?, ?, ?);",
 			ep.Aid,
+			bangumi.Sid,
 			ep.Index,
 			view,
 			ep.Cid,
