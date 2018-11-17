@@ -1,6 +1,7 @@
 package crawler
 
 import (
+	"errors"
 	"github.com/LLipter/bilibiliCrawler/conf"
 	"github.com/LLipter/bilibiliCrawler/proxy"
 	"io/ioutil"
@@ -21,25 +22,34 @@ func init() {
 }
 
 func getResp(addr string) ([]byte, error) {
-	client := http.Client{}
-	req, err := http.NewRequest("GET", addr, nil)
-	// http://devs.cloudimmunity.com/gotchas-and-common-mistakes-in-go-golang/index.html#close_http_conn
-	req.Close = true
-	req.Header.Add("User-Agent", conf.NetworkConfig.UserAgent)
+	tr := &http.Transport{
+		// http://devs.cloudimmunity.com/gotchas-and-common-mistakes-in-go-golang/index.html#close_http_conn
+		/*
+			Close connection immediately,
+			otherwise the number of opened file will keep growing.
+		*/
+		DisableKeepAlives: true,
+	}
 	if conf.NetworkConfig.UseProxy {
 		length := len(proxy.ProxyPool)
+		if length == 0 {
+			return nil, errors.New("no proxy")
+		}
 		proxyAddr := proxy.ProxyPool[rand.Intn(length)]
 		urlProxy, err := url.Parse("http://" + proxyAddr)
 		if err != nil {
 			return nil, err
 		}
-		client = http.Client{
-			Transport: &http.Transport{
-				Proxy: http.ProxyURL(urlProxy),
-			},
-			Timeout: time.Second * 20,
-		}
+		tr.Proxy = http.ProxyURL(urlProxy)
 	}
+
+	client := &http.Client{
+		Transport: tr,
+		Timeout:   time.Second * 20,
+	}
+
+	req, err := http.NewRequest("GET", addr, nil)
+	req.Header.Add("User-Agent", conf.NetworkConfig.UserAgent)
 	resp, err := client.Do(req)
 	// http://devs.cloudimmunity.com/gotchas-and-common-mistakes-in-go-golang/index.html#close_http_resp_body
 	/*
