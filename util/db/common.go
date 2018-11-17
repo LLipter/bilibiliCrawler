@@ -2,6 +2,7 @@ package db
 
 import (
 	"database/sql"
+	"errors"
 	"fmt"
 	"github.com/LLipter/bilibiliCrawler/conf"
 	_ "github.com/go-sql-driver/mysql"
@@ -45,4 +46,12 @@ func CloseDatabase() {
 	if connPool != nil {
 		connPool.Close()
 	}
+}
+
+func rollback(tx *sql.Tx, oldErr error) error {
+	err := tx.Rollback()
+	if err != nil {
+		return errors.New(oldErr.Error() + " : " + err.Error())
+	}
+	return oldErr
 }

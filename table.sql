@@ -54,18 +54,18 @@ CREATE TABLE bangumi(
     title VARCHAR(200),
     pubdate DATETIME,
     epno INT,
-    media_id INT,
     score DOUBLE(3,2),
     follow INT,
     view INT,
+    media_id INT,
     PRIMARY KEY(sid)
 )charset=utf8;
 
 CREATE TABLE episode(
 	aid   INT,
-    index VARCHAR(200),
+    idx   VARCHAR(200),
     view  INT,
 	cid   INT,
 	epid  INT,
-    PRIMARY KEY(aid,index)
+    PRIMARY KEY(aid,idx)
 )charset=utf8;

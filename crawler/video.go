@@ -15,6 +15,7 @@ func CrawlVideo(startAid int, endAid int) {
 	for i := startAid; i <= endAid; i++ {
 		// control max number of crawler go routine
 		curCrawlerNo <- true
+		wg.Add(1)
 		go videoCrawlerRoutine(i)
 	}
 
@@ -24,7 +25,6 @@ func CrawlVideo(startAid int, endAid int) {
 }
 
 func videoCrawlerRoutine(aid int) {
-	wg.Add(1)
 	defer wg.Done()
 	defer func() {
 		<-curCrawlerNo

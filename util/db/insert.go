@@ -1,7 +1,6 @@
 package db
 
 import (
-	"database/sql"
 	"errors"
 	"github.com/LLipter/bilibiliCrawler/conf"
 )
@@ -112,12 +111,5 @@ func InsertBangumi(bangumi conf.Bangumi) error {
 	if err != nil {
 		return errors.New("transaction Commit failed : " + err.Error())
 	}
-}
-
-func rollback(tx *sql.Tx, oldErr error) error {
-	err := tx.Rollback()
-	if err != nil {
-		return errors.New(oldErr.Error() + " : " + err.Error())
-	}
-	return oldErr
+	return nil
 }
