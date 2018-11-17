@@ -78,13 +78,21 @@ func InsertBangumi(bangumi conf.Bangumi) error {
 		return errors.New("transaction begin failed : " + err.Error())
 	}
 
+	// some bangumi doesn't have score
+	var score interface{}
+	if bangumi.Score < 0 {
+		score = nil
+	} else {
+		score = bangumi.Score
+	}
+
 	_, err = connPool.Exec(
 		"INSERT INTO bangumi VALUES(?, ?, ?, ?, ?, ?, ?, ?);",
 		bangumi.Sid,
 		bangumi.Title,
 		bangumi.Pubdate,
 		bangumi.Epno,
-		bangumi.Score,
+		score,
 		bangumi.Follow,
 		bangumi.View,
 		bangumi.MediaID,
@@ -93,12 +101,31 @@ func InsertBangumi(bangumi conf.Bangumi) error {
 		return rollback(tx, err)
 	}
 
+	// for some bangumi, all episodes' view are identical
+	// clearly, it's illegal data
+	viewFirst := bangumi.Eplist[0].View
+	isValid := false
 	for _, ep := range bangumi.Eplist {
+		if ep.View != viewFirst {
+			isValid = true
+			break
+		}
+	}
+
+	for _, ep := range bangumi.Eplist {
+		// use null replace illegal data
+		var view interface{}
+		if isValid {
+			view = ep.View
+		} else {
+			view = nil
+		}
+
 		_, err = connPool.Exec(
 			"INSERT INTO episode VALUES(?, ?, ?, ?, ?);",
 			ep.Aid,
 			ep.Index,
-			ep.View,
+			view,
 			ep.Cid,
 			ep.Epid,
 		)

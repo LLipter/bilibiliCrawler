@@ -70,6 +70,7 @@ func usage() {
 	fmt.Println("usage: bilibiliCrawler [-vo]")
 	fmt.Println("   -v: crawl video data")
 	fmt.Println("   -o: crawl online data")
+	fmt.Println("   -b: crawl bangumi data")
 	os.Exit(1)
 }
 
