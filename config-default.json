@@ -7,17 +7,11 @@
         "maxOpenConn":95
     },
     
-    "videoCrawler":{
-        "maxCrawlerNum":300,
-        "isDaemon":false,
-        "startAid":1,
-        "endAid":35000000
-    },
-
     "network":{
         "useProxy":true,
         "userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36",
-        "retryTimes":25
+        "retryTimes":25,
+        "maxCrawlerNum":300
     }
 
 }
