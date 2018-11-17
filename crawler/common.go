@@ -18,7 +18,7 @@ var (
 )
 
 func init() {
-	curCrawlerNo = make(chan bool, conf.VideoCrawlerConfig.MaxCrawlerNum)
+	curCrawlerNo = make(chan bool, conf.NetworkConfig.MaxCrawlerNum)
 }
 
 func getResp(addr string) ([]byte, error) {
