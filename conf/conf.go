@@ -78,6 +78,8 @@ func isValidParameter(arg string) bool {
 		return true
 	} else if arg == "-o" {
 		return true
+	} else if arg == "-b" {
+		return true
 	}
 	return false
 }

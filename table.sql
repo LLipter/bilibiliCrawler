@@ -47,4 +47,16 @@ CREATE TABLE online(
 	webonline  INT, -- 在线人数
 	playonline INT, 
     PRIMARY KEY(ts)
-);
+)charset=utf8;
+
+CREATE TABLE bangumi(
+    sid INT,
+    title VARCHAR(200),
+    pubdate DATETIME,
+    epno INT,
+    media_id INT,
+    score DOUBLE(3,2),
+    follow INT,
+    view INT,
+    PRIMARY KEY(sid)
+)charset=utf8;
