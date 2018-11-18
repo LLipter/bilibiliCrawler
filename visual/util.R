@@ -10,6 +10,7 @@ wssplot <- function(data, nc=15, ns=10){
 
 # number of indices ~ number of clusters
 nincplot <- function(data, method="kmeans"){
+    library(NbClust)
     op <- par(no.readonly=TRUE)
     res <- NbClust(data, method=method)
     par(op)
