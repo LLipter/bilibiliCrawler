@@ -1,439 +1,12 @@
-decode()
-Encoding(t)
-Encoding(t) <- 'utf-8'
-t
-Encoding(t) <- 'utf-8'
-Encoding(t)
-Encoding(t) <- 'UTF-T'
-Encoding(t) <- 'UTF-8'
-Encoding(t)
-t
-T
-t
-t_encoded <- enc2utf8(t)
-t_encoded
-a <- "是多少"
-a
-a <- "是多少"
-a
-Encoding(a)
-a <- <-'GB2312'
-Encoding(a)<-'GB2312'
-a
-Encoding(a)
-Encoding(a)<-'GB2312'
-x=c('中華民族');x; y <- data.frame(x, stringsAsFactors=FALSE)
-q<-'天'#
-#
-q
-Sys.setlocale("LC_CTYPE", locale="Chinese")
-Sys.setlocale( locale="UTF-8" )
-q<-'天'#
-#
-q
-dbGetQuery(con, "SELECT * FROM bangumi where abs(view-view_calculated) < view*0.1 order by view desc limit 10")
-library(DBI)#
-library(RMySQL)#
-con <- dbConnect(MySQL(), host="localhost", dbname="bilibili", user="root", password="57575207")#
-dbGetQuery(con, "SELECT * FROM bangumi where abs(view-view_calculated) < view*0.1 order by view desc limit 10")
-Sys.setlocale( locale="UTF-8" )
-dbGetQuery(con, "SELECT * FROM bangumi where abs(view-view_calculated) < view*0.1 order by view desc limit 10")
-ÒdbGetQuery(con, "SELECT * FROM bangumi where abs(view-view_calculated) < view*0.1 order by view desc limit 10")
-dbGetQuery(con, "SELECT * FROM bangumi where abs(view-view_calculated) < view*0.1 order by view desc limit 10")
-data(nutrient, package = "flexclust")
-nutrient
-type(nutrient)
-data <- dbGetQuery(con, "SELECT * FROM bangumi where abs(view-view_calculated) < view*0.1 order by view desc limit 10")
-data
-data[,"title"]
-data[:,"title"]
-data[,"title"]
-data2 <= data[,c("title","follow","view_calculated")]
-data2 <- data[,c("title","follow","view_calculated")]
-data2
-data2 <- data[,c("title","follow","view_calculated")]
-data2
-data2
-data2
-row.names(data2) <- data2$title
-data2
-data2 <- data2[,c(follow, view_calculated)]
-data2 <- data2[,c("follow", "view_calculated")]
-data2
-data$title
-data$follow
-data <- rawdata[,c("folllw", "view_calculated")]#
-row.names(data) <- rawdata$title
-rawdata <- dbGetQuery(con, "SELECT * FROM bangumi where abs(view-view_calculated) < view*0.1 order by view desc limit 10")
-data <- rawdata[,c("folllw", "view_calculated")]#
-row.names(data) <- rawdata$title
-data <- rawdata[,c("follow", "view_calculated")]#
-row.names(data) <- rawdata$title
-data
-rawdata <- dbGetQuery(con, "SELECT * FROM bangumi where abs(view-view_calculated) < view*0.1 order by view desc limit 10")#
-data <- rawdata[c("follow", "view_calculated")]#
-row.names(data) <- rawdata$title
-data
-rawdata$sid
-rawdata
-a <- "s"
-b <- "b"
-a + b
-c <- a + b
-sid <- 10
-sqlstr <- paste("SELECT * FROM episode WHERE sid =", sid)
-sqlstr
-data
-rawdata$sid
-sid <- 5070
-epdata <- dbGetQuery(con, sqlstr)
-epdata
-sqlstr <- paste("SELECT * FROM episode WHERE sid =", sid)
-sqlstr
-epdata <- dbGetQuery(con, sqlstr)
-epdata
-sqlstr <- paste("SELECT view FROM episode WHERE sid =", sid)#
-    epdata <- dbGetQuery(con, sqlstr)
-epdata
-sqlstr <- paste("SELECT * FROM episode WHERE sid =", sid, "ORDER BY idx")
-epdata <- dbGetQuery(con, sqlstr)
-epdata
-sqlstr <- paste("SELECT * FROM episode WHERE sid =", sid, "ORDER BY aid")
-epdata <- dbGetQuery(con, sqlstr)
-epdata
-rawdata <- dbGetQuery(con, "SELECT * FROM bangumi WHERE ABS(view-view_calculated) < view*0.1 ORDER BT view DESC LIMIT 10")
-rawdata <- dbGetQuery(con, "SELECT * FROM bangumi WHERE ABS(view-view_calculated) < view*0.1 ORDER BY view DESC LIMIT 10")
-rawdata
-data <- rawdata[c("follow", "view_calculated")]#
-row.names(data) <- rawdata$title
-data
-rawdata$sid
-sid <- 24588
-sqlstr <- paste("SELECT * FROM episode WHERE sid =", sid, "ORDER BY aid")
-sqlstr
-sqlstr <- paste("SELECT * FROM episode WHERE sid =", sid, "ORDER BY idx")
-epdata <- dbGetQuery(con, sqlstr)
-epdata
-sqlstr <- paste("SELECT view FROM episode WHERE sid =", sid, "ORDER BY idx")#
-    epdata <- dbGetQuery(con, sqlstr)
-epdata
-epdata_scaled <- scale(epdata$view)
-epdata_scaled
-mydata <- data.frame(age = numeric(0), gender = character(0), weight = numeric(0))
-mydata
-viewdata <- data.frame(view1=numeric(0),view3=numeric(0),view1n=numeric(0),view3n=numeric(0))
-viewdata
-viewdata <- data.frame(view1=numeric(0),#
-view3=numeric(0),view1n=numeric(0),#
-view3n=numeric(0))
-viewdata <- data.frame(view1=numeric(0),
-view3=numeric(0),view1n=numeric(0),
-view3n=numeric(0))
-a <- numeric()
-a
-viewdata <- data.frame(view1=numeric(),#
-                        view3=numeric(),#
-                        view1n=numeric(),#
-                        view3n=numeric())
-viewdata
-help(numeric)
-help(numeric)
-help(rbind)
-help(rbind)
-length(c(1,2))
-len <- length(epdata)#
-    row <- c(epdata[1],epdata[3],epdata[len],epdata[len-3])
-epdata <- epdata$view
-len <- length(epdata)#
-    row <- c(epdata[1],epdata[3],epdata[len],epdata[len-3])
-row
-epdata
-epdata <- scale(epdata)
-epdata
-row <- c(epdata[1],epdata[3],epdata[len],epdata[len-3])
-row
-viewdata <- rbind(viewdata, row)
-viewdata
-viewdata <- data.frame(view1=numeric(),#
-                        view3=numeric(),#
-                        view1n=numeric(),#
-                        view3n=numeric())
-viewdata
-rbind(viewdata, row)
-row.names(viewdata) <- c("view1","view3","view1n","view3n")
-column.names(viewdata) <- c("view1","view3","view1n","view3n")
-names(viewdata) <- c("view1","view3","view1n","view3n")
-viewdata
-viewdata <- rbind(viewdata, row)
-viewdata
-viewdata <- data.frame(view1=numeric(),#
-                        view3=numeric(),#
-                        view1n=numeric(),#
-                        view3n=numeric())
-for(sid in rawdata$sid){#
-    sqlstr <- paste("SELECT view FROM episode WHERE sid =", sid, "ORDER BY idx")#
-    epdata <- dbGetQuery(con, sqlstr)#
-    epdata <- epdata$view#
-    epdata <- scale(epdata)#
-    len <- length(epdata)#
-    row <- c(epdata[1],epdata[3],epdata[len],epdata[len-3])#
-    viewdata <- rbind(viewdata, row)#
-}#
-names(viewdata) <- c("view1","view3","view1n","view3n")
-viewdata
-data
-cbind(data, viewdata)
-source(bangumiCluster.R)
-source("bangumiCluster.R")
-getwd()
-setwd("/Users/llipter/go/src/github.com/LLipter/bilibiliCrawler")
-source("bangumiCluster.R")
-setwd("visul")
-setwd("visual")
-source("bangumiCluster.R")
-data
-source("bangumiCluster.R")
-data
-dbDisconnect(conn)
-dbDisconnect(con)
-con <- dbConnect(MySQL(), host="localhost", dbname="bilibili", user="root", password="57575207")#
-rawdata <- dbGetQuery(con, "SELECT * FROM bangumi WHERE ABS(view-view_calculated) < view*0.1 AND epno>10 ORDER BY view DESC LIMIT 10")#
-data <- rawdata[c("follow", "view_calculated")]#
-row.names(data) <- rawdata$title#
-#
-viewdata <- data.frame(view1=numeric(),#
-                        view3=numeric(),#
-                        view1n=numeric(),#
-                        view3n=numeric())    #
-for(sid in rawdata$sid){#
-    sqlstr <- paste("SELECT view FROM episode WHERE sid =", sid, "ORDER BY idx")#
-    epdata <- dbGetQuery(con, sqlstr)#
-    epdata <- epdata$view#
-    epdata <- scale(epdata)#
-    len <- length(epdata)#
-    row <- c(epdata[1],epdata[3],epdata[len],epdata[len-3])#
-    viewdata <- rbind(viewdata, row)#
-}#
-names(viewdata) <- c("view1","view3","view1n","view3n") #
-data <- cbind(data, viewdata)#
-#
-dbDisconnect(con)
-data
-data
-d <- dist(nutrient.scaled)
-con <- dbConnect(MySQL(), host="localhost", dbname="bilibili", user="root", password="57575207")#
-rawdata <- dbGetQuery(con, "SELECT * FROM bangumi WHERE ABS(view-view_calculated) < view*0.1 AND epno>10 ORDER BY view DESC LIMIT 10")#
-bangumidata <- rawdata[c("follow", "view_calculated")]#
-row.names(bangumidata) <- rawdata$title#
-#
-viewdata <- data.frame(view1=numeric(),#
-                        view3=numeric(),#
-                        view1n=numeric(),#
-                        view3n=numeric())    #
-for(sid in rawdata$sid){#
-    sqlstr <- paste("SELECT view FROM episode WHERE sid =", sid, "ORDER BY idx")#
-    epdata <- dbGetQuery(con, sqlstr)#
-    epdata <- epdata$view#
-    epdata <- scale(epdata)#
-    len <- length(epdata)#
-    row <- c(epdata[1],epdata[3],epdata[len],epdata[len-3])#
-    viewdata <- rbind(viewdata, row)#
-}#
-names(viewdata) <- c("view1","view3","view1n","view3n") #
-bangumidata <- cbind(data, viewdata)#
-#
-# d <- dist(bangumidata)#
-#
-dbDisconnect(con)
-bangumidata
-data
-bangumidata
-bangumidata <- rawdata[c("follow", "view_calculated")]
-bangumidata
-row.names(bangumidata) <- rawdata$title
-bangumidata
-viewdata <- data.frame(view1=numeric(),#
-                        view3=numeric(),#
-                        view1n=numeric(),#
-                        view3n=numeric())
-for(sid in rawdata$sid){#
-    sqlstr <- paste("SELECT view FROM episode WHERE sid =", sid, "ORDER BY idx")#
-    epdata <- dbGetQuery(con, sqlstr)#
-    epdata <- epdata$view#
-    epdata <- scale(epdata)#
-    len <- length(epdata)#
-    row <- c(epdata[1],epdata[3],epdata[len],epdata[len-3])#
-    viewdata <- rbind(viewdata, row)#
-}
-con <- dbConnect(MySQL(), host="localhost", dbname="bilibili", user="root", password="57575207")#
-rawdata <- dbGetQuery(con, "SELECT * FROM bangumi WHERE ABS(view-view_calculated) < view*0.1 AND epno>10 ORDER BY view DESC LIMIT 10")#
-bangumidata <- rawdata[c("follow", "view_calculated")]#
-row.names(bangumidata) <- rawdata$title#
-#
-viewdata <- data.frame(view1=numeric(),#
-                        view3=numeric(),#
-                        view1n=numeric(),#
-                        view3n=numeric())
-bangumidata
-for(sid in rawdata$sid){#
-    sqlstr <- paste("SELECT view FROM episode WHERE sid =", sid, "ORDER BY idx")#
-    epdata <- dbGetQuery(con, sqlstr)#
-    epdata <- epdata$view#
-    epdata <- scale(epdata)#
-    len <- length(epdata)#
-    row <- c(epdata[1],epdata[3],epdata[len],epdata[len-3])#
-    viewdata <- rbind(viewdata, row)#
-}
-viewdata
-bangumidata
-names(viewdata) <- c("view1","view3","view1n","view3n") #
-bangumidata <- cbind(data, viewdata)
-bangumidata
-viewdata <- data.frame(view1=numeric(),#
-                        view3=numeric(),#
-                        view1n=numeric(),#
-                        view3n=numeric())    #
-for(sid in rawdata$sid){#
-    sqlstr <- paste("SELECT view FROM episode WHERE sid =", sid, "ORDER BY idx")#
-    epdata <- dbGetQuery(con, sqlstr)#
-    epdata <- epdata$view#
-    epdata <- scale(epdata)#
-    len <- length(epdata)#
-    row <- c(epdata[1],epdata[3],epdata[len],epdata[len-3])#
-    viewdata <- rbind(viewdata, row)#
-}
-viewdata
-names(viewdata) <- c("view1","view3","view1n","view3n")
-viewdata
-cbind(data, viewdata)
-help(cbind)
-cbind(1, 1:7)
-con <- dbConnect(MySQL(), host="localhost", dbname="bilibili", user="root", password="57575207")#
-rawdata <- dbGetQuery(con, "SELECT * FROM bangumi WHERE ABS(view-view_calculated) < view*0.1 AND epno>10 ORDER BY view DESC LIMIT 10")#
-bangumidata <- rawdata[c("follow", "view_calculated")]#
-row.names(bangumidata) <- rawdata$title#
-#
-viewdata <- data.frame(view1=numeric(),#
-                        view3=numeric(),#
-                        view1n=numeric(),#
-                        view3n=numeric())    #
-for(sid in rawdata$sid){#
-    sqlstr <- paste("SELECT view FROM episode WHERE sid =", sid, "ORDER BY idx")#
-    epdata <- dbGetQuery(con, sqlstr)#
-    epdata <- epdata$view#
-    epdata <- scale(epdata)#
-    len <- length(epdata)#
-    row <- c(epdata[1],epdata[3],epdata[len],epdata[len-3])#
-    viewdata <- rbind(viewdata, row)#
-}
-bangumidata
-viewdata
-row.names(view) <- rawdata$title
-row.names(viewdata) <- rawdata$title
-viewdata
-cbind(data, viewdata)
-rawdata <- dbGetQuery(con, "SELECT * FROM bangumi WHERE ABS(view-view_calculated) < view*0.1 AND epno>10 ORDER BY view DESC LIMIT 10")#
-bangumidata <- rawdata[c("follow", "view_calculated")]#
-row.names(bangumidata) <- rawdata$title#
-#
-viewdata <- data.frame(view1=numeric(),#
-                        view3=numeric(),#
-                        view1n=numeric(),#
-                        view3n=numeric())    #
-for(sid in rawdata$sid){#
-    sqlstr <- paste("SELECT view FROM episode WHERE sid =", sid, "ORDER BY idx")#
-    epdata <- dbGetQuery(con, sqlstr)#
-    epdata <- epdata$view#
-    epdata <- scale(epdata)#
-    len <- length(epdata)#
-    row <- c(epdata[1],epdata[3],epdata[len],epdata[len-3])#
-    viewdata <- rbind(viewdata, row)#
-}#
-names(viewdata) <- c("view1","view3","view1n","view3n") #
-# row.names(viewdata) <- rawdata$title#
-bangumidata <- cbind(data, viewdata)
-bangumidata
-bangumi[["工作细胞"]]
-bangumidata[["工作细胞"]]
-bangumidata[["OVERLORDⅡ"]]
-bangumidata[[OVERLORDⅡ]]
-bangumidata
-bangumidata
-viewdata
-rawdata <- dbGetQuery(con, "SELECT * FROM bangumi WHERE ABS(view-view_calculated) < view*0.1 AND epno>10 ORDER BY view DESC LIMIT 10")#
-bangumidata <- rawdata[c("follow", "view_calculated")]#
-row.names(bangumidata) <- rawdata$title#
-#
-viewdata <- data.frame(view1=numeric(),#
-                        view3=numeric(),#
-                        view1n=numeric(),#
-                        view3n=numeric())    #
-for(sid in rawdata$sid){#
-    sqlstr <- paste("SELECT view FROM episode WHERE sid =", sid, "ORDER BY idx")#
-    epdata <- dbGetQuery(con, sqlstr)#
-    epdata <- epdata$view#
-    epdata <- scale(epdata)#
-    len <- length(epdata)#
-    row <- c(epdata[1],epdata[3],epdata[len],epdata[len-3])#
-    viewdata <- rbind(viewdata, row)#
-}#
-names(viewdata) <- c("view1","view3","view1n","view3n")
-viewdata
-bangumidata
-bangumidata <- cbind(bangumidata, viewdata)
-bangumidata
-d <- dist(bangumidata)
-fit.average <- hclust(d, method = "average")
-plot(fit.average, hang = -1, cex = .8, main = "Average Linkage Clustering")
-d
-bangumidata
-rawdata <- dbGetQuery(con, "SELECT * FROM bangumi WHERE ABS(view-view_calculated) < view*0.1 AND epno>10 ORDER BY view DESC LIMIT 10")#
-bangumidata <- rawdata[c("follow", "view_calculated")]#
-row.names(bangumidata) <- rawdata$title
-bangumidata
-scale(bangumidata)
-rawdata <- dbGetQuery(con, "SELECT * FROM bangumi WHERE ABS(view-view_calculated) < view*0.1 AND epno>10 ORDER BY view DESC LIMIT 10")#
-bangumidata <- rawdata[c("follow", "view_calculated")]#
-bangumidata <- scale(bangumidata)#
-row.names(bangumidata) <- rawdata$title#
-#
-viewdata <- data.frame(view1=numeric(),#
-                        view3=numeric(),#
-                        view1n=numeric(),#
-                        view3n=numeric())    #
-for(sid in rawdata$sid){#
-    sqlstr <- paste("SELECT view FROM episode WHERE sid =", sid, "ORDER BY idx")#
-    epdata <- dbGetQuery(con, sqlstr)#
-    epdata <- epdata$view#
-    epdata <- scale(epdata)#
-    len <- length(epdata)#
-    row <- c(epdata[1],epdata[3],epdata[len],epdata[len-3])#
-    viewdata <- rbind(viewdata, row)#
-}#
-names(viewdata) <- c("view1","view3","view1n","view3n") #
-bangumidata <- cbind(bangumidata, viewdata)
-bangumidata
-d <- dist(bangumidata)
-d
-fit.average <- hclust(d, method = "average")
-plot(fit.average, hang = -1, cex = .8, main = "Average Linkage Clustering")
-plot(fit.average, hang = -1, cex = .8, main = "Average Linkage Clustering",family='STXihei')
-plot(fit.average, hang = -1, cex = .8, main = "Average Linkage Clustering",#
-family="Source Han Sans")
-plot(fit.average, hang = -1, cex = .8, main = "Average Linkage Clustering",#
-family='STXihei')
-plot(fit.average, hang = -1, main = "Average Linkage Clustering",#
-family='STXihei')
+wss <- NULL
+rm(list=ls())
 con <- dbConnect(MySQL(), host="localhost", dbname="bilibili", user="root", password="57575207")#
 rawdata <- dbGetQuery(con, "SELECT * FROM bangumi WHERE ABS(view-view_calculated) < view*0.1 AND epno>10 ORDER BY view DESC LIMIT 100")#
-bangumidata <- rawdata[c("follow", "view_calculated")]#
-bangumidata <- scale(bangumidata)#
-row.names(bangumidata) <- rawdata$title#
+bangumi_data <- rawdata[c("follow", "view_calculated")]#
+bangumi_data <- scale(bangumi_data)#
+row.names(bangumi_data) <- rawdata$title#
 #
-viewdata <- data.frame(view1=numeric(),#
-                        view3=numeric(),#
-                        view1n=numeric(),#
-                        view3n=numeric())    #
+viewdata <- NULL  #
 for(sid in rawdata$sid){#
     sqlstr <- paste("SELECT view FROM episode WHERE sid =", sid, "ORDER BY idx")#
     epdata <- dbGetQuery(con, sqlstr)#
@@ -444,24 +17,110 @@ for(sid in rawdata$sid){#
     viewdata <- rbind(viewdata, row)#
 }#
 names(viewdata) <- c("view1","view3","view1n","view3n") #
-bangumidata <- cbind(bangumidata, viewdata)#
-#
-d <- dist(bangumidata)#
-fit.average <- hclust(d, method = "average")#
-plot(fit.average, hang = -1, cex = .8, main = "Average Linkage Clustering",#
-family='STXihei')
-plot(fit.average, hang = -1, cex = .3, main = "Average Linkage Clustering",#
-family='STXihei')
+bangumi_data <- cbind(bangumi_data, viewdata)
+bangumi_data
+bangumi_dist <- dist(bangumi_data)#
+bangumi_hc <- hclust(bangumi_dist, method = "average")#
+plot(bangumi_hc, #
+    hang = -1, #
+    cex = .5, #
+    main = "Hierarchical Clustering on 100 Most Popular Anime in Bilibili",#
+    family='STXihei',#
+    xlab="",#
+    ylab=NULL,#
+    sub="",#
+    axes = FALSE)#
+cluster_result <- rect.hclust(bangumi_hc, k=10, border = "red")
+bangumi_kmeans <- kmeans(bangumi_data, centers = 5)
+bangumi_kmeans
+bangumi_kmeans$withinss
+bangumi_kmeans$totss
+bangumi_kmeans$betweenss
+bangumi_kmeans$size
+bangumi_kmeans$cluster
+wssplot <- function(data, nc=15, seed=1234){#
+    wss <- NULL#
+    for(i in 1:nc){#
+      set.seed(seed)#
+      wss[i] <- sum(kmeans(data, centers = i)$withinss)#
+    }#
+    plot(1:nc, wss, type = "b",xlab = "Number of Clusters",#
+        ylab = "Within groups sum of squares")#
+}
+wssplot(bangumi)
+wssplot(bangumi_data)
+wssplot <- function(data, nc=15){#
+    wss <- NULL#
+    for(i in 1:nc){#
+      wss[i] <- sum(kmeans(data, centers=i, nstat=10)$withinss)#
+    }#
+    plot(1:nc, wss, type = "b",xlab = "Number of Clusters",#
+        ylab = "Within groups sum of squares")#
+}
+wssplot(bangumi_data)
+wssplot <- function(data, nc=15){#
+    wss <- NULL#
+    for(i in 1:nc){#
+      wss[i] <- sum(kmeans(data, centers=i, nstart=10)$withinss)#
+    }#
+    plot(1:nc, wss, type = "b",xlab = "Number of Clusters",#
+        ylab = "Within groups sum of squares")#
+}
+wssplot(bangumi_data)
+NbClust(bangumidata)
+NbClust(bangumidata, method="kmean")
+NbClust(bangumi_data, method="kmeans")
+res <- NbClust(bangumi_data, method="kmeans")
+res$Best
+res
+res$Best.nc
+res$Best.nc[1]
+res$Best.nc[1,]
+table(res$Best.nc[1,])
+nincplot <- function(data, method="kmeans"){#
+    res <- NbClust(data, method=method)#
+    graph <- table(nc$Best.nc[1,])#
+    barplot(graph,#
+        xlab = "Number of Clusters", ylab = "Number of Indices"#
+}
+nincplot <- function(data, method="kmeans"){#
+    res <- NbClust(data, method=method)#
+    graph <- table(nc$Best.nc[1,])#
+    barplot(graph,#
+        xlab = "Number of Clusters", ylab = "Number of Indices")#
+}
+nincplot(bangumi_data)
+nincplot <- function(data, method="kmeans"){#
+    res <- NbClust(data, method=method)#
+    graph <- table(res$Best.nc[1,])#
+    barplot(graph,#
+        xlab = "Number of Clusters", ylab = "Number of Indices")#
+}
+nincplot(bangumi_data)
+data <- bangumi_data
+res <- NbClust(data, method=method)#
+    graph <- table(res$Best.nc[1,])#
+    barplot(graph,#
+        xlab = "Number of Clusters", ylab = "Number of Indices")
+res <- NbClust(data, method="kmeans")#
+    graph <- table(res$Best.nc[1,])#
+    barplot(graph,#
+        xlab = "Number of Clusters", ylab = "Number of Indices")
+rm(list=ls())
+nincplot <- function(data, method="kmeans"){#
+    res <- NbClust(data, method=method)#
+    graph <- table(res$Best.nc[1,])#
+    barplot(graph,#
+        xlab = "Number of Clusters", ylab = "Number of Indices")#
+}
+nincplot(bangumi_data)
 con <- dbConnect(MySQL(), host="localhost", dbname="bilibili", user="root", password="57575207")#
-rawdata <- dbGetQuery(con, "SELECT * FROM bangumi WHERE ABS(view-view_calculated) < view*0.1 AND epno>10 ORDER BY view DESC LIMIT 50")#
-bangumidata <- rawdata[c("follow", "view_calculated")]#
-bangumidata <- scale(bangumidata)#
-row.names(bangumidata) <- rawdata$title#
+rawdata <- dbGetQuery(con, "SELECT * FROM bangumi WHERE ABS(view-view_calculated) < view*0.1 AND epno>10 ORDER BY view DESC LIMIT 100")#
+bangumi_data <- rawdata[c("follow", "view_calculated")]#
+bangumi_data <- scale(bangumi_data)#
+row.names(bangumi_data) <- rawdata$title#
 #
-viewdata <- data.frame(view1=numeric(),#
-                        view3=numeric(),#
-                        view1n=numeric(),#
-                        view3n=numeric())    #
+viewdata <- NULL  #
 for(sid in rawdata$sid){#
     sqlstr <- paste("SELECT view FROM episode WHERE sid =", sid, "ORDER BY idx")#
     epdata <- dbGetQuery(con, sqlstr)#
@@ -472,22 +131,252 @@ for(sid in rawdata$sid){#
     viewdata <- rbind(viewdata, row)#
 }#
 names(viewdata) <- c("view1","view3","view1n","view3n") #
-bangumidata <- cbind(bangumidata, viewdata)#
+bangumi_data <- cbind(bangumi_data, viewdata)#
 #
-d <- dist(bangumidata)#
-fit.average <- hclust(d, method = "average")#
-plot(fit.average, hang = -1, cex = .5, main = "Average Linkage Clustering",#
-family='STXihei')
+bangumi_dist <- dist(bangumi_data)#
+bangumi_hc <- hclust(bangumi_dist, method = "average")#
+plot(bangumi_hc, #
+    hang = -1, #
+    cex = .5, #
+    main = "Hierarchical Clustering on 100 Most Popular Anime in Bilibili",#
+    family='STXihei',#
+    xlab="",#
+    ylab=NULL,#
+    sub="",#
+    axes = FALSE)#
+cluster_result <- rect.hclust(bangumi_hc, k=10, border = "red")
+nincplot(bangumi_data)
+nincplot <- function(data, method="kmeans"){#
+    op <- par(no.readonly=TURE)#
+    res <- NbClust(data, method=method)#
+    par(op)#
+    graph <- table(res$Best.nc[1,])#
+    barplot(graph,#
+        xlab = "Number of Clusters", ylab = "Number of Indices")#
+}
+nincplot(bangumi_data)
+nincplot <- function(data, method="kmeans"){#
+    op <- par(no.readonly=TRUE)#
+    res <- NbClust(data, method=method)#
+    par(op)#
+    graph <- table(res$Best.nc[1,])#
+    barplot(graph,#
+        xlab = "Number of Clusters", ylab = "Number of Indices")#
+}
+nincplot(bangumi_data)
+bangumi_kmean <- kmeans(bangumi, k=7, nstart=10)
+bangumi_kmean <- kmeans(bangumi, 7, nstart=10)
+bangumi_kmean <- kmeans(bangumi_data, 7, nstart=10)
+bangumi_kmean
+bangumi_kmeans <- kmeans(bangumi_data, 7, nstart=10)
+fitted(bangumi_kmeans)
+bangumi_kmeans
+bangumi_hc
+plot(bangumi_data[c("follow", "view_calculated")],,#
+    col=bangumi_kmeans$cluster)
+plot(bangumi_data[c("follow", "view_calculated")],#
+    col=bangumi_kmeans$cluster)
+bangumi_data[c("follow", "view_calculated")]
+bangumi_data
+rawdata <- dbGetQuery(con, "SELECT * FROM bangumi WHERE ABS(view-view_calculated) < view*0.1 AND epno>10 ORDER BY view DESC LIMIT 100")#
+bangumi_data <- rawdata[c("follow", "view_calculated")]#
+bangumi_data <- scale(bangumi_data)#
+row.names(bangumi_data) <- rawdata$title#
+viewdata <- NULL  #
+for(sid in rawdata$sid){#
+    sqlstr <- paste("SELECT view FROM episode WHERE sid =", sid, "ORDER BY idx")#
+    epdata <- dbGetQuery(con, sqlstr)#
+    epdata <- epdata$view#
+    epdata <- scale(epdata)#
+    len <- length(epdata)#
+    row <- c(epdata[1],epdata[3],epdata[len],epdata[len-3])#
+    viewdata <- rbind(viewdata, row)#
+}#
+names(viewdata) <- c("view1","view3","view1n","view3n") #
+bangumi_data <- cbind(bangumi_data, viewdata)
+bangumi_data
+viewdata
+columns(viewdata) <- c("view1","view3","view1n","view3n")
+colnames(viewdata) <- c("view1","view3","view1n","view3n")
+# data preprocessing#
+rawdata <- dbGetQuery(con, "SELECT * FROM bangumi WHERE ABS(view-view_calculated) < view*0.1 AND epno>10 ORDER BY view DESC LIMIT 100")#
+bangumi_data <- rawdata[c("follow", "view_calculated")]#
+bangumi_data <- scale(bangumi_data)#
+row.names(bangumi_data) <- rawdata$title#
+viewdata <- NULL  #
+for(sid in rawdata$sid){#
+    sqlstr <- paste("SELECT view FROM episode WHERE sid =", sid, "ORDER BY idx")#
+    epdata <- dbGetQuery(con, sqlstr)#
+    epdata <- epdata$view#
+    epdata <- scale(epdata)#
+    len <- length(epdata)#
+    row <- c(epdata[1],epdata[3],epdata[len],epdata[len-3])#
+    viewdata <- rbind(viewdata, row)#
+}#
+colnames(viewdata) <- c("view1","view3","view1n","view3n") #
+bangumi_data <- cbind(bangumi_data, viewdata)
+bangumi_data
+bangumi_kmeans <- kmeans(bangumi_data, 7, nstart=10)#
+plot(bangumi_data[c("follow", "view_calculated")],#
+    col=bangumi_kmeans$cluster)
+bangumi_data[c("follow", "view_calculated")]
+bangumi_data
+bangumidata[1]
+bangumi_data[1]
+bangumi_data[1,]
+bangumi_data[[1]]
+bangumi_data["follow"]
+colnames(bangumi_data)
+bangumi_data[follow"]
+;
+ss
+""
+bangumi_data[follow]
+bangumi_data["follow"]
+bangumi_data[["follow"]]
+bangumi_data[,1:2]
+bangumi_data[,c("follow")]
+bangumi_data[,c("follow", "view_calculated")]
+plot(bangumi_data[,c("follow", "view_calculated")],#
+    col=bangumi_kmeans$cluster)
+plot(rawdata[,c("follow", "view_calculated")],#
+    col=bangumi_kmeans$cluster)
+cluster_result$centers
+cluster_result
+bangumi_kmeans$centers
+points(bangumi_kmeans$centers[,c("follow", "view_calculated")], col = 1:3, pch = 8, cex=2);
+plot(rawdata[,c("follow", "view_calculated")],#
+    col=bangumi_kmeans$cluster)#
+points(bangumi_kmeans$centers[,c("follow", "view_calculated")], col = 1:3, pch = 8, cex=2);
+plot(bangumi_data[,c("follow", "view_calculated")],#
+    col=bangumi_kmeans$cluster)#
+points(bangumi_kmeans$centers[,c("follow", "view_calculated")], col = 1:3, pch = 8, cex=2);
+bangumi_kmeans$cluster
+plot(bangumi_data[,c("follow", "view_calculated")],#
+    col=bangumi_kmeans$cluster)#
+points(bangumi_kmeans$centers[,c("follow", "view_calculated")], col = bangumi_kmeans$cluster, pch = 8, cex=2);
+bangumi_kmeans <- kmeans(bangumi_data, number_cluster, nstart=10)#
+plot(bangumi_data[,c("follow", "view_calculated")],#
+    col=bangumi_kmeans$cluster)#
+points(bangumi_kmeans$centers[,c("follow", "view_calculated")], col = 1:number_cluster , pch = 8, cex=2);
+number_cluster <- 7#
+bangumi_kmeans <- kmeans(bangumi_data, number_cluster, nstart=10)#
+plot(bangumi_data[,c("follow", "view_calculated")],#
+    col=bangumi_kmeans$cluster)#
+points(bangumi_kmeans$centers[,c("follow", "view_calculated")], col = 1:number_cluster , pch = 8, cex=2);
+bangumi_kmeans$centers
+bangumi_kmeans
+bangumi_kmeans$centers
+bangumi_kmeans$cluster
+typeof(bangumi_kmeans$cluster)
+row.names(bangumi_kmeans$cluster)
+bangumi_kmeans$cluster
+bangumi_kmeans$cluster["OVERLORD"]
+plot(bangumi_data[,c("follow", "view_calculated")],#
+    col=bangumi_kmeans$cluster)#
+points(bangumi_kmeans$centers[,c("follow", "view_calculated")], col = 1:number_cluster , pch = 8, cex=2);
+colnames(bangumi_kmeans$cluster)
+row.names(bangumi_kmeans$cluster)
+colnames(bangumi_kmeans$cluster)
+typeof(bangumi_kmeans$cluster)
+typeof(bangumi_kmeans)
+typeof(bangumi_kmeans$cluster)
+bangumi_kmeans$cluster
+bangumi_kmeans$cluster[1]
+bangumi_kmeans$cluster[2]
+bangumi_kmeans$cluster[1:10]
+row.names(bangumi_data)
+bangumi_kmeans$center
+row.names(bangumi_kmeans$center)
+library(cluster)#
+library(fpc)#
+#
+data(iris)#
+dat <- iris[, -5] # without known classification #
+# Kmeans clustre analysis#
+clus <- kmeans(dat, centers=3)#
+clusplot(dat, clus$cluster, color=TRUE, shade=TRUE, #
+         labels=2, lines=0)
+library(cluster)#
+#
+data(iris)#
+dat <- iris[, -5] # without known classification #
+# Kmeans clustre analysis#
+clus <- kmeans(dat, centers=3)#
+clusplot(dat, clus$cluster, color=TRUE, shade=TRUE, #
+         labels=2, lines=0)
+data(iris)#
+dat <- iris[, -5] # without known classification #
+# Kmeans clustre analysis#
+clus <- kmeans(dat, centers=3, nstart=5)#
+clusplot(dat, clus$cluster, color=TRUE, shade=TRUE, #
+         labels=2, lines=0)
+clusplot(bangumi_data, bangumi_kmeans$cluster, color=TRUE, shade=TRUE, #
+         labels=2, lines=0)
+clusplot(bangumi_data, bangumi_kmeans$cluster, color=TRUE, shade=TRUE, #
+         labels=2, lines=0, family='STXihei',)
+clusplot(bangumi_data[,c("follow", "view_calculated")], bangumi_kmeans$cluster, color=TRUE, shade=TRUE, #
+         labels=2, lines=0, family='STXihei',)
+clusplot(bangumi_data[,c("follow", "view_calculated")], bangumi_kmeans$cluster, color=TRUE, shade=TRUE, #
+         labels=2, lines=1, family='STXihei',)
+clusplot(bangumi_data[,c("follow", "view_calculated")], bangumi_kmeans$cluster, color=TRUE, shade=TRUE, #
+         labels=2, lines=2, family='STXihei',)
+clusplot(bangumi_data[,c("follow", "view_calculated")], bangumi_kmeans$cluster, color=TRUE, shade=TRUE, #
+         labels=5, lines=2, family='STXihei',)
+clusplot(bangumi_data[,c("follow", "view_calculated")], bangumi_kmeans$cluster, color=TRUE, shade=TRUE, #
+         labels=5, lines=2, family='STXihei',#
+         xlab="follow", ylab="view_calculated",#
+         main="K-means Clustering on 100 Most Popular Anime in Bilibili",#
+         sub="")
+clusplot(bangumi_data[,c("follow", "view_calculated")], bangumi_kmeans$cluster, color=TRUE, shade=TRUE, #
+         labels=5, lines=2, family='STXihei',#
+         xlab="follow", ylab="view_calculated",#
+         main="K-means Clustering on 100 Most Popular Anime in Bilibili",#
+         )
+clusplot(bangumi_data[,c("follow", "view_calculated")], bangumi_kmeans$cluster, color=TRUE, shade=TRUE, #
+         labels=2, lines=2, family='STXihei',#
+         xlab="follow", ylab="view_calculated",#
+         main="K-means Clustering on 100 Most Popular Anime in Bilibili",#
+         )
+clusplot(bangumi_data, bangumi_kmeans$cluster, color=TRUE, shade=TRUE, #
+         labels=2, lines=2, family='STXihei',#
+         xlab="follow", ylab="view_calculated",#
+         main="K-means Clustering on 100 Most Popular Anime in Bilibili",#
+         )
+clusplot(bangumi_data, bangumi_kmeans$cluster, color=TRUE, shade=TRUE, #
+         labels=2, #
+        #  lines=2, #
+         family='STXihei',#
+        #  xlab="follow", ylab="view_calculated",#
+         main="K-means Clustering on 100 Most Popular Anime in Bilibili",#
+         )
+clusplot(bangumi_data, bangumi_kmeans$cluster, color=TRUE, shade=TRUE, #
+         labels=5, #
+        #  lines=2, #
+         family='STXihei',#
+        #  xlab="follow", ylab="view_calculated",#
+         main="K-means Clustering on 100 Most Popular Anime in Bilibili",#
+         )
+clusplot(bangumi_data, bangumi_kmeans$cluster, color=TRUE, shade=TRUE, #
+         labels=5, #
+         lines=0, #
+         family='STXihei',#
+        #  xlab="follow", ylab="view_calculated",#
+         main="K-means Clustering on 100 Most Popular Anime in Bilibili",#
+         )
+font_import()
+par(family='STXihei')
+library(DBI)#
+library(RMySQL)#
+Sys.setlocale(locale="UTF-8")#
 con <- dbConnect(MySQL(), host="localhost", dbname="bilibili", user="root", password="57575207")#
-rawdata <- dbGetQuery(con, "SELECT * FROM bangumi WHERE ABS(view-view_calculated) < view*0.1 AND epno>10 ORDER BY view DESC LIMIT 50")#
-bangumidata <- rawdata[c("follow", "view_calculated")]#
-bangumidata <- scale(bangumidata)#
-row.names(bangumidata) <- rawdata$title#
 #
-viewdata <- data.frame(view1=numeric(),#
-                        view3=numeric(),#
-                        view1n=numeric(),#
-                        view3n=numeric())    #
+# data preprocessing#
+rawdata <- dbGetQuery(con, "SELECT * FROM bangumi WHERE ABS(view-view_calculated) < view*0.1 AND epno>10 ORDER BY view DESC LIMIT 100")#
+bangumi_data <- rawdata[c("follow", "view_calculated")]#
+bangumi_data <- scale(bangumi_data)#
+row.names(bangumi_data) <- rawdata$title#
+viewdata <- NULL  #
 for(sid in rawdata$sid){#
     sqlstr <- paste("SELECT view FROM episode WHERE sid =", sid, "ORDER BY idx")#
     epdata <- dbGetQuery(con, sqlstr)#
@@ -497,53 +386,870 @@ for(sid in rawdata$sid){#
     row <- c(epdata[1],epdata[3],epdata[len],epdata[len-3])#
     viewdata <- rbind(viewdata, row)#
 }#
-names(viewdata) <- c("view1","view3","view1n","view3n") #
-bangumidata <- cbind(bangumidata, viewdata)#
+colnames(viewdata) <- c("view1","view3","view1n","view3n") #
+bangumi_data <- cbind(bangumi_data, viewdata)
+clusplot(bangumi_data, bangumi_kmeans$cluster, color=TRUE, shade=TRUE, #
+         labels=5, #
+         lines=0, #
+         family='STXihei',#
+        #  xlab="follow", ylab="view_calculated",#
+         main="K-means Clustering on 100 Most Popular Anime in Bilibili",#
+         )
+library(cluster)
+clusplot(bangumi_data, bangumi_kmeans$cluster, color=TRUE, shade=TRUE, #
+         labels=5, #
+         lines=0, #
+         family='STXihei',#
+        #  xlab="follow", ylab="view_calculated",#
+         main="K-means Clustering on 100 Most Popular Anime in Bilibili",#
+         )
+number_cluster <- 7#
+bangumi_kmeans <- kmeans(bangumi_data, number_cluster, nstart=10)#
+plot(bangumi_data[,c("follow", "view_calculated")],#
+    col=bangumi_kmeans$cluster)#
+points(bangumi_kmeans$centers[,c("follow", "view_calculated")], col = 1:number_cluster , pch = 8, cex=2);
+clusplot(bangumi_data, bangumi_kmeans$cluster, color=TRUE, shade=TRUE, #
+         labels=5, #
+         lines=0, #
+         family='STXihei',#
+        #  xlab="follow", ylab="view_calculated",#
+         main="K-means Clustering on 100 Most Popular Anime in Bilibili",#
+         )
+par(family='STXihei')#
+clusplot(bangumi_data, bangumi_kmeans$cluster, color=TRUE, shade=TRUE, #
+         labels=5, #
+         lines=0, #
+         family='STXihei',#
+        #  xlab="follow", ylab="view_calculated",#
+         main="K-means Clustering on 100 Most Popular Anime in Bilibili",#
+         )
+op <- par(family='STXihei')#
+clusplot(bangumi_data, bangumi_kmeans$cluster, color=TRUE, shade=TRUE, #
+         labels=5, #
+         lines=0, #
+        #  xlab="follow", ylab="view_calculated",#
+         main="K-means Clustering on 100 Most Popular Anime in Bilibili",#
+         )#
+par(op)
+data(votes.repub)
+votes.diss <- daisy(votes.repub)
+pamv <- pam(votes.diss, 2, diss = TRUE)
+str(cMDS <- cmdscale(votes.diss, k=3, add=TRUE))
+rownames(votes.repub)
+clusplot(pamv, s.x.2d = list(x=cMDS$points[, c(3,2)],#
+                             labs=rownames(votes.repub), var.dec=NA),#
+         shade = TRUE, col.p = votes.clus,#
+         sub="", xlab = "Component 3", ylab = "Component 2")
+votes.clus <- pamv$clustering
+votes.clus
+clusplot(pamv, s.x.2d = list(x=cMDS$points[, c(3,2)],#
+                             labs=rownames(votes.repub), var.dec=NA),#
+         shade = TRUE, col.p = votes.clus,#
+         sub="", xlab = "Component 3", ylab = "Component 2")
+clusplot(pamv, s.x.2d = list(x=cMDS$points[, c(1,2)],#
+                             labs=rownames(votes.repub), var.dec=NA),#
+         shade = TRUE, col.p = votes.clus,#
+         sub="", xlab = "Component 1", ylab = "Component 2")
+clusplot(pamv, shade = TRUE)
+votes.repub
+clusplot(pamv, shade = TRUE)
+clusplot(pamv, s.x.2d = list(x=cMDS$points[, c(1,2)],#
+                             labs=rownames(votes.repub), var.dec=NA),#
+         shade = TRUE, col.p = votes.clus,#
+         sub="", xlab = "Component 1", ylab = "Component 2")
+clusplot(pamv, s.x.2d = list(x=cMDS$points[, c(1,2)],#
+                             labs=rownames(votes.repub), var.dec=NA),#
+         shade = TRUE, col.p = votes.clus,#
+         sub="", xlab = "Component 1", ylab = "Component 2",#
+         labels=2)
+clusplot(pamv, s.x.2d = list(x=cMDS$points[, c(1,2)],#
+                             labs=rownames(votes.repub), var.dec=NA),#
+         shade = TRUE, col.p = votes.clus,#
+         sub="", xlab = "Component 1", ylab = "Component 2",#
+         labels=5)
+bangumi.diss <- daisy(bangumi_data)#
+bangumi.pamv <- pam(bangumi.diss, 7, diss = TRUE)#
+clusplot(bangumi.pamv, shade = TRUE, color=TRUE)
+clusplot(bangumi.pamv, shade = TRUE, color=TRUE, lines=0)
+# data preprocessing#
+rawdata <- dbGetQuery(con, "SELECT * FROM bangumi WHERE ABS(view-view_calculated) < view*0.1 AND epno>10 ORDER BY view DESC LIMIT 100")#
+bangumi_data <- rawdata[c("follow", "view_calculated")]#
+bangumi_data <- scale(bangumi_data)#
+row.names(bangumi_data) <- rawdata$title#
+viewdata <- NULL  #
+for(sid in rawdata$sid){#
+    sqlstr <- paste("SELECT view FROM episode WHERE sid =", sid, "ORDER BY idx")#
+    epdata <- dbGetQuery(con, sqlstr)#
+    epdata <- epdata$view#
+    epdata <- scale(epdata)#
+    len <- length(epdata)#
+    row <- c(epdata[1],epdata[3],epdata[len],epdata[len-3])#
+    viewdata <- rbind(viewdata, row)#
+}#
+colnames(viewdata) <- c("view1","view3","view1n","view3n") #
+bangumi_data <- cbind(bangumi_data, viewdata)
+library(DBI)#
+library(RMySQL)#
+Sys.setlocale(locale="UTF-8")#
+con <- dbConnect(MySQL(), host="localhost", dbname="bilibili", user="root", password="57575207")#
 #
-d <- dist(bangumidata)#
-fit.average <- hclust(d, method = "average")#
-plot(fit.average, hang = -1, cex = .5, main = "Average Linkage Clustering",#
-family='STXihei')
-help(plot)
-help(par)
-plot(fit.average, hang = -1, cex = .5, main = "Average Linkage Clustering",#
-family='STXihei',#
-col=c("red", "blue"))
-plot(fit.average, hang = -1, cex = .5, main = "Average Linkage Clustering",#
-family='STXihei')
-plot(fit.average, hang = -1, cex = .5, main = "Average Linkage Clustering",#
-family='STXihei',#
-xlab="111")
-plot(fit.average, hang = -1, cex = .5, main = "Average Linkage Clustering",#
-family='STXihei',#
-xlab="50 Most popular Anime in Bilibili")
-plot(fit.average, hang = -1, cex = .5, main = "Average Linkage Clustering",#
-family='STXihei',#
-xlab="50 Most popular Anime in Bilibili",#
-sub="")
-plot(fit.average, hang = -1, cex = .5, main = "Average Linkage Clustering",#
-family='STXihei',#
-xlab="50 Most popular Anime in Bilibili",#
-ylab="",#
-sub="")
-library(NbClust)
-install.package(NbClust)
-package.install(NbClust)
-packages.install(NbClust)
-install.packages(NbClust)
-install.packages("NbClust")
-library(NbClust)
-devAskNewPage(ask = TRUE)
-nc <- NbClust(df, min.nc = 2, max.nc = 15, method = "kmeans")#
-    table(nc$Best.n[1,])#
-    barplot(table(nc$Best.n[1,]),#
-        xlab = "Number of Clusters", ylab = "Number of Criteria",#
-        main = "Number of Clusters Chosen by 26 Criteria")
-library(NbClust)#
-    set.seed(1234)#
-    devAskNewPage(ask = TRUE)#
-    nc <- NbClust(bangumidata, min.nc = 2, max.nc = 15, method = "kmeans")#
-    table(nc$Best.n[1,])#
-    barplot(table(nc$Best.n[1,]),#
-        xlab = "Number of Clusters", ylab = "Number of Criteria",#
-        main = "Number of Clusters Chosen by 26 Criteria")
+# data preprocessing#
+rawdata <- dbGetQuery(con, "SELECT * FROM bangumi WHERE ABS(view-view_calculated) < view*0.1 AND epno>10 ORDER BY view DESC LIMIT 100")#
+bangumi_data <- rawdata[c("follow", "view_calculated")]#
+bangumi_data <- scale(bangumi_data)#
+row.names(bangumi_data) <- rawdata$title#
+viewdata <- NULL  #
+for(sid in rawdata$sid){#
+    sqlstr <- paste("SELECT view FROM episode WHERE sid =", sid, "ORDER BY idx")#
+    epdata <- dbGetQuery(con, sqlstr)#
+    epdata <- epdata$view#
+    epdata <- scale(epdata)#
+    len <- length(epdata)#
+    row <- c(epdata[1],epdata[3],epdata[len],epdata[len-3])#
+    viewdata <- rbind(viewdata, row)#
+}#
+colnames(viewdata) <- c("view1","view3","view1n","view3n") #
+bangumi_data <- cbind(bangumi_data, viewdata)
+# Hierarchical Clustering#
+bangumi_dist <- dist(bangumi_data)#
+bangumi_hc <- hclust(bangumi_dist, method = "average")#
+plot(bangumi_hc, #
+    hang = -1, #
+    cex = .5, #
+    main = "Hierarchical Clustering on 100 Most Popular Anime in Bilibili",#
+    family='STXihei',#
+    xlab="",#
+    ylab=NULL,#
+    sub="",#
+    axes = FALSE)#
+cluster_result <- rect.hclust(bangumi_hc, k=10, border = "red")
+# data preprocessing#
+rawdata <- dbGetQuery(con, "SELECT * FROM bangumi WHERE ABS(view-view_calculated) < view*0.1 AND epno>10 ORDER BY view DESC LIMIT 50")#
+bangumi_data <- rawdata[c("follow", "view_calculated")]#
+bangumi_data <- scale(bangumi_data)#
+row.names(bangumi_data) <- rawdata$title#
+viewdata <- NULL  #
+for(sid in rawdata$sid){#
+    sqlstr <- paste("SELECT view FROM episode WHERE sid =", sid, "ORDER BY idx")#
+    epdata <- dbGetQuery(con, sqlstr)#
+    epdata <- epdata$view#
+    epdata <- scale(epdata)#
+    len <- length(epdata)#
+    row <- c(epdata[1],epdata[3],epdata[len],epdata[len-3])#
+    viewdata <- rbind(viewdata, row)#
+}#
+colnames(viewdata) <- c("view1","view3","view1n","view3n") #
+bangumi_data <- cbind(bangumi_data, viewdata)
+# Hierarchical Clustering#
+bangumi_dist <- dist(bangumi_data)#
+bangumi_hc <- hclust(bangumi_dist, method = "average")#
+plot(bangumi_hc, #
+    hang = -1, #
+    cex = .5, #
+    main = "Hierarchical Clustering on 50 Most Popular Anime in Bilibili",#
+    family='STXihei',#
+    xlab="",#
+    ylab=NULL,#
+    sub="",#
+    axes = FALSE)#
+cluster_result <- rect.hclust(bangumi_hc, k=10, border = "red")
+plot(bangumi_hc, #
+    hang = -1, #
+    cex = .5, #
+    main = "Hierarchical Clustering on 50 Most Popular Anime in Bilibili",#
+    family='STXihei',#
+    xlab="",#
+    ylab=NULL,#
+    sub="",#
+    axes = FALSE)#
+cluster_result <- rect.hclust(bangumi_hc, k=3, border = "red")
+plot(bangumi_hc, #
+    hang = -1, #
+    cex = .5, #
+    main = "Hierarchical Clustering on 50 Most Popular Anime in Bilibili",#
+    family='STXihei',#
+    xlab="",#
+    ylab=NULL,#
+    sub="",#
+    axes = FALSE)#
+cluster_result <- rect.hclust(bangumi_hc, k=5, border = "red")
+wssplot <- function(data, nc=15, ns=10){#
+    wss <- NULL#
+    for(i in 1:nc){#
+      wss[i] <- sum(kmeans(data, centers=i, nstart=ns)$withinss)#
+    }#
+    plot(1:nc, wss, type = "b",xlab = "Number of Clusters",#
+        ylab = "Within groups sum of squares")#
+}
+wssplot(bangumi_data)
+nincplot <- function(data, method="kmeans"){#
+    op <- par(no.readonly=TRUE)#
+    res <- NbClust(data, method=method)#
+    par(op)#
+    graph <- table(res$Best.nc[1,])#
+    barplot(graph,#
+        xlab = "Number of Clusters", ylab = "Number of Indices")#
+}
+nincplot(bangumi_data)
+nincplot <- function(data, method="kmeans"){#
+    library(NbClust)#
+    op <- par(no.readonly=TRUE)#
+    res <- NbClust(data, method=method)#
+    par(op)#
+    graph <- table(res$Best.nc[1,])#
+    barplot(graph,#
+        xlab = "Number of Clusters", ylab = "Number of Indices")#
+}
+nincplot(bangumi_data)
+number_cluster <- 7#
+bangumi_kmeans <- kmeans(bangumi_data, number_cluster, nstart=10)#
+plot(bangumi_data[,c("follow", "view_calculated")],#
+    col=bangumi_kmeans$cluster)#
+points(bangumi_kmeans$centers[,c("follow", "view_calculated")], col = 1:number_cluster , pch = 8, cex=2);
+library(cluster)#
+op <- par(family='STXihei')#
+clusplot(bangumi_data, bangumi_kmeans$cluster, color=TRUE, shade=TRUE, #
+         labels=5, #
+         lines=0, #
+        #  xlab="follow", ylab="view_calculated",#
+         main="K-means Clustering on 50 Most Popular Anime in Bilibili",#
+         )#
+par(op)
+bangumi.diss <- daisy(bangumi_data)#
+bangumi.pamv <- pam(bangumi.diss, 7, diss = TRUE)#
+clusplot(bangumi.pamv, shade = TRUE, color=TRUE, lines=0)
+library(cluster)#
+op <- par(family='STXihei')#
+clusplot(bangumi_data, bangumi_kmeans$cluster, color=TRUE, shade=TRUE, #
+         labels=5, #
+         lines=0, #
+        #  xlab="follow", ylab="view_calculated",#
+         main="K-means Clustering on 50 Most Popular Anime in Bilibili",#
+         )#
+par(op)
+number_cluster <- 7#
+bangumi_kmeans <- kmeans(bangumi_data, number_cluster, nstart=10)#
+plot(bangumi_data[,c("follow", "view_calculated")],#
+    col=bangumi_kmeans$cluster)#
+points(bangumi_kmeans$centers[,c("follow", "view_calculated")], col = 1:number_cluster , pch = 8, cex=2);
+plot(bangumi_data[,c("follow", "view_calculated")],#
+    pch=bangumi_kmeans$cluster)
+plot(bangumi_data[,c("follow", "view_calculated")],#
+    pch=bangumi_kmeans$cluster)#
+points(bangumi_kmeans$centers[,c("follow", "view_calculated")], col ="red"  , pch = 1:number_cluster, cex=2);
+rawdata <- dbGetQuery(con, "SELECT * FROM bangumi WHERE ABS(view-view_calculated) < view*0.1 AND epno>10 ORDER BY view DESC LIMIT 50")#
+bangumi_data <- rawdata[c("follow", "view_calculated")]#
+bangumi_data <- scale(bangumi_data)#
+row.names(bangumi_data) <- rawdata$title#
+viewdata <- NULL  #
+for(sid in rawdata$sid){#
+    sqlstr <- paste("SELECT view FROM episode WHERE sid =", sid, "ORDER BY idx")#
+    epdata <- dbGetQuery(con, sqlstr)#
+    epdata <- epdata$view#
+    epdata <- scale(epdata)#
+    len <- length(epdata)#
+    row <- c(epdata[1],epdata[3],epdata[len],epdata[len-3])#
+    viewdata <- rbind(viewdata, row)#
+}#
+colnames(viewdata) <- c("view1","view3","view1n","view3n") #
+bangumi_data <- cbind(bangumi_data, viewdata)
+number_cluster <- 7#
+bangumi_kmeans <- kmeans(bangumi_data, number_cluster, nstart=10)#
+plot(bangumi_data[,c("follow", "view_calculated")],#
+    pch=bangumi_kmeans$cluster)#
+points(bangumi_kmeans$centers[,c("follow", "view_calculated")], col ="red"  , pch = 1:number_cluster, cex=2);
+plot(bangumi_data[,c("follow", "view_calculated")],#
+    pch=bangumi_kmeans$cluster)
+data(iris)#
+iris.x <- iris[, 1:4]#
+cl3 <- pam(iris.x, 3)$clustering#
+op <- par(mfrow= c(2,2))#
+clusplot(iris.x, cl3, color = TRUE)#
+U <- par("usr")#
+## zoom in :#
+rect(0,-1, 2,1, border = "orange", lwd=2)#
+clusplot(iris.x, cl3, color = TRUE, xlim = c(0,2), ylim = c(-1,1))#
+box(col="orange",lwd=2); mtext("sub region", font = 4, cex = 2)#
+##  or zoom out :#
+clusplot(iris.x, cl3, color = TRUE, xlim = c(-4,4), ylim = c(-4,4))#
+mtext("`super' region", font = 4, cex = 2)#
+rect(U[1],U[3], U[2],U[4], lwd=2, lty = 3)#
+#
+# reset graphics#
+par(op)
+number_cluster <- 3#
+bangumi_kmeans <- kmeans(bangumi_data, number_cluster, nstart=10)#
+plot(bangumi_data[,c("follow", "view_calculated")],#
+    pch=bangumi_kmeans$cluster)#
+points(bangumi_kmeans$centers[,c("follow", "view_calculated")], col ="red"  , pch = 1:number_cluster, cex=2);
+number_cluster <- 3#
+bangumi_kmeans <- kmeans(bangumi_data, number_cluster, nstart=10)#
+plot(bangumi_data[,c("follow", "view_calculated")],#
+    pch=bangumi_kmeans$cluster)#
+points(bangumi_kmeans$centers[,c("follow", "view_calculated")], col ="red"  , pch = 1:number_cluster);
+bangumi.diss <- daisy(bangumi_data)#
+bangumi.pamv <- pam(bangumi.diss, 3, diss = TRUE)#
+clusplot(bangumi.pamv, shade = TRUE, color=TRUE, lines=0)
+data(votes.repub)#
+votes.diss <- daisy(votes.repub)#
+pamv <- pam(votes.diss, 2, diss = TRUE)#
+clusplot(pamv, shade = TRUE)
+str(cMDS <- cmdscale(votes.diss, k=3, add=TRUE))#
+clusplot(pamv, s.x.2d = list(x=cMDS$points[, c(1,2)],#
+                             labs=rownames(votes.repub), var.dec=NA),#
+         shade = TRUE, col.p = votes.clus,#
+         sub="", xlab = "Component 1", ylab = "Component 2",#
+         labels=5)
+votes.clus <- pamv$clustering
+str(cMDS <- cmdscale(votes.diss, k=3, add=TRUE))#
+clusplot(pamv, s.x.2d = list(x=cMDS$points[, c(1,2)],#
+                             labs=rownames(votes.repub), var.dec=NA),#
+         shade = TRUE, col.p = votes.clus,#
+         sub="", xlab = "Component 1", ylab = "Component 2",#
+         labels=5)
+library(cluster)#
+op <- par(family='STXihei')#
+clusplot(bangumi_data, bangumi_kmeans$cluster, color=TRUE, shade=TRUE, #
+         labels=5, #
+         lines=0, #
+        #  xlab="follow", ylab="view_calculated",#
+         main="K-means Clustering on 50 Most Popular Anime in Bilibili",#
+         )#
+par(op)
+library(cluster)#
+op <- par(family='STXihei')#
+clusplot(bangumi_data, bangumi_kmeans$cluster, color=TRUE, shade=FALSE, #
+         labels=5, #
+         lines=0, #
+        #  xlab="follow", ylab="view_calculated",#
+         main="K-means Clustering on 50 Most Popular Anime in Bilibili",#
+         )#
+par(op)
+library(cluster)#
+op <- par(family='STXihei')#
+clusplot(bangumi_data, bangumi_kmeans$cluster, color=TRUE, shade=FALSE, #
+         labels=5, #
+         lines=0, #
+        #  xlab="follow", ylab="view_calculated",#
+         main="K-means Clustering on 50 Most Popular Anime in Bilibili",#
+         col.txt="black"#
+         )#
+par(op)
+op <- par(family='STXihei')#
+clusplot(bangumi_data, bangumi_kmeans$cluster, color=TRUE, shade=FALSE, #
+         labels=5, #
+         lines=0, #
+        #  xlab="follow", ylab="view_calculated",#
+         main="K-means Clustering on 50 Most Popular Anime in Bilibili",#
+         col.txt="black",#
+         cex.txt = 0.5#
+         cex = 0.5#
+         )#
+par(op)
+op <- par(family='STXihei')#
+clusplot(bangumi_data, bangumi_kmeans$cluster, color=TRUE, shade=FALSE, #
+         labels=5, #
+         lines=0, #
+        #  xlab="follow", ylab="view_calculated",#
+         main="K-means Clustering on 50 Most Popular Anime in Bilibili",#
+         col.txt="black",#
+         cex.txt = 0.5,#
+         cex = 0.5,#
+         )#
+par(op)
+op <- par(family='STXihei', cex.txt=0.5)#
+clusplot(bangumi_data, bangumi_kmeans$cluster, color=TRUE, shade=FALSE, #
+         labels=5, #
+         lines=0, #
+        #  xlab="follow", ylab="view_calculated",#
+         main="K-means Clustering on 50 Most Popular Anime in Bilibili",#
+         col.txt="black",#
+         cex = 0.5,#
+         )#
+par(op)
+library(cluster)#
+op <- par(family='STXihei')#
+clusplot(bangumi_data, bangumi_kmeans$cluster, color=TRUE, shade=FALSE, #
+         labels=5, #
+         lines=0, #
+        #  xlab="follow", ylab="view_calculated",#
+         main="K-means Clustering on 50 Most Popular Anime in Bilibili",#
+         col.txt="black",#
+         cex = 0.5,#
+          cex.txt=0.1,#
+         )#
+par(op)
+bangumi.diss <- daisy(bangumi_data)#
+bangumi.pamv <- pam(bangumi.diss, 3, diss = TRUE)#
+clusplot(bangumi.pamv, shade = TRUE, color=TRUE, lines=0)
+number_cluster <- 3#
+bangumi_kmeans <- kmeans(bangumi_data, number_cluster, nstart=10)#
+plot(bangumi_data[,c("follow", "view_calculated")],#
+    pch=bangumi_kmeans$cluster)#
+points(bangumi_kmeans$centers[,c("follow", "view_calculated")], col ="red"  , pch = 1:number_cluster);
+op <- par(family='STXihei')#
+clusplot(bangumi.pamv, shade = TRUE, color=TRUE, lines=0,#
+        labels=5,#
+        main="K-means Clustering on 50 Most Popular Anime in Bilibili",#
+        col.txt="black",#
+        cex = 0.5)#
+par(op)
+op <- par(family='STXihei')#
+clusplot(bangumi.pamv, shade = TRUE, color=TRUE, lines=0,#
+        labels=1,#
+        main="K-means Clustering on 50 Most Popular Anime in Bilibili",#
+        col.txt="black",#
+        cex = 0.5)#
+par(op)
+rawdata <- dbGetQuery(con, "SELECT * FROM bangumi WHERE ABS(view-view_calculated) < view*0.1 AND epno>10 ORDER BY view DESC LIMIT 100")#
+bangumi_data <- rawdata[c("follow", "view_calculated")]#
+bangumi_data <- scale(bangumi_data)#
+row.names(bangumi_data) <- rawdata$title#
+viewdata <- NULL  #
+for(sid in rawdata$sid){#
+    sqlstr <- paste("SELECT view FROM episode WHERE sid =", sid, "ORDER BY idx")#
+    epdata <- dbGetQuery(con, sqlstr)#
+    epdata <- epdata$view#
+    epdata <- scale(epdata)#
+    len <- length(epdata)#
+    row <- c(epdata[1],epdata[3],epdata[len],epdata[len-3])#
+    viewdata <- rbind(viewdata, row)#
+}#
+colnames(viewdata) <- c("view1","view3","view1n","view3n") #
+bangumi_data <- cbind(bangumi_data, viewdata)
+bangumi_data
+# Hierarchical Clustering#
+bangumi_dist <- dist(bangumi_data[1:50])#
+bangumi_hc <- hclust(bangumi_dist, method = "average")#
+plot(bangumi_hc, #
+    hang = -1, #
+    cex = .5, #
+    main = "Hierarchical Clustering on 50 Most Popular Anime in Bilibili",#
+    family='STXihei',#
+    xlab="",#
+    ylab=NULL,#
+    sub="",#
+    axes = FALSE)#
+cluster_result <- rect.hclust(bangumi_hc, k=5, border = "red")
+bangumi_dist
+# Hierarchical Clustering#
+bangumi_dist <- dist(bangumi_data[1:50])#
+row.names(bangumi_dist) <- row.names(bangumi_dist)[1:50]#
+bangumi_hc <- hclust(bangumi_dist, method = "average")#
+plot(bangumi_hc, #
+    hang = -1, #
+    cex = .5, #
+    main = "Hierarchical Clustering on 50 Most Popular Anime in Bilibili",#
+    family='STXihei',#
+    xlab="",#
+    ylab=NULL,#
+    sub="",#
+    axes = FALSE)#
+cluster_result <- rect.hclust(bangumi_hc, k=5, border = "red")
+bangumi_dist
+bangumi_dist <- dist(bangumi_data)#
+bangumi_hc <- hclust(bangumi_dist, method = "average")#
+plot(bangumi_hc, #
+    hang = -1, #
+    cex = .5, #
+    main = "Hierarchical Clustering on 50 Most Popular Anime in Bilibili",#
+    family='STXihei',#
+    xlab="",#
+    ylab=NULL,#
+    sub="",#
+    axes = FALSE)#
+cluster_result <- rect.hclust(bangumi_hc, k=5, border = "red")
+bangumi_data[1:50]
+bangumi_dist <- dist(bangumi_data[1:50,])#
+bangumi_hc <- hclust(bangumi_dist, method = "average")#
+plot(bangumi_hc, #
+    hang = -1, #
+    cex = .5, #
+    main = "Hierarchical Clustering on 50 Most Popular Anime in Bilibili",#
+    family='STXihei',#
+    xlab="",#
+    ylab=NULL,#
+    sub="",#
+    axes = FALSE)#
+cluster_result <- rect.hclust(bangumi_hc, k=5, border = "red")
+# kmeans#
+number_cluster <- 3#
+bangumi_kmeans <- kmeans(bangumi_data, number_cluster, nstart=10)#
+library(cluster)#
+op <- par(family='STXihei')#
+clusplot(bangumi_data, bangumi_kmeans$cluster, color=TRUE, shade=FALSE, #
+        labels=1, #
+        lines=0, #
+        main="K-means Clustering on 50 Most Popular Anime in Bilibili",#
+        col.txt="black",#
+        cex = 0.5,#
+        )#
+par(op)
+rawdata <- dbGetQuery(con, "SELECT * FROM bangumi WHERE ABS(view-view_calculated) < view*0.1 AND epno>10 ORDER BY view DESC LIMIT 200")#
+bangumi_data <- rawdata[c("follow", "view_calculated")]#
+bangumi_data <- scale(bangumi_data)#
+row.names(bangumi_data) <- rawdata$title#
+viewdata <- NULL  #
+for(sid in rawdata$sid){#
+    sqlstr <- paste("SELECT view FROM episode WHERE sid =", sid, "ORDER BY idx")#
+    epdata <- dbGetQuery(con, sqlstr)#
+    epdata <- epdata$view#
+    epdata <- scale(epdata)#
+    len <- length(epdata)#
+    row <- c(epdata[1],epdata[3],epdata[len],epdata[len-3])#
+    viewdata <- rbind(viewdata, row)#
+}#
+colnames(viewdata) <- c("view1","view3","view1n","view3n") #
+bangumi_data <- cbind(bangumi_data, viewdata)
+number_cluster <- 3#
+bangumi_kmeans <- kmeans(bangumi_data, number_cluster, nstart=10)#
+library(cluster)#
+op <- par(family='STXihei')#
+clusplot(bangumi_data, bangumi_kmeans$cluster, color=TRUE, shade=FALSE, #
+        labels=5, #
+        lines=0, #
+        main="K-means Clustering on 50 Most Popular Anime in Bilibili",#
+        col.txt="black",#
+        cex = 0.5,#
+        )#
+par(op)
+number_cluster <- 5#
+bangumi_kmeans <- kmeans(bangumi_data, number_cluster, nstart=10)#
+library(cluster)#
+op <- par(family='STXihei')#
+clusplot(bangumi_data, bangumi_kmeans$cluster, color=TRUE, shade=FALSE, #
+        labels=5, #
+        lines=0, #
+        main="K-means Clustering on 50 Most Popular Anime in Bilibili",#
+        col.txt="black",#
+        cex = 0.5,#
+        )#
+par(op)
+bangumi.diss <- daisy(bangumi_data)#
+bangumi.pamv <- pam(bangumi.diss, number_cluster, diss = TRUE)#
+#
+op <- par(family='STXihei')#
+clusplot(bangumi.pamv, shade = TRUE, color=TRUE, lines=0,#
+        labels=5,#
+        main="K-means Clustering on 50 Most Popular Anime in Bilibili",#
+        col.txt="black",#
+        cex = 0.5)#
+par(op)
+op <- par(family='STXihei')#
+clusplot(bangumi.pamv, shade = TRUE, color=TRUE, lines=0,#
+        labels=0,#
+        main="K-means Clustering on 50 Most Popular Anime in Bilibili",#
+        col.txt="black",#
+        cex = 0.5)#
+par(op)
+bangumi_dist <- dist(bangumi_data[1:50,])#
+bangumi_hc <- hclust(bangumi_dist, method = "average")#
+plot(bangumi_hc, #
+    hang = -1, #
+    cex = .5, #
+    main = "Hierarchical Clustering on 50 Most Popular Anime in Bilibili",#
+    family='STXihei',#
+    xlab="",#
+    ylab=NULL,#
+    sub="",#
+    axes = FALSE)#
+cluster_result <- rect.hclust(bangumi_hc, k=5, border = "red")
+bangumi_dist <- dist(bangumi_data[1:50,])#
+bangumi_hc <- hclust(bangumi_dist, method = "average")#
+plot(bangumi_hc, #
+    hang = -1, #
+    cex = .5, #
+    main = "Hierarchical Clustering on 50 Most Popular Anime in Bilibili",#
+    family='STXihei',#
+    xlab="",#
+    ylab=NULL,#
+    sub="",#
+    axes = FALSE)#
+cluster_result <- rect.hclust(bangumi_hc, k=10, border = "red")
+number_cluster <- 5#
+bangumi_kmeans <- kmeans(bangumi_data, number_cluster, nstart=10)#
+library(cluster)#
+op <- par(family='STXihei')#
+clusplot(bangumi_data, bangumi_kmeans$cluster, color=TRUE, shade=FALSE, #
+        labels=0, #
+        lines=0, #
+        main="K-means Clustering on 50 Most Popular Anime in Bilibili",#
+        col.txt="black",#
+        cex = 0.5,#
+        )#
+par(op)
+number_cluster <- 5#
+bangumi_kmeans <- kmeans(bangumi_data, number_cluster, nstart=10)#
+library(cluster)#
+op <- par(family='STXihei')#
+clusplot(bangumi_data, bangumi_kmeans$cluster, color=TRUE, shade=FALSE, #
+        labels=0, #
+        lines=0, #
+        main="K-means Clustering",#
+        sub="200 Most Popular Anime in Bilibili"#
+        col.txt="black",#
+        cex = 0.5,#
+        )#
+par(op)
+number_cluster <- 5#
+bangumi_kmeans <- kmeans(bangumi_data, number_cluster, nstart=10)#
+library(cluster)#
+op <- par(family='STXihei')#
+clusplot(bangumi_data, bangumi_kmeans$cluster, color=TRUE, shade=FALSE, #
+        labels=0, #
+        lines=0, #
+        main="K-means Clustering",#
+        sub="200 Most Popular Anime in Bilibili",#
+        col.txt="black",#
+        cex = 0.5,#
+        )#
+par(op)
+bangumi.diss <- daisy(bangumi_data)#
+bangumi.pamv <- pam(bangumi.diss, number_cluster, diss = TRUE)#
+#
+op <- par(family='STXihei')#
+clusplot(bangumi.pamv, shade = TRUE, color=TRUE, lines=0,#
+        labels=0,#
+        main="PAM Clustering on 200 Most Popular Anime in Bilibili",#
+        col.txt="black",#
+        cex = 0.5)#
+par(op)
+setwd("/Users/llipter/go/src/github.com/LLipter/bilibiliCrawler/visual")
+library(DBI)#
+library(RMySQL)#
+Sys.setlocale(locale="UTF-8")#
+con <- dbConnect(MySQL(), host="localhost", dbname="bilibili", user="root", password="57575207")#
+#
+# data preprocessing#
+rawdata <- dbGetQuery(con, "SELECT * FROM bangumi WHERE ABS(view-view_calculated) < view*0.1 AND epno>10 ORDER BY view DESC LIMIT 200")#
+bangumi.data <- rawdata[c("follow", "view_calculated")]#
+bangumi.data <- scale(bangumi.data)#
+row.names(bangumi.data) <- rawdata$title#
+viewdata <- NULL  #
+for(sid in rawdata$sid){#
+    sqlstr <- paste("SELECT view FROM episode WHERE sid =", sid, "ORDER BY idx")#
+    epdata <- dbGetQuery(con, sqlstr)#
+    epdata <- epdata$view#
+    epdata <- scale(epdata)#
+    len <- length(epdata)#
+    row <- c(epdata[1],epdata[3],epdata[len],epdata[len-3])#
+    viewdata <- rbind(viewdata, row)#
+}#
+colnames(viewdata) <- c("view1","view3","view1n","view3n") #
+bangumi.data <- cbind(bangumi.data, viewdata)#
+#
+# Hierarchical Clustering#
+bangumi_dist <- dist(bangumi.data[1:50,])#
+bangumi.hc <- hclust(bangumi_dist, method = "average")#
+png(file="hierarchical_clustering.png",width=3000, height=3000, res=600, pointsize=9)#
+op <- par(mai=c(0.1,0.7,0.1,0.1),lwd=0.7,font.lab=2)#
+plot(bangumi.hc, #
+    hang = -1, #
+    cex = .5, #
+    ylab = "Hierarchical Clustering on 50 Most Popular Anime in Bilibili",#
+    family='STXihei',#
+    xlab="",#
+    main="",#
+    sub="",#
+    axes=TRUE,#
+    )#
+cluster.result <- rect.hclust(bangumi.hc, h=3, border = 2:6)#
+par(op)#
+dev.off()
+library(cluster)
+bangumi.dist <- dist(bangumi.data[1:50,])#
+bangumi.diss <- daisy(bangumi.data[1:50,])
+bangumi.dist
+bangumi.diss
+bangumi.dist[1]
+bangumi.diss[1]
+bangumi.diss[2]
+bangumi.dist[2]
+bangumi.diss[3]
+bangumi.dist[3]
+bangumi.dist <- dist(bangumi.data[1:50,])#
+bangumi.hc <- hclust(bangumi.dist, method = "average")#
+png(file="hierarchical_clustering.png",width=3000, height=3000, res=600, pointsize=9)#
+op <- par(mai=c(0.1,0.7,0.1,0.1),lwd=0.7,font.lab=2)#
+plot(bangumi.hc, #
+    hang = -1, #
+    cex = .5, #
+    ylab = "Hierarchical Clustering on 50 Most Popular Anime in Bilibili",#
+    family='STXihei',#
+    xlab="",#
+    main="",#
+    sub="",#
+    axes=TRUE,#
+    )#
+cluster.result <- rect.hclust(bangumi.hc, h=3, border = 2:6)#
+par(op)#
+dev.off()
+bangumi.dist <- dist(bangumi.data[1:50,])#
+bangumi.hc <- hclust(bangumi.dist, method = "complete")#
+png(file="hierarchical_clustering.png",width=3000, height=3000, res=600, pointsize=9)#
+op <- par(mai=c(0.1,0.7,0.1,0.1),lwd=0.7,font.lab=2)#
+plot(bangumi.hc, #
+    hang = -1, #
+    cex = .5, #
+    ylab = "Hierarchical Clustering on 50 Most Popular Anime in Bilibili",#
+    family='STXihei',#
+    xlab="",#
+    main="",#
+    sub="",#
+    axes=TRUE,#
+    )#
+cluster.result <- rect.hclust(bangumi.hc, h=3, border = 2:6)#
+par(op)#
+dev.off()
+bangumi.dist <- dist(bangumi.data[1:50,])#
+bangumi.hc <- hclust(bangumi.dist, method = "complete")#
+png(file="hierarchical_clustering.png",width=3000, height=3000, res=600, pointsize=9)#
+op <- par(mai=c(0.1,0.7,0.1,0.1),lwd=0.7,font.lab=2)#
+plot(bangumi.hc, #
+    hang = -1, #
+    cex = .5, #
+    ylab = "Hierarchical Clustering on 50 Most Popular Anime in Bilibili",#
+    family='STXihei',#
+    xlab="",#
+    main="",#
+    sub="",#
+    axes=TRUE,#
+    )#
+cluster.result <- rect.hclust(bangumi.hc, k=5, border = 2:6)#
+par(op)#
+dev.off()
+number_cluster <- 5#
+bangumi.kmeans <- kmeans(bangumi.data, number_cluster, nstart=10)#
+library(cluster)#
+op <- par(family='STXihei')#
+clusplot(bangumi.data, bangumi.kmeans$cluster, #
+        color=TRUE, shade=FALSE, #
+        labels=0, #
+        lines=0, #
+        main="K-means Clustering on 200 Most Popular Anime in Bilibili",#
+        col.txt="black",#
+        cex = 0.5)#
+par(op)
+bangumi.dist <- dist(bangumi.data[1:50,])#
+bangumi.hc <- hclust(bangumi.dist, method = "complete")#
+number_cluster <- 5#
+png(file="hierarchical_clustering.png",width=3000, height=3000, res=600, pointsize=9)#
+op <- par(mai=c(0.1,0.7,0.1,0.1),lwd=0.7,font.lab=2)#
+plot(bangumi.hc, #
+    hang = -1, #
+    cex = .5, #
+    ylab = "Hierarchical Clustering on 50 Most Popular Anime in Bilibili",#
+    family='STXihei',#
+    xlab="",#
+    main="",#
+    sub="",#
+    axes=TRUE,#
+    )#
+cluster.result <- rect.hclust(bangumi.hc, k=number_cluster, border = 2:number_cluster+1)#
+par(op)#
+dev.off()
+number_cluster <- 5#
+bangumi.kmeans <- kmeans(bangumi.data, number_cluster, nstart=10)#
+library(cluster)#
+op <- par(family='STXihei')#
+clusplot(bangumi.data, bangumi.kmeans$cluster, #
+        color=TRUE, shade=FALSE, #
+        labels=0, #
+        lines=0, #
+        main="K-means Clustering on 200 Most Popular Anime in Bilibili",#
+        col.txt="black",#
+        cex = 0.5)#
+par(op)
+number_cluster <- 5#
+bangumi.kmeans <- kmeans(bangumi.data, number_cluster, nstart=10)#
+library(cluster)#
+op <- par(family='STXihei')#
+clusplot(bangumi.data, bangumi.kmeans$cluster, #
+        color=TRUE, shade=FALSE, #
+        labels=0, #
+        lines=0, #
+        main="K-means Clustering on 200 Most Popular Anime in Bilibili",#
+        col.txt="black",#
+        cex = 0.5)#
+par(op)
+bangumi.diss <- daisy(bangumi.data)#
+bangumi.pamv <- pam(bangumi.diss, number_cluster, diss = TRUE)#
+op <- par(family='STXihei')#
+library(cluster)#
+clusplot(bangumi.pamv, #
+        shade = TRUE, color=TRUE, #
+        lines=0,#
+        labels=0,#
+        main="PAM Clustering on 200 Most Popular Anime in Bilibili",#
+        col.txt="black",#
+        cex = 0.5)#
+par(op)
+number_cluster <- 5#
+bangumi.kmeans <- kmeans(bangumi.data, number_cluster, nstart=10)#
+library(cluster)#
+png(file="kmeans__clustering.png",width=3000, height=3000, res=600, pointsize=9)#
+op <- par(family='STXihei')#
+clusplot(bangumi.data, bangumi.kmeans$cluster, #
+        color=TRUE, shade=FALSE, #
+        labels=0, #
+        lines=0, #
+        main="K-means Clustering on 200 Most Popular Anime in Bilibili",#
+        col.txt="black",#
+        cex = 0.5)#
+par(op)#
+dev.off()
+number_cluster <- 5#
+bangumi.kmeans <- kmeans(bangumi.data, number_cluster, nstart=10)#
+library(cluster)#
+png(file="kmeans__clustering.png",width=3000, height=3000, res=600)#
+op <- par(family='STXihei')#
+clusplot(bangumi.data, bangumi.kmeans$cluster, #
+        color=TRUE, shade=FALSE, #
+        labels=0, #
+        lines=0, #
+        main="K-means Clustering on 200 Most Popular Anime in Bilibili",#
+        col.txt="black",#
+        cex = 0.5)#
+par(op)#
+dev.off()
+number_cluster <- 5#
+bangumi.kmeans <- kmeans(bangumi.data, number_cluster, nstart=10)#
+library(cluster)#
+png(file="kmeans__clustering.png",width=3000, height=3000, res=600, pointsize=9)#
+op <- par(family='STXihei')#
+clusplot(bangumi.data, bangumi.kmeans$cluster, #
+        color=TRUE, shade=FALSE, #
+        labels=0, #
+        lines=0, #
+        main="K-means Clustering on 200 Most Popular Anime in Bilibili",#
+        col.txt="black",#
+        cex = 0.5)#
+par(op)#
+dev.off()
+png(file="assets/hierarchical_clustering.png",width=3000, height=3000, res=600, pointsize=9)#
+op <- par(mai=c(0.1,0.7,0.1,0.1),lwd=0.7,font.lab=2)#
+plot(bangumi.hc, #
+    hang = -1, #
+    cex = .5, #
+    ylab = "Hierarchical Clustering on 50 Most Popular Anime in Bilibili",#
+    family='STXihei',#
+    xlab="",#
+    main="",#
+    sub="",#
+    axes=TRUE,#
+    )#
+cluster.result <- rect.hclust(bangumi.hc, k=number_cluster, border = 2:number_cluster+1)#
+par(op)#
+dev.off()
+bangumi.diss <- daisy(bangumi.data)#
+bangumi.pamv <- pam(bangumi.diss, number_cluster, diss = TRUE)#
+op <- par(family='STXihei')#
+library(cluster)#
+clusplot(bangumi.pamv, #
+        shade=FALSE, color=TRUE, #
+        lines=0,#
+        labels=0,#
+        main="PAM Clustering on 200 Most Popular Anime in Bilibili",#
+        col.txt="black",#
+        cex = 0.5)#
+par(op)

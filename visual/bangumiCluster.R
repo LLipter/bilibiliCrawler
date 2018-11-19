@@ -5,9 +5,9 @@ con <- dbConnect(MySQL(), host="localhost", dbname="bilibili", user="root", pass
 
 # data preprocessing
 rawdata <- dbGetQuery(con, "SELECT * FROM bangumi WHERE ABS(view-view_calculated) < view*0.1 AND epno>10 ORDER BY view DESC LIMIT 200")
-bangumi_data <- rawdata[c("follow", "view_calculated")]
-bangumi_data <- scale(bangumi_data)
-row.names(bangumi_data) <- rawdata$title
+bangumi.data <- rawdata[c("follow", "view_calculated")]
+bangumi.data <- scale(bangumi.data)
+row.names(bangumi.data) <- rawdata$title
 viewdata <- NULL  
 for(sid in rawdata$sid){
     sqlstr <- paste("SELECT view FROM episode WHERE sid =", sid, "ORDER BY idx")
@@ -19,29 +19,36 @@ for(sid in rawdata$sid){
     viewdata <- rbind(viewdata, row)
 }
 colnames(viewdata) <- c("view1","view3","view1n","view3n") 
-bangumi_data <- cbind(bangumi_data, viewdata)
+bangumi.data <- cbind(bangumi.data, viewdata)
 
 # Hierarchical Clustering
-bangumi_dist <- dist(bangumi_data[1:50,])
-bangumi_hc <- hclust(bangumi_dist, method = "average")
-plot(bangumi_hc, 
+bangumi.dist <- dist(bangumi.data[1:50,])
+bangumi.hc <- hclust(bangumi.dist, method = "complete")
+number_cluster <- 5
+png(file="assets/hierarchical_clustering.png",width=3000, height=3000, res=600, pointsize=9)
+op <- par(mai=c(0.1,0.7,0.1,0.1),lwd=0.7,font.lab=2)
+plot(bangumi.hc, 
     hang = -1, 
     cex = .5, 
-    main = "Hierarchical Clustering on 50 Most Popular Anime in Bilibili",
+    ylab = "Hierarchical Clustering on 50 Most Popular Anime in Bilibili",
     family='STXihei',
     xlab="",
-    ylab=NULL,
+    main="",
     sub="",
-    axes = FALSE)
-cluster_result <- rect.hclust(bangumi_hc, k=10, border = "red")
+    axes=TRUE,
+    )
+cluster.result <- rect.hclust(bangumi.hc, k=number_cluster, border = 2:number_cluster+1)
+par(op)
+dev.off()
 
 
 # kmeans
 number_cluster <- 5
-bangumi_kmeans <- kmeans(bangumi_data, number_cluster, nstart=10)
+bangumi.kmeans <- kmeans(bangumi.data, number_cluster, nstart=10)
 library(cluster)
+png(file="assets/kmeans__clustering.png",width=3000, height=3000, res=600, pointsize=9)
 op <- par(family='STXihei')
-clusplot(bangumi_data, bangumi_kmeans$cluster, 
+clusplot(bangumi.data, bangumi.kmeans$cluster, 
         color=TRUE, shade=FALSE, 
         labels=0, 
         lines=0, 
@@ -49,15 +56,16 @@ clusplot(bangumi_data, bangumi_kmeans$cluster,
         col.txt="black",
         cex = 0.5)
 par(op)
+dev.off()
 
 
 # pams
-bangumi.diss <- daisy(bangumi_data)
+bangumi.diss <- daisy(bangumi.data)
 bangumi.pamv <- pam(bangumi.diss, number_cluster, diss = TRUE)
-
 op <- par(family='STXihei')
+library(cluster)
 clusplot(bangumi.pamv, 
-        shade = TRUE, color=TRUE, 
+        shade=FALSE, color=TRUE, 
         lines=0,
         labels=0,
         main="PAM Clustering on 200 Most Popular Anime in Bilibili",
