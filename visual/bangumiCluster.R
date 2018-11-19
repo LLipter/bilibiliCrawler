@@ -4,7 +4,7 @@ Sys.setlocale(locale="UTF-8")
 con <- dbConnect(MySQL(), host="localhost", dbname="bilibili", user="root", password="57575207")
 
 # data preprocessing
-bangumi.datasize <- 200
+bangumi.datasize <- 100
 rawdata <- dbGetQuery(con, paste("SELECT * FROM bangumi WHERE ABS(view-view_calculated) < view*0.1 AND epno>10 ORDER BY view DESC LIMIT", bangumi.datasize))
 bangumi.followview <- matrix(unlist(rawdata[c("follow","view_calculated")]), 
                             nrow=bangumi.datasize, 
@@ -52,11 +52,11 @@ png(file="assets/kmeans_clustering.png",width=3000, height=3000, res=600, points
 op <- par(family='STXihei')
 oo <- options(scipen=10)
 clusplot(bangumi.followview, bangumi.kmeans$cluster, 
-        color=TRUE, shade=FALSE, 
+        color=TRUE, shade=TRUE, 
         s.x.2d = list(x=bangumi.followview, labs=rownames(bangumi.followview), var.dec=NA),
         labels=0, 
         lines=0, 
-        main="K-means Clustering on 200 Most Popular Anime in Bilibili",
+        main="K-means Clustering on 100 Most Popular Anime in Bilibili",
         sub="",
         col.txt="black",
         xlab="Subscriber",
@@ -65,38 +65,32 @@ clusplot(bangumi.followview, bangumi.kmeans$cluster,
 x <- c(bangumi.followview["齐木楠雄的灾难（日播&精选版）",1]+1.3e6,
         bangumi.followview["Re：从零开始的异世界生活",1]+1e6,
         bangumi.followview["工作细胞",1]-0.4e6,
-        bangumi.followview["齐木楠雄的灾难",1]-0.6e6,
-        bangumi.followview["紫罗兰永恒花园",1]+0.6e6
+        bangumi.followview["紫罗兰永恒花园",1]+0.6e6,
+        bangumi.followview["OVERLORD",1]-0.5e6,
+        bangumi.followview["食戟之灵",1]-0.4e6,
+        bangumi.followview["齐木楠雄的灾难 第二季",1]+0.9e6
         )
 y <- c(bangumi.followview["齐木楠雄的灾难（日播&精选版）",2],
         bangumi.followview["Re：从零开始的异世界生活",2]-0.4e7,
         bangumi.followview["工作细胞",2]-0.4e7,
-        bangumi.followview["齐木楠雄的灾难",2]-0.4e7,
-        bangumi.followview["紫罗兰永恒花园",2]-0.4e7
+        bangumi.followview["紫罗兰永恒花园",2]-0.4e7,
+        bangumi.followview["OVERLORD",2]+0.3e7,
+        bangumi.followview["食戟之灵",2]+0.3e7,
+        bangumi.followview["齐木楠雄的灾难 第二季",2]-0.3e7
         )
 l <- c("齐木楠雄的灾难（日播&精选版）",
         "Re：从零开始的异世界生活",
         "工作细胞",
-        "齐木楠雄的灾难",
-        "紫罗兰永恒花园"
+        "紫罗兰永恒花园",
+        "OVERLORD",
+        "食戟之灵",
+        "齐木楠雄的灾难 第二季"
         )
 text(x,y,labels=l,cex=0.8)
 par(op)
 options(oo)
 dev.off()
 
-
-
-plot(bangumi.followview)
-
-
-clusplot(bangumi.data, bangumi.kmeans$cluster, 
-        color=TRUE, shade=FALSE, 
-        labels=0, 
-        lines=0, 
-        main="K-means Clustering on 200 Most Popular Anime in Bilibili",
-        col.txt="black",
-        cex = 0.5)
 
 
 

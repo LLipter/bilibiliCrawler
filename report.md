@@ -30,7 +30,7 @@ The view of first episode of an anime may just depends on the publicity and how 
 
 ### Data Preprocessing
 
-I chose a subset of all anime to conduct this analysis, namely, 200 most popular anime were used as dataset after removing illegal data. Here I decided to use the number of times that the anime is played as criteria to determine which one is more popular, since people is generally more familiar with those anime, hence, the result will be more intuitive. 
+I chose a subset of all anime to conduct this analysis, namely, 100 most popular anime were used as dataset after removing illegal data. Here I decided to use the number of times that the anime is played as criteria to determine which one is more popular, since people is generally more familiar with those anime, hence, the result will be more intuitive. 
 
 Also, I use normalization to eliminate the influence caused by the order of magnitudes of different field. 
 
@@ -74,7 +74,7 @@ bangumi.hc <- hclust(bangumi.dist)
 
 ![](visual/assets/hierarchical_clustering.png)
 
-The above figure demonstrate the clustering result on 50 most popular anime. Here I choose a dataset of size 50 instead of 200 for better clearity.
+The above figure demonstrate the clustering result on 50 most popular anime. Here I choose a dataset of size 50 instead of 100 for better clearity.
 
 Each colorful rectangle box in the figure identify a cluster after I divided them into 5 clusters based on their height in this hierarchical tree. One of the most  unique characteristics of this algorithm that differentiate it from other clustering algorithm is that there exists a bunch of clusters that contain only one data in the result. This behavior could be advantage or disadvantage depends on the structure of your input data. In your input dataset, if there're some data that significant different from others, namely outliers, the hierarchical clustering can easily identify them and it will not affect the clustering result of other data. Otherwise this behavior will cause some redundant clusters and make result not clear and convincing enough.
 
