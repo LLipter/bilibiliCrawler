@@ -23,7 +23,7 @@ bangumi.data <- cbind(bangumi.data, viewdata)
 
 # Hierarchical Clustering
 bangumi.dist <- dist(bangumi.data[1:50,])
-bangumi.hc <- hclust(bangumi.dist, method = "complete")
+bangumi.hc <- hclust(bangumi.dist)
 number_cluster <- 5
 png(file="assets/hierarchical_clustering.png",width=3000, height=3000, res=600, pointsize=9)
 op <- par(mai=c(0.1,0.7,0.1,0.1),lwd=0.7,font.lab=2)
