@@ -24,7 +24,7 @@ bangumi.data <- cbind(bangumi.data, viewdata)
 # Hierarchical Clustering
 bangumi.dist <- dist(bangumi.data[1:50,])
 bangumi.hc <- hclust(bangumi.dist)
-number_cluster <- 5
+number_cluster <- 7
 png(file="assets/hierarchical_clustering.png",width=3000, height=3000, res=600, pointsize=9)
 op <- par(mai=c(0.1,0.7,0.1,0.1),lwd=0.7,font.lab=2)
 plot(bangumi.hc, 
@@ -46,9 +46,16 @@ dev.off()
 number_cluster <- 5
 bangumi.kmeans <- kmeans(bangumi.data, number_cluster, nstart=10)
 library(cluster)
-png(file="assets/kmeans__clustering.png",width=3000, height=3000, res=600, pointsize=9)
+png(file="assets/kmeans_clustering.png",width=3000, height=3000, res=600, pointsize=9)
 op <- par(family='STXihei')
-clusplot(bangumi.data, bangumi.kmeans$cluster, 
+clusplot(bangumi.data[,1:2], bangumi.kmeans$cluster, 
+        color=TRUE, shade=FALSE, 
+        labels=0, 
+        lines=0, 
+        main="K-means Clustering on 200 Most Popular Anime in Bilibili",
+        col.txt="black",
+        cex = 0.5)
+clusplot(bangumi.kmeans$cluster, 
         color=TRUE, shade=FALSE, 
         labels=0, 
         lines=0, 
@@ -80,3 +87,9 @@ dbDisconnect(con)
 
 
 
+x <- rbind(cbind(rnorm(10,0,0.5), rnorm(10,0,0.5)),
+           cbind(rnorm(15,5,0.5), rnorm(15,5,0.5)))
+pamx <- pam(x, 2)
+pamx # Medoids: '7' and '25' ...
+summary(pamx)
+plot(pamx)

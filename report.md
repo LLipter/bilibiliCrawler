@@ -48,6 +48,21 @@ bangumi.data <- scale(bangumi.data)
 epdata <- scale(epdata)
 ~~~
 
+So after preprocessing, data should be like this.
+
+| title | subscriber | view | view1 | view3 | view1n | view3n |
+| --- | --- | --- | --- | --- | --- | --- |
+| 齐木楠雄的灾难（日播&精选版）| 0.1411795 | 4.794045 | 7.441913 | 1.752764427 | -0.8288319 | -1.5574569 |
+| Re：从零开始的异世界生活 | 3.1416083 | 4.276249 | 4.478053 | 0.222903397 | -0.2814297 | -0.6988199 |
+| OVERLORD | 1.6189524 | 3.708043 | 3.054340 | 0.008884399 | 0.7177556 | -0.3164916 |
+| OVERLORDⅡ | 2.6265758 | 3.344890 | 3.069243 | -0.528246750 | 0.7596778 | -0.5551935 |
+| 工作细胞 | 5.3756598 | 3.356346 | 2.836749 | 0.419733939 | -0.9962491 | -0.6214508 |
+| OVERLORD Ⅲ | 2.6063785 | 3.075571 | 3.227855 | -0.116261306 | -0.8443022 | -0.4561667 |
+| 在下坂本，有何贵干？ | 2.7746897 | 3.223651 | 2.899112 | 0.320569318 | -1.1089019 | -0.5597468 |
+| 小林家的龙女仆 | 2.9048504 | 2.832698 | 2.608638 | 0.548210997 | -0.9330176 | -0.6030295 |
+| 食戟之灵 | 0.4486281 | 2.448500 | 4.422652 | 0.479730450 | 0.2280054 | -0.4721607 |
+| Fate/Apocrypha | 2.2809767 | 2.024209 | 4.294462 | 0.699122367 | -0.4251027 | -0.5924514 |
+
 ### Hierarchical Clustering
 
 Hierarchical cluster analysis using a set of dissimilarities for the n objects being clustered. In this case, a dissimilarity matrix based on euclidean distance is computed. Initially, each anime is assigned to its own cluster and then the algorithm proceeds iteratively, at each stage joining the two most similar clusters, continuing until there is just a single cluster. At each stage distances between clusters are recomputed by the Lance–Williams dissimilarity update formula according to the particular clustering method being used.
@@ -61,8 +76,10 @@ bangumi.hc <- hclust(bangumi.dist)
 
 The above figure demonstrate the clustering result on 50 most popular anime. Here I choose a dataset of size 50 instead of 200 for better clearity.
 
-Each colorful rectangle box in the figure identify a cluster after I divided them into 5 clusters based on the height of this hierarchical tree.
+Each colorful rectangle box in the figure identify a cluster after I divided them into 5 clusters based on their height in this hierarchical tree. One of the most  unique characteristics of this algorithm that differentiate it from other clustering algorithm is that there exists a bunch of clusters that contain only one data in the result. This behavior could be advantage or disadvantage depends on the structure of your input data. In your input dataset, if there're some data that significant different from others, namely outliers, the hierarchical clustering can easily identify them and it will not affect the clustering result of other data. Otherwise this behavior will cause some redundant clusters and make result not clear and convincing enough.
 
+### Kmeans Clustering
+	
 # Reference
 
 1. [bilibili上市宣传视频](www.bilibili/video/av21322566)
