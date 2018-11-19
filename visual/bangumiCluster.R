@@ -1,10 +1,22 @@
+# load liabrary
 library(DBI)
 library(RMySQL)
+library(cluster)
+
+# connect to database
 Sys.setlocale(locale="UTF-8")
 con <- dbConnect(MySQL(), host="localhost", dbname="bilibili", user="root", password="57575207")
 
-# data preprocessing
+# setting parameters
 bangumi.datasize <- 100
+number.hc.datasize <- 50
+number.hc.cluster <- 7
+number.kmeans.datasize <- 100
+number.kmeans.cluster <- 5
+number.pam.datasize <- 100
+number.pam.cluster <- 5
+
+# data preprocessing
 rawdata <- dbGetQuery(con, paste("SELECT * FROM bangumi WHERE ABS(view-view_calculated) < view*0.1 AND epno>10 ORDER BY view DESC LIMIT", bangumi.datasize))
 bangumi.followview <- matrix(unlist(rawdata[c("follow","view_calculated")]), 
                             nrow=bangumi.datasize, 
@@ -25,38 +37,34 @@ colnames(viewdata) <- c("view1","view3","view1n","view3n")
 bangumi.data <- cbind(bangumi.data, viewdata)
 
 # Hierarchical Clustering
-bangumi.dist <- dist(bangumi.data[1:50,])
+bangumi.dist <- dist(bangumi.data[1:number.hc.datasize,])
 bangumi.hc <- hclust(bangumi.dist)
-number.cluster <- 7
-png(file="assets/hierarchical_clustering.png",width=3000, height=3000, res=600, pointsize=9)
-op <- par(mai=c(0.1,0.7,0.1,0.1),lwd=0.7,font.lab=2)
+png(file="assets/hierarchical_clustering.png", width=3000, height=3000, res=600, pointsize=9)
+op <- par(mai=c(0.1,0.7,0.1,0.1),lwd=0.7)
 plot(bangumi.hc, 
     hang = -1, 
     cex = .5, 
-    ylab = "Hierarchical Clustering on 50 Most Popular Anime in Bilibili",
+    ylab = paste("Hierarchical Clustering on", number.hc.datasize, "Most Popular Anime in Bilibili"),
     family='STXihei',
     xlab="",
     main="",
     sub="",
-    axes=TRUE,
-    )
-cluster.result <- rect.hclust(bangumi.hc, k=number.cluster, border = 2:number.cluster+1)
+    axes=TRUE)
+cluster.result <- rect.hclust(bangumi.hc, k=number.hc.cluster, border = 2:number.hc.cluster+1)
 par(op)
 dev.off()
 
 # kmeans
-library(cluster)
-number.cluster <- 5
-bangumi.kmeans <- kmeans(bangumi.data, number.cluster, nstart=50)
+bangumi.kmeans <- kmeans(bangumi.data[1:number.kmeans.datasize,], number.kmeans.cluster, nstart=50)
 png(file="assets/kmeans_clustering.png",width=3000, height=3000, res=600, pointsize=9)
 op <- par(family='STXihei')
 oo <- options(scipen=10)
-clusplot(bangumi.followview, bangumi.kmeans$cluster, 
+clusplot(bangumi.followview[1:number.kmeans.datasize,], bangumi.kmeans$cluster, 
         color=TRUE, shade=FALSE, 
-        s.x.2d = list(x=bangumi.followview, labs=rownames(bangumi.followview), var.dec=NA),
+        s.x.2d = list(x=bangumi.followview[1:number.kmeans.datasize,], labs=rownames(bangumi.followview)[1:number.kmeans.datasize], var.dec=NA),
         labels=0, 
         lines=0, 
-        main="K-means Clustering on 100 Most Popular Anime in Bilibili",
+        main=paste("Kmeans Clustering on", number.kmeans.datasize, "Most Popular Anime in Bilibili"),
         sub="",
         col.txt="black",
         xlab="Subscriber",
@@ -92,19 +100,17 @@ options(oo)
 dev.off()
 
 # pams
-library(cluster)
-number.cluster <-5
-bangumi.diss <- daisy(bangumi.data)
-bangumi.pamv <- pam(bangumi.diss, number.cluster, diss = TRUE)
+bangumi.diss <- daisy(bangumi.data[1:number.pam.datasize,])
+bangumi.pamv <- pam(bangumi.diss, number.pam.cluster, diss = TRUE)
 png(file="assets/pam_clustering.png",width=3000, height=3000, res=600, pointsize=9)
 op <- par(family='STXihei')
 oo <- options(scipen=10)
-clusplot(bangumi.followview, bangumi.pamv$clustering, 
+clusplot(bangumi.followview[1:number.pam.datasize,], bangumi.pamv$clustering, 
         shade=FALSE, color=TRUE, 
-        s.x.2d = list(x=bangumi.followview, labs=rownames(bangumi.followview), var.dec=NA),
+        s.x.2d = list(x=bangumi.followview[1:number.pam.datasize,], labs=rownames(bangumi.followview)[1:number.pam.datasize], var.dec=NA),
         lines=0,
         labels=0,
-        main="PAM Clustering on 100 Most Popular Anime in Bilibili",
+        main=paste("PAM Clustering on", number.pam.datasize, "Most Popular Anime in Bilibili"),
         col.txt="black",
         sub="",
         xlab="Subscriber",
@@ -139,4 +145,22 @@ par(op)
 options(oo)
 dev.off()
 
+kmeans.dist <- dist(bangumi.data[1:number.kmeans.datasize,])
+kmeans.si <- silhouette(bangumi.kmeans$cluster, dist=kmeans.dist)
+png(file="assets/kmeans_silhouette.png",width=4500, height=8000, res=600)
+plot(kmeans.si,
+    col=terrain.colors(number.kmeans.datasize),
+    main=paste("Silhouette Plot of Kmeans", number.kmeans.datasize, "Most Popular Anime in Bilibili"),
+    do.clus.stat=TRUE,
+    do.col.sort=FALSE,
+    do.n.k=FALSE,
+    width=1000
+    )
+dev.off()
+
+
+si.pam <- silhouette(bangumi.pamv)
+plot(si.pam)
+
+# close database
 dbDisconnect(con)

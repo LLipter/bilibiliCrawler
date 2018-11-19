@@ -10,9 +10,9 @@ An era of rapid economic growth in China with the boom of internet gave rise to 
 
 ### Data Collection
 
-`bilibiliCrawler -b[d]`
+`./bilibiliCrawler -b[d]`
 
-Using the above command, over 2000 anime data will be collect from Bilibili. 
+Using the above command, over 2000 anime data will be collect from Bilibili. For detail codes, see `crawler/online.go`
 
 In this section, only the following field will be used.
 
@@ -29,6 +29,8 @@ In this section, only the following field will be used.
 The view of first episode of an anime may just depends on the publicity and how popular of this intellectual property. So it may just demonstrate people's  expectation and be irrelevant to the actual performance of it. However, the view of third episode may largely relative with the actual quality of this anime. In this sense, by comparing the difference between `view1` and `view3`, I can find whether people is satisfied with it. The view of the third last episode may related with the equality of the entirely anime, and the view of the last episode may related with the quality of ending of this anime. I choose this four field in order to give more dimension information, so that my analysis will be more comprehensive and accurate.
 
 ### Data Preprocessing
+
+In the rest of this section, all relative codes are stored in file `visual/bangumiClustering.R`.
 
 I chose a subset of all anime to conduct this analysis, namely, 100 most popular anime were used as dataset after removing illegal data. Here I decided to use the number of times that the anime is played as criteria to determine which one is more popular, since people is generally more familiar with those anime, hence, the result will be more intuitive. 
 
@@ -68,7 +70,7 @@ So after preprocessing, data should be like this.
 Hierarchical cluster analysis using a set of dissimilarities for the n objects being clustered. In this case, a dissimilarity matrix based on euclidean distance is computed. Initially, each anime is assigned to its own cluster and then the algorithm proceeds iteratively, at each stage joining the two most similar clusters, continuing until there is just a single cluster. At each stage distances between clusters are recomputed by the Lance–Williams dissimilarity update formula according to the particular clustering method being used.
 
 ~~~R
-bangumi.dist <- dist(bangumi.data[1:50,])
+bangumi.dist <- dist(bangumi.data[1:number.hc.datasize,])
 bangumi.hc <- hclust(bangumi.dist)
 ~~~
 
@@ -76,10 +78,43 @@ bangumi.hc <- hclust(bangumi.dist)
 
 The above figure demonstrate the clustering result on 50 most popular anime. Here I choose a dataset of size 50 instead of 100 for better clearity.
 
-Each colorful rectangle box in the figure identify a cluster after I divided them into 5 clusters based on their height in this hierarchical tree. One of the most  unique characteristics of this algorithm that differentiate it from other clustering algorithm is that there exists a bunch of clusters that contain only one data in the result. This behavior could be advantage or disadvantage depends on the structure of your input data. In your input dataset, if there're some data that significant different from others, namely outliers, the hierarchical clustering can easily identify them and it will not affect the clustering result of other data. Otherwise this behavior will cause some redundant clusters and make result not clear and convincing enough.
+Each colorful rectangle box in the figure identify a cluster after I divided them into 7 clusters based on their height in this hierarchical tree. One of the most  unique characteristics of this algorithm that differentiate it from other clustering algorithm is that there exists a bunch of clusters that contain only one data in the result. This behavior could be advantage or disadvantage depends on the structure of your input data. In your input dataset, if there're some data that significant different from others, namely outliers, the hierarchical clustering can easily identify them and it will not affect the clustering result of other data. Otherwise this behavior will cause some redundant clusters and make result not clear and convincing enough.
 
 ### Kmeans Clustering
-	
+
+This algorithm first randomly choose k points as initial k center points. Then it runs iteratively. Within each iteration, it first assign each non-center points to a cluster depends on which center point it closes to. In this process, distance formula, usually is euclidean distance, is used to evaluate closeness. Then it shifts the center point of each cluster to the average point of all points belong to it. After center points no longer changes, the result converges and it stop iterating.
+
+~~~R
+bangumi.kmeans <- kmeans(bangumi.data[1:number.kmeans.datasize,], 
+						number.kmeans.cluster, nstart=50)
+~~~
+
+![](visual/assets/kmeans_clustering.png)
+
+Each cluster is represented by the ellipse with smallest area containing all its points. (This is a special case of the minimum volume ellipsoid.) The ellipses are colored with respect to their density, which is the number of points in the cluster divided by the area of the ellipse. With increasing density, the colors are light blue, light green, red and purple.
+
+As showed in the figure above, data was divided into 5 cluster. However, two of which contains only a single data point. This is the intrinsic defect of this algorithm. Since the shifting of center points are calculated by the average distance, it's easy to be influenced by some extreme value. Such point can distort the distribution of data significantly. So the best solution for this algorithm is to divided this extreme value point into a cluster alone. Also the choice of initial center points can affect the result greatly, rendering this algorithm somehow unstable.
+
+### PAM Clustering
+
+The pam-algorithm is based on the search for k representative objects or medoids among the observations of the dataset. These observations should represent the structure of the data. After finding a set of k medoids, k clusters are constructed by assigning each observation to the nearest medoid. The goal is to find k representative objects which minimize the sum of the dissimilarities of the observations to their closest representative object. 
+By default, when medoids are not specified, the algorithm first looks for a good initial set of medoids (this is called the build phase). Then it finds a local minimum for the objective function, that is, a solution such that there is no single switch of an observation with a medoid that will decrease the objective (this is called the swap phase). The detail procedure can be summarized as follows:
+
+1. Initialize: select k of the n data points as the medoids
+2. Associate each data point to the closest medoid.
+3. While the cost of the configuration decreases:
+	1. For each medoid m, for each non-medoid data point o:
+		1. Swap m and o, associate each data point to the closest medoid, recompute the cost (sum of distances of points to their medoid)
+		2. If the total cost of the configuration increased in the previous step, undo the swap
+
+Compared to the k-means approach, this algorithm is more robust because in the swap phase, the swapping process guarantee the center point of each cluster is an actual data point, which will alleviate negative effects caused by extreme points.
+
+![](visual/assets/pam_clustering.png)
+
+As shown in the figure above, `齐木楠雄的灾难（日播&精选版）` and `齐木楠雄的灾难 第二季` no longer belongs to a cluster along, rendering the result more clearly demonstrate the difference between clusters when the total number of cluster is fixed.
+
+## Compare Kmeans and PAM with Respect to Silhouette Plot
+
 # Reference
 
 1. [bilibili上市宣传视频](www.bilibili/video/av21322566)
