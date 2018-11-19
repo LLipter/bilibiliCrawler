@@ -145,22 +145,30 @@ par(op)
 options(oo)
 dev.off()
 
+# silhouette plot of kmeans
 kmeans.dist <- dist(bangumi.data[1:number.kmeans.datasize,])
 kmeans.si <- silhouette(bangumi.kmeans$cluster, dist=kmeans.dist)
-png(file="assets/kmeans_silhouette.png",width=4500, height=8000, res=600)
+png(file="assets/kmeans_silhouette.png",width=5000, height=9000, res=600)
 plot(kmeans.si,
     col=terrain.colors(number.kmeans.datasize),
-    main=paste("Silhouette Plot of Kmeans", number.kmeans.datasize, "Most Popular Anime in Bilibili"),
+    main=paste("Silhouette Plot of Kmeans Clustering on", number.kmeans.datasize, "Most Popular Anime in Bilibili"),
     do.clus.stat=TRUE,
     do.col.sort=FALSE,
     do.n.k=FALSE,
-    width=1000
     )
 dev.off()
 
-
-si.pam <- silhouette(bangumi.pamv)
-plot(si.pam)
+# silhouette plot of PAM
+pam.si <- silhouette(bangumi.pamv)
+png(file="assets/pam_silhouette.png",width=5000, height=9000, res=600)
+plot(pam.si,
+    col=terrain.colors(number.kmeans.datasize),
+    main=paste("Silhouette Plot of PAM Clustering on", number.kmeans.datasize, "Most Popular Anime in Bilibili"),
+    do.clus.stat=TRUE,
+    do.col.sort=FALSE,
+    do.n.k=FALSE,
+    )
+dev.off()
 
 # close database
 dbDisconnect(con)

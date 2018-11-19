@@ -12,7 +12,7 @@ An era of rapid economic growth in China with the boom of internet gave rise to 
 
 `./bilibiliCrawler -b[d]`
 
-Using the above command, over 2000 anime data will be collect from Bilibili. For detail codes, see `crawler/online.go`
+Using the above command, over 2000 anime data will be collect from Bilibili. For detail codes, see `crawler/bangumi.go`. If everything's fine, it will only cost you several minutes.
 
 In this section, only the following field will be used.
 
@@ -113,7 +113,20 @@ Compared to the k-means approach, this algorithm is more robust because in the s
 
 As shown in the figure above, `齐木楠雄的灾难（日播&精选版）` and `齐木楠雄的灾难 第二季` no longer belongs to a cluster along, rendering the result more clearly demonstrate the difference between clusters when the total number of cluster is fixed.
 
-## Compare Kmeans and PAM with Respect to Silhouette Plot
+### Compare Kmeans and PAM with Respect to Silhouette Plot
+
+The silhouette value is a measure of how similar an object is to its own cluster (cohesion) compared to other clusters (separation). The silhouette ranges from −1 to +1, where a high value indicates that the object is well matched to its own cluster and poorly matched to neighboring clusters. If most objects have a high value, then the clustering configuration is appropriate. If many points have a low or negative value, then the clustering configuration may have too many or too few clusters.
+
+For each observation i, the silhouette width s(i) is defined as follows: 
+
+Put a(i) = average dissimilarity between i and all other points of the cluster to which i belongs (if i is the only observation in its cluster, s(i) := 0 without further calculations). For all other clusters C, put d(i,C) = average dissimilarity of i to all observations of C. The smallest of these d(i,C) is b(i), and can be seen as the dissimilarity between i and its “neighbor” cluster, i.e., the nearest one to which it does not belong. 
+
+Finally, `s(i) := ( b(i) - a(i) ) / max( a(i), b(i) )`
+
+![](visual/assets/pam_silhouette.png)
+![](visual/assets/kmeans_silhouette.png)
+
+Since the PAM algorithm will not let extreme points to belong to a cluster alone, the average within-cluster distance actually increases. This phenomenon reflects in the two silhouette plot showed above. The average silhouette width of PAM is actually smaller than Kmeans.
 
 # Reference
 
