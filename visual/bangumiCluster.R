@@ -4,10 +4,13 @@ Sys.setlocale(locale="UTF-8")
 con <- dbConnect(MySQL(), host="localhost", dbname="bilibili", user="root", password="57575207")
 
 # data preprocessing
-rawdata <- dbGetQuery(con, "SELECT * FROM bangumi WHERE ABS(view-view_calculated) < view*0.1 AND epno>10 ORDER BY view DESC LIMIT 200")
-bangumi.data <- rawdata[c("follow", "view_calculated")]
-bangumi.data <- scale(bangumi.data)
-row.names(bangumi.data) <- rawdata$title
+bangumi.datasize <- 200
+rawdata <- dbGetQuery(con, paste("SELECT * FROM bangumi WHERE ABS(view-view_calculated) < view*0.1 AND epno>10 ORDER BY view DESC LIMIT", bangumi.datasize))
+bangumi.followview <- matrix(unlist(rawdata[c("follow","view_calculated")]), 
+                            nrow=bangumi.datasize, 
+                            ncol=2,
+                            dimnames=list(rawdata$title, c("follow","view")))
+bangumi.data <- scale(bangumi.followview)
 viewdata <- NULL  
 for(sid in rawdata$sid){
     sqlstr <- paste("SELECT view FROM episode WHERE sid =", sid, "ORDER BY idx")
@@ -24,7 +27,7 @@ bangumi.data <- cbind(bangumi.data, viewdata)
 # Hierarchical Clustering
 bangumi.dist <- dist(bangumi.data[1:50,])
 bangumi.hc <- hclust(bangumi.dist)
-number_cluster <- 7
+number.cluster <- 7
 png(file="assets/hierarchical_clustering.png",width=3000, height=3000, res=600, pointsize=9)
 op <- par(mai=c(0.1,0.7,0.1,0.1),lwd=0.7,font.lab=2)
 plot(bangumi.hc, 
@@ -37,38 +40,70 @@ plot(bangumi.hc,
     sub="",
     axes=TRUE,
     )
-cluster.result <- rect.hclust(bangumi.hc, k=number_cluster, border = 2:number_cluster+1)
+cluster.result <- rect.hclust(bangumi.hc, k=number.cluster, border = 2:number.cluster+1)
 par(op)
 dev.off()
-
 
 # kmeans
-number_cluster <- 5
-bangumi.kmeans <- kmeans(bangumi.data, number_cluster, nstart=10)
 library(cluster)
+number.cluster <- 5
+bangumi.kmeans <- kmeans(bangumi.data, number.cluster, nstart=10)
 png(file="assets/kmeans_clustering.png",width=3000, height=3000, res=600, pointsize=9)
 op <- par(family='STXihei')
-clusplot(bangumi.data[,1:2], bangumi.kmeans$cluster, 
+oo <- options(scipen=10)
+clusplot(bangumi.followview, bangumi.kmeans$cluster, 
         color=TRUE, shade=FALSE, 
+        s.x.2d = list(x=bangumi.followview, labs=rownames(bangumi.followview), var.dec=NA),
         labels=0, 
         lines=0, 
         main="K-means Clustering on 200 Most Popular Anime in Bilibili",
+        sub="",
         col.txt="black",
+        xlab="Subscriber",
+        ylab="View",
         cex = 0.5)
-clusplot(bangumi.kmeans$cluster, 
-        color=TRUE, shade=FALSE, 
-        labels=0, 
-        lines=0, 
-        main="K-means Clustering on 200 Most Popular Anime in Bilibili",
-        col.txt="black",
-        cex = 0.5)
+x <- c(bangumi.followview["齐木楠雄的灾难（日播&精选版）",1]+1.3e6,
+        bangumi.followview["Re：从零开始的异世界生活",1]+1e6,
+        bangumi.followview["工作细胞",1]-0.4e6,
+        bangumi.followview["齐木楠雄的灾难",1]-0.6e6,
+        bangumi.followview["紫罗兰永恒花园",1]+0.6e6
+        )
+y <- c(bangumi.followview["齐木楠雄的灾难（日播&精选版）",2],
+        bangumi.followview["Re：从零开始的异世界生活",2]-0.4e7,
+        bangumi.followview["工作细胞",2]-0.4e7,
+        bangumi.followview["齐木楠雄的灾难",2]-0.4e7,
+        bangumi.followview["紫罗兰永恒花园",2]-0.4e7
+        )
+l <- c("齐木楠雄的灾难（日播&精选版）",
+        "Re：从零开始的异世界生活",
+        "工作细胞",
+        "齐木楠雄的灾难",
+        "紫罗兰永恒花园"
+        )
+text(x,y,labels=l,cex=0.8)
 par(op)
+options(oo)
 dev.off()
+
+
+
+plot(bangumi.followview)
+
+
+clusplot(bangumi.data, bangumi.kmeans$cluster, 
+        color=TRUE, shade=FALSE, 
+        labels=0, 
+        lines=0, 
+        main="K-means Clustering on 200 Most Popular Anime in Bilibili",
+        col.txt="black",
+        cex = 0.5)
+
 
 
 # pams
+number.cluster <-5
 bangumi.diss <- daisy(bangumi.data)
-bangumi.pamv <- pam(bangumi.diss, number_cluster, diss = TRUE)
+bangumi.pamv <- pam(bangumi.diss, number.cluster, diss = TRUE)
 op <- par(family='STXihei')
 library(cluster)
 clusplot(bangumi.pamv, 
