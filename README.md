@@ -35,7 +35,7 @@ If you want to use proxy, change `GetProxy()` function in `proxy/proxy.go` to pr
 
 ### Start running it!
 
-`./bilibiliCrawler [-vo]`
+`./bilibiliCrawler [-v[d] startAid endAid][-o[d]][-b[d]]`
 
 
 # Tuning parameters in configuration file
