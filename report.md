@@ -1,6 +1,6 @@
 # Abstract
 
-In this paper, I analyzed data collected from Bilibili, which is the most popular online entertainment website in China. By visualizing data and running clustering algorithm, some interesting results pop up. I use `Golang` to implement a crawler with high concurrency supported to collect data, and `R` takes over the analyzing and visualizing part if it.
+In this paper, I analyzed data collected from Bilibili, which is the most popular online entertainment website in China. By visualizing data and running clustering algorithm, some interesting results pop up. I use `Golang` to implement a crawler with high concurrency supported to collect data, and `R` takes over the analyzing and visualizing part of it.
 
 # Introduction
 
@@ -26,13 +26,13 @@ In this section, only the following field will be used.
 | view1n | the number of times that the last episode of the anime is played |
 | view3n | the number of times that the third last episode of the anime is played |
 
-The view of first episode of an anime may just depends on the publicity and how popular of this intellectual property. So it may just demonstrate people's  expectation and be irrelevant to the actual performance of it. However, the view of third episode may largely relative with the actual quality of this anime. In this sense, by comparing the difference between `view1` and `view3`, I can find whether people is satisfied with it. The view of the third last episode may related with the equality of the entirely anime, and the view of the last episode may related with the quality of ending of this anime. I choose this four field in order to give more dimension information, so that my analysis will be more comprehensive and accurate.
+The view of first episode of an anime may just depends on the publicity and how popular of this intellectual property is. So it may just demonstrate people's  expectation and be irrelevant to the actual performance of it. However, the view of third episode may largely relative with the actual quality of this anime. In this sense, by comparing the difference between `view1` and `view3`, I can find whether people is satisfied with it. The view of the third last episode may related with the equality of the entirely anime, and the view of the last episode may related with the quality of ending of this anime. I choose this four field in order to provide information in more dimension, so that my analysis will be more comprehensive and accurate.
 
 ### Data Preprocessing
 
 In the rest of this section, all relative codes are stored in file `visual/bangumiClustering.R`.
 
-I chose a subset of all anime to conduct this analysis, namely, 100 most popular anime were used as dataset after removing illegal data. Here I decided to use the number of times that the anime is played as criteria to determine which one is more popular, since people is generally more familiar with those anime, hence, the result will be more intuitive. 
+I chose a subset of all anime to conduct this analysis, namely, 100 most popular anime were used as dataset after removing invalid ones. Here I decided to use the number of times that the anime is played as criteria to determine which one is more popular, since people is generally more familiar with those anime, hence, the result will be more intuitive. 
 
 Also, I use normalization to eliminate the influence caused by the order of magnitudes of different field. 
 
@@ -76,9 +76,9 @@ bangumi.hc <- hclust(bangumi.dist)
 
 ![](visual/assets/hierarchical_clustering.png)
 
-The above figure demonstrate the clustering result on 50 most popular anime. Here I choose a dataset of size 50 instead of 100 for better clearity.
+The above figure demonstrates the clustering result on 50 most popular anime. Here I choose a dataset of size 50 instead of 100 for better clearity.
 
-Each colorful rectangle box in the figure identify a cluster after I divided them into 7 clusters based on their height in this hierarchical tree. One of the most  unique characteristics of this algorithm that differentiate it from other clustering algorithm is that there exists a bunch of clusters that contain only one data in the result. This behavior could be advantage or disadvantage depends on the structure of your input data. In your input dataset, if there're some data that significant different from others, namely outliers, the hierarchical clustering can easily identify them and it will not affect the clustering result of other data. Otherwise this behavior will cause some redundant clusters and make result not clear and convincing enough.
+Each colorful rectangle box in the figure identify a cluster after I divided them into 7 clusters based on their height in this hierarchical tree. One of the most  unique characteristics of this algorithm that differentiate it from other clustering algorithm is that there exists a bunch of clusters that contain only one data in it. This behavior could be advantage or disadvantage depends on the structure of your input data. In your input dataset, if there're some data that significant different from others, namely outliers, the hierarchical clustering can easily identify them and it will not affect the clustering result of other data. Otherwise this behavior will cause some redundant clusters and make result not clear and convincing enough.
 
 ### Kmeans Clustering
 
@@ -93,7 +93,7 @@ bangumi.kmeans <- kmeans(bangumi.data[1:number.kmeans.datasize,],
 
 Each cluster is represented by the ellipse with smallest area containing all its points. (This is a special case of the minimum volume ellipsoid.) The ellipses are colored with respect to their density, which is the number of points in the cluster divided by the area of the ellipse. With increasing density, the colors are light blue, light green, red and purple.
 
-As showed in the figure above, data was divided into 5 cluster. However, two of which contains only a single data point. This is the intrinsic defect of this algorithm. Since the shifting of center points are calculated by the average distance, it's easy to be influenced by some extreme value. Such point can distort the distribution of data significantly. So the best solution for this algorithm is to divided this extreme value point into a cluster alone. Also the choice of initial center points can affect the result greatly, rendering this algorithm somehow unstable.
+As showed in the figure above, data was divided into 5 cluster. However, two of which contains only a single data point. This is the intrinsic characteristic of this algorithm. Since the shifting of center points are calculated by the average distance, it's easy to be influenced by some extreme value. Such point can distort the distribution of data significantly. So the best solution for this algorithm is to divided this extreme value point into a cluster alone. Also the choice of initial center points can affect the result greatly, rendering this algorithm somehow unstable.
 
 ### PAM Clustering
 
@@ -111,7 +111,7 @@ Compared to the k-means approach, this algorithm is more robust because in the s
 
 ![](visual/assets/pam_clustering.png)
 
-As shown in the figure above, `齐木楠雄的灾难（日播&精选版）` and `齐木楠雄的灾难 第二季` no longer belongs to a cluster along, rendering the result more clearly demonstrate the difference between clusters when the total number of cluster is fixed.
+As shown in the figure above, `齐木楠雄的灾难（日播&精选版）` and `齐木楠雄的灾难 第二季` no longer belongs to a cluster alone, rendering the result more clearly demonstrate the difference between clusters when the total number of cluster is fixed.
 
 ### Compare Kmeans and PAM with Respect to Silhouette Plot
 
