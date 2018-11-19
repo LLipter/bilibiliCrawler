@@ -123,10 +123,14 @@ Put a(i) = average dissimilarity between i and all other points of the cluster t
 
 Finally, `s(i) := ( b(i) - a(i) ) / max( a(i), b(i) )`
 
-![](visual/assets/pam_silhouette.png)
 ![](visual/assets/kmeans_silhouette.png)
+![](visual/assets/pam_silhouette.png)
 
 Since the PAM algorithm will not let extreme points to belong to a cluster alone, the average within-cluster distance actually increases. This phenomenon reflects in the two silhouette plot showed above. The average silhouette width of PAM is actually smaller than Kmeans.
+
+# Part 2: Visualizing over 35000000 Video Data in Bilibili
+
+# Part 3: Daily Active User in Bilibili
 
 # Reference
 
