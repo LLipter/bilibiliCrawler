@@ -47,12 +47,12 @@ dev.off()
 # kmeans
 library(cluster)
 number.cluster <- 5
-bangumi.kmeans <- kmeans(bangumi.data, number.cluster, nstart=10)
+bangumi.kmeans <- kmeans(bangumi.data, number.cluster, nstart=50)
 png(file="assets/kmeans_clustering.png",width=3000, height=3000, res=600, pointsize=9)
 op <- par(family='STXihei')
 oo <- options(scipen=10)
 clusplot(bangumi.followview, bangumi.kmeans$cluster, 
-        color=TRUE, shade=TRUE, 
+        color=TRUE, shade=FALSE, 
         s.x.2d = list(x=bangumi.followview, labs=rownames(bangumi.followview), var.dec=NA),
         labels=0, 
         lines=0, 
@@ -70,7 +70,7 @@ x <- c(bangumi.followview["齐木楠雄的灾难（日播&精选版）",1]+1.3e6
         bangumi.followview["食戟之灵",1]-0.4e6,
         bangumi.followview["齐木楠雄的灾难 第二季",1]+0.9e6
         )
-y <- c(bangumi.followview["齐木楠雄的灾难（日播&精选版）",2],
+y <- c(bangumi.followview["齐木楠雄的灾难（日播&精选版）",2]+0.2e7,
         bangumi.followview["Re：从零开始的异世界生活",2]-0.4e7,
         bangumi.followview["工作细胞",2]-0.4e7,
         bangumi.followview["紫罗兰永恒花园",2]-0.4e7,
@@ -91,34 +91,52 @@ par(op)
 options(oo)
 dev.off()
 
-
-
-
 # pams
+library(cluster)
 number.cluster <-5
 bangumi.diss <- daisy(bangumi.data)
 bangumi.pamv <- pam(bangumi.diss, number.cluster, diss = TRUE)
+png(file="assets/pam_clustering.png",width=3000, height=3000, res=600, pointsize=9)
 op <- par(family='STXihei')
-library(cluster)
-clusplot(bangumi.pamv, 
+oo <- options(scipen=10)
+clusplot(bangumi.followview, bangumi.pamv$clustering, 
         shade=FALSE, color=TRUE, 
+        s.x.2d = list(x=bangumi.followview, labs=rownames(bangumi.followview), var.dec=NA),
         lines=0,
         labels=0,
-        main="PAM Clustering on 200 Most Popular Anime in Bilibili",
+        main="PAM Clustering on 100 Most Popular Anime in Bilibili",
         col.txt="black",
+        sub="",
+        xlab="Subscriber",
+        ylab="View",
         cex = 0.5)
+x <- c(bangumi.followview["齐木楠雄的灾难（日播&精选版）",1]+1.3e6,
+        bangumi.followview["Re：从零开始的异世界生活",1]+1e6,
+        bangumi.followview["工作细胞",1]-0.4e6,
+        bangumi.followview["紫罗兰永恒花园",1]+0.6e6,
+        bangumi.followview["OVERLORD",1]-0.5e6,
+        bangumi.followview["食戟之灵",1]-0.4e6,
+        bangumi.followview["齐木楠雄的灾难 第二季",1]+0.9e6
+        )
+y <- c(bangumi.followview["齐木楠雄的灾难（日播&精选版）",2]-0.2e7,
+        bangumi.followview["Re：从零开始的异世界生活",2]-0.4e7,
+        bangumi.followview["工作细胞",2]-0.4e7,
+        bangumi.followview["紫罗兰永恒花园",2]-0.4e7,
+        bangumi.followview["OVERLORD",2]+0.3e7,
+        bangumi.followview["食戟之灵",2]+0.3e7,
+        bangumi.followview["齐木楠雄的灾难 第二季",2]-0.3e7
+        )
+l <- c("齐木楠雄的灾难（日播&精选版）",
+        "Re：从零开始的异世界生活",
+        "工作细胞",
+        "紫罗兰永恒花园",
+        "OVERLORD",
+        "食戟之灵",
+        "齐木楠雄的灾难 第二季"
+        )
+text(x,y,labels=l,cex=0.8)
 par(op)
+options(oo)
+dev.off()
 
 dbDisconnect(con)
-
-
-
-
-
-
-x <- rbind(cbind(rnorm(10,0,0.5), rnorm(10,0,0.5)),
-           cbind(rnorm(15,5,0.5), rnorm(15,5,0.5)))
-pamx <- pam(x, 2)
-pamx # Medoids: '7' and '25' ...
-summary(pamx)
-plot(pamx)
