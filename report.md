@@ -78,7 +78,7 @@ bangumi.hc <- hclust(bangumi.dist)
 
 The above figure demonstrates the clustering result on 50 most popular anime. Here I choose a dataset of size 50 instead of 100 for better clearity.
 
-Each colorful rectangle box in the figure identify a cluster after I divided them into 7 clusters based on their height in this hierarchical tree. One of the most  unique characteristics of this algorithm that differentiate it from other clustering algorithm is that there exists a bunch of clusters that contain only one data in it. This behavior could be advantage or disadvantage depends on the structure of your input data. In your input dataset, if there're some data that significant different from others, namely outliers, the hierarchical clustering can easily identify them and it will not affect the clustering result of other data. Otherwise this behavior will cause some redundant clusters and make result not clear and convincing enough.
+Each colorful rectangle box in the figure identify a cluster after I divided them into 7 clusters based on their height in this hierarchical tree. One of the most  unique characteristics of this algorithm that differentiate it from other clustering algorithm is that there may exist a bunch of clusters that contain only one data in it. This behavior could be advantage or disadvantage depends on the structure of your input data. In your input dataset, if there're some data that significant different from others, namely outliers, the hierarchical clustering can easily identify them and it will not affect the clustering result of other data. Otherwise this behavior will cause some redundant clusters and make result not clear and convincing enough.
 
 ### Kmeans Clustering
 
