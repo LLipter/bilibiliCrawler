@@ -4,7 +4,6 @@ library(RMySQL)
 library(cluster)
 
 # connect to database
-Sys.setlocale(locale="UTF-8")
 con <- dbConnect(MySQL(), host="localhost", dbname="bilibili", user="root", password="57575207")
 
 # setting parameters
@@ -15,6 +14,7 @@ number.kmeans.datasize <- 100
 number.kmeans.cluster <- 5
 number.pam.datasize <- 100
 number.pam.cluster <- 5
+Sys.setlocale(locale="UTF-8")
 
 # data preprocessing
 rawdata <- dbGetQuery(con, paste("SELECT * FROM bangumi WHERE ABS(view-view_calculated) < view*0.1 AND epno>10 ORDER BY view DESC LIMIT", bangumi.datasize))
