@@ -17,14 +17,14 @@ number.pam.cluster <- 5
 Sys.setlocale(locale="UTF-8")
 
 # data preprocessing
-rawdata <- dbGetQuery(con, paste("SELECT * FROM bangumi WHERE ABS(view-view_calculated) < view*0.1 AND epno>10 ORDER BY view DESC LIMIT", bangumi.datasize))
-bangumi.followview <- matrix(unlist(rawdata[c("follow","view_calculated")]), 
+bangumi.rawdata <- dbGetQuery(con, paste("SELECT * FROM bangumi WHERE ABS(view-view_calculated) < view*0.1 AND epno>10 ORDER BY view DESC LIMIT", bangumi.datasize))
+bangumi.followview <- matrix(unlist(bangumi.rawdata[c("follow","view_calculated")]), 
                             nrow=bangumi.datasize, 
                             ncol=2,
-                            dimnames=list(rawdata$title, c("follow","view")))
+                            dimnames=list(bangumi.rawdata$title, c("follow","view")))
 bangumi.data <- scale(bangumi.followview)
 viewdata <- NULL  
-for(sid in rawdata$sid){
+for(sid in bangumi.rawdata$sid){
     sqlstr <- paste("SELECT view FROM episode WHERE sid =", sid, "ORDER BY idx")
     epdata <- dbGetQuery(con, sqlstr)
     epdata <- epdata$view
