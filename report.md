@@ -6,7 +6,19 @@ In this paper, I analyzed data collected from Bilibili, which is the most popula
 
 An era of rapid economic growth in China with the boom of internet gave rise to a new generation - Generation Z, people who born between 1990 and 2009. Like no other generation before, they grow up in affluent times and are internet-savvy consumers and trend-setters. They are transforming online entertainment in China. Born to address their demand, Bilibili is the welcoming home of diverse culture and interests and represents the iconic brand for online entertainment serving young generations in China. Started as a content community inspired by anime, comics and games, Bilibili has evolved into a full-spectrum online entertainment world with 72 million and growing monthly-active-users, over 80% of whom are Generation z. Bilibili created an immersive entertainment experience for Generation Z, and built highly sticky and engaged communities. Their pioneered community feature - bullet chatting - transforms viewing experience by allowing audience to share thoughts and feelings real-time with others viewing the same video. They also created a unique membership exam, leading to users' strong sense of belonging. As a result, their users spend approximately 76 minutes daily on Bilibili. Their dynamic communities fuel on ever-growing supply of creative professional user generated content, and content creators earn respect and rewards from our users, forming a self-reinforcing virtuous cycle. By analyzing the data collected from it, I believe it's a good way to learn about the Generation Z.
 
-# Part 1: Clustering Analyzing of Anime
+# Part 1: Daily Active User in Bilibili
+
+`./bilibiliCrawler -o[d]`
+
+Using the above command, a crawler will be initiated to collect active user number of Bilibili every minute. For detail codes, see `crawler/online.go`
+
+![](visual/assets/daily_active_user.png)
+
+As demonstrated in the above figures, Bilibili holds a highly active user group with incredible loyalty. There're millions of users browsing their website every time even if it's in midnight. And as the red line showed, there're more than 50 thousands new video uploaded everyday, making this community lively and creatively.
+
+
+
+# Part 2: Clustering Analyzing of Anime
 
 ### Data Collection
 
@@ -128,9 +140,9 @@ Finally, `s(i) := ( b(i) - a(i) ) / max( a(i), b(i) )`
 
 Since the PAM algorithm will not let extreme points to belong to a cluster alone, the average within-cluster distance actually increases. This phenomenon reflects in the two silhouette plot showed above. The average silhouette width of PAM is actually smaller than Kmeans.
 
-# Part 2: Visualizing over 35000000 Video Data in Bilibili
+# Part 3: Visualizing over 35000000 Video Data in Bilibili
 
-# Part 3: Daily Active User in Bilibili
+
 
 # Reference
 

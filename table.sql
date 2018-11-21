@@ -24,6 +24,12 @@ CREATE TABLE video(
     PRIMARY KEY(aid)
 )charset=utf8;
 
+CREATE INDEX status_idx ON video(status);
+CREATE INDEX pubdate_idx ON video(pubdate);
+CREATE INDEX dannmaku_idx ON video(dannmaku);
+CREATE INDEX view_idx ON video(view);
+CREATE INDEX pages_idx ON video(pages);
+
 CREATE TABLE online(
     ts         DATETIME,
 	douga      INT, -- 动画
