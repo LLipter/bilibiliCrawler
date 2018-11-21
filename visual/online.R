@@ -22,7 +22,7 @@ online.plot <- online.plot + xlab("")
 online.plot <- online.plot + scale_y_continuous(sec.axis=sec_axis(~./40, name="Number of New Videos"))
 online.plot <- online.plot + scale_x_datetime(breaks=date_breaks("3 hour"), date_labels="%b %d %H:00")
 online.plot <- online.plot + theme(axis.text.x=element_text(angle=45,vjust=1,hjust=1))
-online.plot <- online.plot + theme(plot.title=element_text(hjust = 0.5))
+online.plot <- online.plot + theme(plot.title=element_text(hjust=0.5))
 ggsave("assets/daily_active_user.png", width=14, height=7)
 options(oo)
 
