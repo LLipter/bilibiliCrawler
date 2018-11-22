@@ -161,3 +161,9 @@ In the last, I make a word could that based on the title of 10000 most popular v
 # Reference
 
 1. [bilibili上市宣传视频](www.bilibili/video/av21322566)
+2. [Golang document](https://golang.org/pkg/)
+3. [50 Shades of Go: Traps, Gotchas, and Common Mistakes for New Golang Devs](http://devs.cloudimmunity.com/gotchas-and-common-mistakes-in-go-golang/)
+4. [R document](https://www.rdocumentation.org/)
+5. [ggplot2 - A system for declaratively creating graphics in R](https://ggplot2.tidyverse.org/)
+6. [wordcloud - A python package to generate beautiful wordcloud](https://amueller.github.io/word_cloud/auto_examples/index.html)
+7. [“Jieba” - Chinese text segmentation](https://pypi.org/project/jieba/)
