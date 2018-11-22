@@ -16,13 +16,11 @@ if __name__ == "__main__":
     db.close()
 
     title = " ".join(titles)
-    cut_text= jieba.cut(title, cut_all=False)
-    result= "/".join(cut_text)
-    # print(result)
+    # print(title)
 
     image = Image.open("assets/mask.png")
     graph = np.array(image)
     # wc = WordCloud(font_path="MonacoYahei.ttf", background_color='white',width=1080,height=1080)
-    wc = WordCloud(font_path="assets/MonacoYahei.ttf", background_color='white',mask=graph)
+    wc = WordCloud(font_path="assets/MonacoYahei.ttf", background_color='white', mask=graph)
     wc.generate(title)
     wc.to_file("assets/wordcloud.png")
