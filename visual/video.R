@@ -5,7 +5,7 @@ library(scales)
 Sys.setlocale(locale="UTF-8")
 
 # connect to database
-con <- dbConnect(MySQL(), host="localhost", dbname="bilibili", user="root", password="57575207")
+con <- dbConnect(MySQL(), host="localhost", dbname="bilibili", user="(づ｡◕‿‿◕｡)づ", password="123456")
 video.rawdata <- dbGetQuery(con, "SELECT * FROM video WHERE status=0");
 
 # view chart

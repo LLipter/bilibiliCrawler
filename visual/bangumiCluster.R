@@ -4,7 +4,7 @@ library(RMySQL)
 library(cluster)
 
 # connect to database
-con <- dbConnect(MySQL(), host="localhost", dbname="bilibili", user="root", password="57575207")
+con <- dbConnect(MySQL(), host="localhost", dbname="bilibili", user="(づ｡◕‿‿◕｡)づ", password="123456")
 
 # setting parameters
 bangumi.datasize <- 100

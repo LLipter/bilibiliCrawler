@@ -5,7 +5,7 @@ from wordcloud import WordCloud, ImageColorGenerator
 from PIL import Image
 
 if __name__ == "__main__":
-    db = pymysql.connect("localhost","root","57575207","bilibili")
+    db = pymysql.connect("localhost","(づ｡◕‿‿◕｡)づ","123456","bilibili")
     cursor = db.cursor()
     sql = "SELECT title FROM video WHERE pages < 10 ORDER BY view DESC LIMIT 10000"
     cursor.execute(sql)
