@@ -29,6 +29,7 @@ CREATE INDEX pubdate_idx ON video(pubdate);
 CREATE INDEX dannmaku_idx ON video(dannmaku);
 CREATE INDEX view_idx ON video(view);
 CREATE INDEX pages_idx ON video(pages);
+CREATE INDEX tid_idx ON video(tid);
 
 CREATE TABLE online(
     ts         DATETIME,

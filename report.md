@@ -10,11 +10,11 @@ An era of rapid economic growth in China with the boom of internet gave rise to 
 
 `./bilibiliCrawler -o[d]`
 
-Using the above command, a crawler will be initiated to collect active user number of Bilibili every minute. For detail codes, see `crawler/online.go`
+Using the above command, a crawler will be initiated to collect active user number of Bilibili every minute. For detail codes, see `crawler/online.go`. I run my program several days and draw the following fugure.
 
 ![](visual/assets/daily_active_user.png)
 
-As demonstrated in the above figures, Bilibili holds a highly active user group with incredible loyalty. There're millions of users browsing their website every time even if it's in midnight. And as the red line showed, there're more than 50 thousands new video uploaded everyday, making this community lively and creatively.
+The blue line represents the number of current online user. The red line represents the total new video number uploaded in one day, and this number is cleared to 0 every day on 24:00. As demonstrated in the above figures, Bilibili holds a highly active user group with incredible loyalty. There're millions of users browsing their website every time even if it's in midnight. And as the red line showed, there're more than 50 thousands new video uploaded everyday, making this community lively and creatively.
 
 
 
@@ -140,9 +140,19 @@ Finally, `s(i) := ( b(i) - a(i) ) / max( a(i), b(i) )`
 
 Since the PAM algorithm will not let extreme points to belong to a cluster alone, the average within-cluster distance actually increases. This phenomenon reflects in the two silhouette plot showed above. The average silhouette width of PAM is actually smaller than Kmeans.
 
-# Part 3: Visualizing over 35000000 Video Data in Bilibili
+# Part 3: Visualizing over 20000000 Video Data in Bilibili
 
+`./bilibiliCrawler -v[d] 1 36000000`
 
+Using the above command, over 20000000 valid video data will be collect from Bilibili. In Bilibili, each video has a unique id called `aid`, by the time I write this report, the largest aid number is larger than 36000000. After removing invalid data, it's still over 20000000. It take my program 100 hours to collect all these 20 million data due to the constrain of internet bandwidth. See detail codes in `crawler/video.go`
+
+![](visual/assets/view_distribution.png)
+
+This is a statistic figure demonstrates the distribution of the number of times that videos are played. Pareto principle plays the decisive role in this field. As presented in the figure, over 60% videos are seldom played. The popular video we watched, which means it has been played more than 10k times, is less than 10 percents. 
+
+![](visual/assets/monthly_new_video.png)
+
+The red line represents the number of new videos uploaded in a month. The blue bar represents the total number of videos. Starting from 2009, Bilibili grows in a incredible way and has became one of the most popular entertainment website, especially for young generation.
 
 # Reference
 
