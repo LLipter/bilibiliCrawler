@@ -152,7 +152,11 @@ This is a statistic figure demonstrates the distribution of the number of times 
 
 ![](visual/assets/monthly_new_video.png)
 
-The red line represents the number of new videos uploaded in a month. The blue bar represents the total number of videos. Starting from 2009, Bilibili grows in a incredible way and has became one of the most popular entertainment website, especially for young generation.
+The red line represents the number of new videos uploaded in a month. The blue bar represents the total number of videos. Starting from 2009, Bilibili grows in an incredible way and has became one of the most popular entertainment website, especially for young generation.
+
+![](visual/assets/wordcloud.png)
+
+In the last, I make a word could that based on the title of 10000 most popular video in Bilibili.
 
 # Reference
 
